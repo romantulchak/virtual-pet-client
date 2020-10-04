@@ -1,0 +1,15 @@
+<form (submit)="createSub()">
+
+  <div>
+    <label for="subName"></label>
+    <input type="text" name="subName" [(ngModel)]="sub.name"  id="subName" placeholder="Hero name">
+  </div>
+
+  <div>
+    <select name="subTypes" id="subTypes" [(ngModel)]="subTypeId">
+      <option [value]="subType.id" *ngFor="let subType of subTypes">{{subType.name}}</option>
+    </select>
+  </div>
+
+  <button type="submit">Create</button>
+</form>

@@ -1,0 +1,15 @@
+<p>profile works!</p>
+<button (click)="exit()">Exit</button>
+
+<div>
+    <h2>My heroes</h2>
+    <div *ngFor="let hero of myHeroes">
+        <h2>{{hero.name}}</h2>
+    </div>
+  </div>
+
+<a routerLink="/create-sub">Create your hero</a>
+
+
+
+<button>Play</button>

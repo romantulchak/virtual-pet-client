@@ -1,0 +1,53 @@
+<form *ngIf="!isSuccessful"
+name="form"
+(ngSubmit)="f.form.valid && registration()"
+#f="ngForm"
+novalidate>
+  <div>
+    <label >Username</label>
+    <input type="text" [(ngModel)]="user.username" name="username"  required
+    minlength="3"
+    maxlength="20"
+    #username="ngModel"
+
+    />
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      name="email"
+      [(ngModel)]="user.email"
+      required
+      email
+      #email="ngModel"
+    />
+    <div class="alert-danger" *ngIf="f.submitted && email.invalid">
+      <div *ngIf="email.errors.required">Email is required</div>
+      <div *ngIf="email.errors.email">
+        Email must be a valid email address
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="user.password"
+          required
+          minlength="6"
+          #password="ngModel"
+        />
+        <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+          <div *ngIf="password.errors.required">Password is required</div>
+          <div *ngIf="password.errors.minlength">
+            Password must be at least 6 characters
+          </div>
+        </div>
+  </div>
+  <button type="submit">Registration!</button>
+</form>

@@ -1,0 +1,256 @@
+@font-face{
+  font-family: 'login';
+  src: url('../../../assets/fonts/NHaasGroteskTXPro-65Md.ttf');
+}
+$cyan: #6647aa;
+$borderW: 2px;
+$inputTextColor: #3d374a;
+.login__background{
+  background-image: url('../../../assets/images/login/login1.png');
+  background-size: cover;
+  height: 100vh;
+  font-family: login;
+
+  .login__form_block{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1.5em;
+    background: #edf4f6c7;
+    box-shadow: 1px 1px 13px 0px #6128f3;
+    border-radius: 8px;
+    height: 245px;
+    width: 275px;
+  }
+
+  .login_form{
+
+    @mixin model_size($size) {
+      width: $size;
+    }
+    height: 200px;
+    .first__model{
+      left: -273px;
+      top: -30px;
+      z-index: -1;
+      animation: first__model_anim 2s forwards;
+        @include model_size(400px);
+    }
+    img{
+        position: absolute;
+        user-select: none;
+        pointer-events: none;
+      }
+      .second__model{
+        @include model_size(160px);
+        top: 115px;
+        animation:second__model_anim 4.5s forwards;
+       right: -80px;
+
+       transform: scale(-1, 1) rotate(-23deg) translateX(-80px);
+
+
+      }
+      .third__model{
+
+        @include model_size(460px);
+        top: -158px;
+
+        animation:third__model_anim 2.5s forwards;
+        left: 108px;
+      }
+  }
+}
+
+.error__anim{
+  animation: shake 1s forwards;
+}
+form{
+  .form__field{
+    outline: none;
+    display: grid;
+    user-select: none;
+    input{
+      height: 25px;
+      text-align: center;
+      border-radius: 4px;
+      border: none;
+      outline: none;
+      color: $inputTextColor;
+      margin-top: .5em;
+      transition: .3s ease-in;
+      &:focus{
+        box-shadow: 0px 2px 10px #fabc30;
+      }
+    }
+    label{
+      text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: $inputTextColor;
+    }
+
+  }
+  .form__field:not(:last-child){
+    margin-bottom: 1em;
+  }
+}
+
+.buttons {
+  margin-top: 2em;
+  text-align: center;
+  border-radius:30px;
+}
+
+.blob-btn {
+  $numOfBlobs: 4;
+  z-index: 1;
+  position: relative;
+  padding: 20px 46px;
+  margin-bottom: 15px;
+  text-align: center;
+  margin-top: 5px;
+  text-transform: uppercase;
+  color: $cyan;
+  font-size: 16px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  transition: color 0.5s;
+  cursor: pointer;
+  border-radius:30px;
+
+  &:before {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius:30px;
+  }
+
+  &:after {
+    content: "";
+    z-index: -2;
+    position: absolute;
+    left: $borderW*1.5;
+    top: $borderW*1.5;
+    width: 100%;
+    height: 100%;
+
+    transition: all 0.3s 0.2s;
+    border-radius:30px;
+  }
+
+  &:hover {
+    color: #fff;
+    border-radius:30px;
+
+    &:after {
+      transition: all 0.3s;
+      left: 0;
+      top: 0;
+      border-radius:30px;
+    }
+  }
+
+  &__inner {
+    z-index: -1;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius:30px;
+    background:#ffffff;
+  }
+
+   &__blobs {
+    position: relative;
+    display: block;
+    height: 100%;
+    filter: url('#goo');
+  }
+
+  &__blob {
+    position: absolute;
+    top: $borderW;
+    width: 100% / $numOfBlobs;
+    height: 100%;
+    background: $cyan;
+    border-radius: 100%;
+    transform: translate3d(0,150%,0) scale(1.7);
+    transition: transform 0.45s;
+
+    @supports(filter: url('#goo')) {
+      transform: translate3d(0,150%,0) scale(1.4);
+    }
+
+    @for $i from 1 through $numOfBlobs {
+      &:nth-child(#{$i}) {
+        left: ($i - 1) * (120% / $numOfBlobs);
+        transition-delay: ($i - 1) * 0.08s;
+      }
+    }
+
+    .blob-btn:hover & {
+      transform: translateZ(0) scale(1.7);
+
+      @supports(filter: url('#goo')) {
+        transform: translateZ(0) scale(1.4);
+      }
+    }
+  }
+
+}
+@keyframes third__model_anim{
+  from{
+    transform: scale(-1, 1) rotate(-24deg) translateX(-80px);
+  }
+  to{
+    transform: scale(-1, 1) rotate(-24deg) translateX(2px);
+  }
+
+}
+@keyframes second__model_anim{
+  from{
+    transform: scale(-1, 1) translateX(-72px) rotate(-29deg);
+    top: 165px;
+  }
+  to{
+    top: 145px;
+    transform: scale(-1, 1) rotate(-10deg);
+  }
+}
+
+@keyframes first__model_anim{
+  from{
+    transform:  rotate(0deg);
+  }
+  to{
+    transform: rotate(370deg)
+  }
+}
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
