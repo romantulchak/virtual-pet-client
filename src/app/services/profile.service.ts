@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -22,5 +22,10 @@ export class ProfileService{
   }
   public createSub(subRequest: SubRequest){
     return this.httpClient.post(API_URL + 'profile/createSub', subRequest);
+  }
+  public getCurrentSub(subId: number, userId: number):Observable<SubHero>{
+    let params = new HttpParams();
+    params = params.append('subId', subId.toString()).append('userId', userId.toString());
+    return this.httpClient.get<SubHero>(API_URL + 'profile/getInfoAboutSub', {params: params});
   }
 }

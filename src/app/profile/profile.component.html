@@ -5,9 +5,17 @@
     <h2>My heroes</h2>
     <div *ngFor="let hero of myHeroes">
         <h2>{{hero.name}}</h2>
+        <input type="radio" name="hero" (change)="selectHero($event.target.value)" [checked]="hero.id == myHeroes[0].id" [value]="hero.id">
     </div>
   </div>
 
+  <div *ngIf="currentHero != null">
+    <h3>Information about current hero</h3>
+    <div>
+        <h5>Name: {{currentHero?.name}}</h5>
+        <h4>Money: {{currentHero?.money}}</h4>
+    </div>
+  </div>
 <a routerLink="/create-sub">Create your hero</a>
 
 
