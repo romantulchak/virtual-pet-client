@@ -14,6 +14,8 @@ import { AuthGuard } from './guards/auth-guard.service';
 import { RegistrationGuard } from './guards/registration-guard.service';
 import { CreateSubComponent } from './create-sub/create-sub.component';
 import { AuthInterceptor, authInterceptorProviders } from './helpers/auth.interceptor';
+import { GameComponent } from './game/game.component';
+import { GameGuard } from './guards/game-guard.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +24,7 @@ import { AuthInterceptor, authInterceptorProviders } from './helpers/auth.interc
     ProfileComponent,
     NotFoundComponent,
     CreateSubComponent,
+    GameComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,7 @@ import { AuthInterceptor, authInterceptorProviders } from './helpers/auth.interc
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthGuard, RegistrationGuard, authInterceptorProviders],
+  providers: [AuthGuard, RegistrationGuard, GameGuard, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

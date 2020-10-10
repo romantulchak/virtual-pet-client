@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SubHero } from '../models/subHero.model';
 import { User } from '../models/user.model';
+import { GameService } from '../services/game.service';
 import { ProfileService } from '../services/profile.service';
 import { TokenStorageService } from '../services/token-storage.service';
 
@@ -14,7 +15,7 @@ export class ProfileComponent implements OnInit {
   public myHeroes: SubHero[];
   public currentUser: User;
   public currentHero: SubHero;
-  constructor(private tokenStorage: TokenStorageService, private profileService: ProfileService) { }
+  constructor(private tokenStorage: TokenStorageService, private profileService: ProfileService, private gameService: GameService) { }
 
 
 
@@ -42,12 +43,14 @@ export class ProfileComponent implements OnInit {
       res=>{
         if(res != null){
           this.currentHero = res;
-
         }
       }
     );
 
   }
+  public play(){
 
+    this.gameService.currentHero.next(this.currentHero);
+  }
 
 }

@@ -7,12 +7,15 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuard } from './guards/auth-guard.service';
 import { RegistrationGuard } from './guards/registration-guard.service';
 import { CreateSubComponent } from './create-sub/create-sub.component';
+import { GameComponent } from './game/game.component';
+import { GameGuard } from './guards/game-guard.service';
 
 const routes: Routes = [
   {path:'', component:ProfileComponent, canActivate:[RegistrationGuard]},
   {path:'registration', component: RegistrationComponent},
   {path: 'login', component: LoginComponent},
   {path: 'create-sub', component: CreateSubComponent},
+  {path: 'game', component: GameComponent, canActivate: [GameGuard]},
   {path: '**', component: NotFoundComponent}
 ];
 
