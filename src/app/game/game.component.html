@@ -1,0 +1,18 @@
+<section>
+  <p>game works!</p>
+
+
+<div>
+  <h2>Money: {{currentHero.money}}</h2>
+</div>
+
+<div class="game__click" (click)="moneyClikcs()">
+
+</div>
+<h2 *ngIf="errorMessage != null" class="alert__error">{{errorMessage}}</h2>
+
+<button [disabled]="isUpdatePrice" (click)="upMoneyLevel()">
+  Up money level cost: {{currentHero.moneyUpPrice}}
+</button>
+
+</section>
