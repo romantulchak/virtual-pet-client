@@ -19,6 +19,8 @@ export class GameComponent implements OnInit, OnDestroy {
   private sendInterval: any;
   public isUpdatePrice: boolean = false;
   public errorMessage: string;
+  public currentBoss: any;
+  public level: number;
   constructor(private gameService: GameService) {  }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -29,11 +31,13 @@ export class GameComponent implements OnInit, OnDestroy {
 }
 
   ngOnInit(): void {
+
     this.gameService.currentHero.subscribe(
       res=>{
         this.currentHero = res;
       }
     );
+      this.getBoss();
 
       if(this.currentHero != null){
 
@@ -45,10 +49,21 @@ export class GameComponent implements OnInit, OnDestroy {
 
   }
 
+  private getBoss(){
+    this.gameService.getBoss(this.subReq()).subscribe(
+      res=>{
+        console.log(res);
+        this.currentBoss = res.boss;
+        this.level = res.level;
+      }
+    );
+  }
 
   private moneyEverySecond(){
   this.moneyInterval = setInterval(()=>{
         this.money += this.currentHero.moneyMultiplier;
+        this.updateBoss();
+
         this.currentHero.money += this.currentHero.moneyMultiplier;
     }, 1000);
     console.log(this.moneyInterval);
@@ -86,9 +101,21 @@ export class GameComponent implements OnInit, OnDestroy {
         }
       );
   }
+
+  private updateBoss(){
+    this.currentBoss.health -= this.currentHero.attack;
+
+    if(this.currentBoss.health <= 0){
+      this.money += this.currentBoss.droppedMoney;
+      this.sendMoneyPerMinute();
+      this.getBoss();
+    }
+  }
+
   public moneyClikcs(){
     this.money += this.currentHero.moneyMultiplier;
     this.currentHero.money += this.currentHero.moneyMultiplier;
+    this.updateBoss();
   }
   private subReq():SubRequest{
     let subRequest = new SubRequest();

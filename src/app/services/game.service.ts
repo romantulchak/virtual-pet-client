@@ -23,5 +23,8 @@ export class GameService{
   public sendMoney(subRequest: SubRequest, money:number):any{
     return this.http.put(API_URL + 'game/saveMoney/' + money, subRequest);
   }
+  public getBoss(subRequset: SubRequest):any{
+    return this.http.get(API_URL + 'game/getBoss/' + subRequset.subId);
+  }
 
 }

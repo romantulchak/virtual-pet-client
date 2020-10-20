@@ -6,6 +6,11 @@
   <h2>Money: {{currentHero.money}}</h2>
 </div>
 
+<h1>Level: {{level}}</h1>
+
+<h2>Boss Name: {{currentBoss?.name}} Boss HP: {{currentBoss?.health}} Dropped Money: {{currentBoss?.droppedMoney}}</h2>
+
+
 <div class="game__click" (click)="moneyClikcs()">
 
 </div>
@@ -14,5 +19,6 @@
 <button [disabled]="isUpdatePrice" (click)="upMoneyLevel()">
   Up money level cost: {{currentHero.moneyUpPrice}}
 </button>
+
 
 </section>
