@@ -26,5 +26,8 @@ export class GameService{
   public getBoss(subRequset: SubRequest):any{
     return this.http.get(API_URL + 'game/getBoss/' + subRequset.subId);
   }
+  public upAttackLevel(subRequest: SubRequest): any{
+    return this.http.put(API_URL + 'game/upSubAttack', subRequest);
+  }
 
 }

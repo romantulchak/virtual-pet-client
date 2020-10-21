@@ -1,6 +1,10 @@
 <section>
-  <p>game works!</p>
 
+<div>
+  Name: {{currentHero.name}}
+  Attack:
+  {{currentHero.attack}}
+</div>
 
 <div>
   <h2>Money: {{currentHero.money}}</h2>
@@ -19,6 +23,8 @@
 <button [disabled]="isUpdatePrice" (click)="upMoneyLevel()">
   Up money level cost: {{currentHero.moneyUpPrice}}
 </button>
+
+<button [disabled]="isUpdateAttack" (click)="upAttackLevel()">Up attack</button>
 
 
 </section>

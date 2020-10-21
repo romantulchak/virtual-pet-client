@@ -20,6 +20,7 @@ export class GameComponent implements OnInit, OnDestroy {
   public isUpdatePrice: boolean = false;
   public errorMessage: string;
   public currentBoss: any;
+  public isUpdateAttack: boolean = false;
   public level: number;
   constructor(private gameService: GameService) {  }
 
@@ -35,6 +36,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.gameService.currentHero.subscribe(
       res=>{
         this.currentHero = res;
+
       }
     );
       this.getBoss();
@@ -69,7 +71,25 @@ export class GameComponent implements OnInit, OnDestroy {
     console.log(this.moneyInterval);
 
   }
+  public upAttackLevel(){
+    this.sendMoneyPerMinute();
+    this.isUpdateAttack= true;
+    setTimeout(() => {
+      this.gameService.upAttackLevel(this.subReq()).subscribe(
+        res=>{
+          if(res.httpStatus == 'OK' && this.currentHero.money >= this.currentHero.subAttack.attackMoneyUp){
+            this.currentHero = res.subDTO;
+            console.log(res);
 
+
+          }else{
+            this.errorMessage = "You do not have enough money";
+          }
+          this.isUpdateAttack = false;
+        }
+      );
+    }, 1000);
+  }
   public upMoneyLevel(){
     this.sendMoneyPerMinute();
     this.isUpdatePrice = true;
