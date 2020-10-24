@@ -1,23 +1,41 @@
-<p>profile works!</p>
-<button (click)="exit()">Exit</button>
+<section class="profile__bg">
+  <app-game-top-panel></app-game-top-panel>
 
-<div>
-    <h2>My heroes</h2>
-    <div *ngFor="let hero of myHeroes">
-        <h2>{{hero.name}}</h2>
-        <input type="radio" name="hero" (change)="selectHero($event.target.value)" [checked]="hero.id == myHeroes[0].id" [value]="hero.id">
+  <div class="container">
+    <div class="heroes__grid">
+      <div class="hero__card" *ngFor="let hero of myHeroes" [class.selected]="hero.id == currentHero.id" [class.not_selected]="hero.id != currentHero.id">
+          <div class="hero__card_image">
+          <img [class.selected__image]="hero.id == currentHero.id" src="../../assets/images/login/hero2.png" alt="">
+        </div>
+        <h4>{{hero.name}}</h4>
+        <button *ngIf="hero.id != currentHero.id; else info" (click)="selectHero(hero.id)">Choose</button>
+        <ng-template #info>
+            <div class="hero__info">
+              <div>
+                <img src="../../assets/images/game/attack.svg" alt="">
+                <h5>{{currentHero.attack}}</h5>
+              </div>
+              <div>
+                <img src="../../assets/images/game/shield.svg" alt="">
+                <h5>{{currentHero.defence}}</h5>
+              </div>
+
+            </div>
+        </ng-template>
+      </div>
     </div>
+  <div class="circle">
+
   </div>
 
-  <div *ngIf="currentHero != null">
-    <h3>Information about current hero</h3>
-    <div>
-        <h5>Name: {{currentHero?.name}}</h5>
-        <h4>Money: {{currentHero?.money}}</h4>
-    </div>
+  <button (click)="exit()">Exit</button>
+
+  <a routerLink="/create-sub">Create your hero</a>
+  <a routerLink="/game" (click)="play()">Play</a>
+
   </div>
-<a routerLink="/create-sub">Create your hero</a>
 
 
+<app-game-bottom-panel></app-game-bottom-panel>
+</section>
 
-<a routerLink="/game" (click)="play()">Play</a>

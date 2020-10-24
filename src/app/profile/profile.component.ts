@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { SubHero } from '../models/subHero.model';
 import { User } from '../models/user.model';
 import { GameService } from '../services/game.service';
 import { ProfileService } from '../services/profile.service';
 import { TokenStorageService } from '../services/token-storage.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +16,11 @@ export class ProfileComponent implements OnInit {
   public myHeroes: SubHero[];
   public currentUser: User;
   public currentHero: SubHero;
+
+
+
+
+
   constructor(private tokenStorage: TokenStorageService, private profileService: ProfileService, private gameService: GameService) { }
 
 
@@ -24,6 +30,9 @@ export class ProfileComponent implements OnInit {
     this.currentUser = this.tokenStorage.getUser();
   }
 
+
+
+
   public exit(){
     this.tokenStorage.signOut();
   }
@@ -32,8 +41,9 @@ export class ProfileComponent implements OnInit {
     this.profileService.getMyHeroes().subscribe(
       res=>{
         if(res != null){
-          this.currentHero = res[0];
+          this.currentHero = res[2];
           this.myHeroes = res;
+          this.profileService.currentHero.next(this.currentHero);
         }
       }
     );
@@ -43,6 +53,7 @@ export class ProfileComponent implements OnInit {
       res=>{
         if(res != null){
           this.currentHero = res;
+          this.profileService.currentHero.next(res);
         }
       }
     );

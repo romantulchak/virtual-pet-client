@@ -19,7 +19,7 @@
 
 </div>
 <h2 *ngIf="errorMessage != null" class="alert__error">{{errorMessage}}</h2>
-
+<canvas #myCanvas></canvas>
 <button [disabled]="isUpdatePrice" (click)="upMoneyLevel()">
   Up money level cost: {{currentHero.moneyUpPrice}}
 </button>

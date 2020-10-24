@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SubType } from '../models/subType.model';
 import { catchError, retry } from 'rxjs/operators';
@@ -13,6 +13,8 @@ const API_URL = environment.API_URL;
 })
 export class ProfileService{
   constructor(private httpClient: HttpClient){}
+
+  public currentHero: BehaviorSubject<SubHero> = new BehaviorSubject(null);
 
   public getMyHeroes():Observable<SubHero[]>{
     return this.httpClient.get<SubHero[]>(API_URL + 'profile/getSubsForUser');

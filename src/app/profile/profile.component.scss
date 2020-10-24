@@ -1,0 +1,104 @@
+@font-face{
+  font-family: HeroesName;
+  src: url('../../assets/fonts/HeroesName.otf');
+}
+@font-face{
+  font-family: 'Brightons';
+  src: url('../../assets/fonts/Brightons.ttf');
+}
+
+.profile__bg{
+  background-image: url('../../assets/images/game/bg.jpg');
+  height: 100vh;
+  background-size: cover;
+  overflow: hidden;
+  background-position: bottom;
+}
+.circle{
+  width: 4em;
+    padding: 4em;
+    border: 21px solid #7d6262;
+    border-radius: 50%;
+    transform: rotate3d(17, -5, 5, 80deg);
+}
+.heroes__grid{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-top: 4em;
+  .hero__card{
+    height: 262px;
+    transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    width: 185px;
+    border-radius: 4px;
+    justify-self: center;
+
+    h4{
+      background: #fff;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+      font-family: HeroesName;
+      font-weight: 100;
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: #37383a;
+  }
+  .hero__info{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    height: 52px;
+    background: #131212;
+
+    h5{
+      font-family: Brightons;
+    }
+
+    img{
+      width: 20px;
+    }
+  }
+
+     button{
+      width: 100%;
+      height: 52px;
+      border: none;
+      outline: none;
+      border-radius: 4px;
+      background: gold;
+      font-family: HeroesName;
+      letter-spacing: 1px;
+    }
+    .hero__card_image{
+      height: 180px;
+      background: #f0f8ff5e;
+      .selected__image{
+        z-index: -99;
+      }
+      img{
+        width: 100%;
+        transform: scale(1.8);
+        z-index: 8888;
+        max-height: 120px;
+        user-select: none;
+        object-fit: contain;
+      }
+    }
+  }
+  .selected{
+    transform: scale(1.3);
+    z-index: 99999;
+    background: black;
+  }
+  .not_selected:first-child, .not_selected:last-child{
+    transform: scale(0.8);
+  }
+  .not_selected:nth-child(2), .not_selected:nth-child(3), .not_selected:nth-child(4){
+    transform: scale(0.9);
+  }
+}
+

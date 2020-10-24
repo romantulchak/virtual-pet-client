@@ -1,10 +1,20 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { send } from 'process';
 import { Subscription } from 'rxjs';
 import { SubHero } from '../models/subHero.model';
 import { SubRequest } from '../models/subRequest.model';
 import { GameService } from '../services/game.service';
+
+//THREE
+import * as THREE from 'three';
+var OrbitControls = require('three-orbit-controls')(THREE)
+var STLLoader = require('three-stl-loader')(THREE)
+var loader = new STLLoader();
+import Scene = THREE.Scene;
+import Mesh = THREE.Mesh;
+import PerspectiveCamera = THREE.PerspectiveCamera;
+import WebGLRenderer = THREE.WebGLRenderer;
 
 @Component({
   selector: 'app-game',
@@ -22,7 +32,16 @@ export class GameComponent implements OnInit, OnDestroy {
   public currentBoss: any;
   public isUpdateAttack: boolean = false;
   public level: number;
-  constructor(private gameService: GameService) {  }
+  constructor(private gameService: GameService, private render: Renderer2) {  }
+
+
+  @ViewChild("myCanvas") myCanvas:any;
+  private path:string = '../../assets/images/game/Squirtle.stl';
+  private scene: Scene;
+  private camera: PerspectiveCamera;
+  private renderer: WebGLRenderer;
+  private controls: any;
+
 
   @HostListener('window:beforeunload', ['$event'])
   beforeUnloadHandler(event: any) {
@@ -30,9 +49,13 @@ export class GameComponent implements OnInit, OnDestroy {
   this.sendMoneyPerMinute();
   return false;
 }
-
+ngAfterViewInit(): void {
+  this.init3D();
+}
   ngOnInit(): void {
-
+    let global = this.render.listen('window', 'resize', (evt) => {
+      this.onWindowResize();
+    });
     this.gameService.currentHero.subscribe(
       res=>{
         this.currentHero = res;
@@ -150,5 +173,42 @@ export class GameComponent implements OnInit, OnDestroy {
       this.sendMoneyPerMinute();
       clearInterval(this.sendInterval);
 
+  }
+  private init3D(){
+    console.log(this.myCanvas.nativeElement);
+
+    this.renderer = new THREE.WebGLRenderer({alpha: true, canvas:  this.myCanvas.nativeElement});
+    this.renderer.setSize( window.innerWidth, window.innerHeight );
+    this.scene = new THREE.Scene();
+    this.scene.background = new THREE.Color( 0xFFFFFF );
+    this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 0.01, 10000 );
+    this.camera.position.set( 113, 111, 113 );
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.scene.add( new THREE.AmbientLight( 0x222222 ) );
+    this.scene.add( this.camera ); // required, because we are adding a light as a child of the camera
+    this.controls = new OrbitControls(this.camera,this.renderer.domElement);
+    var light = new THREE.PointLight( 0xffffff, 0.8 );
+    this.camera.add( light );
+
+    loader.load(this.path, geometry => {
+      var material = new THREE.MeshPhongMaterial( { color: 0xBEBEBE } );
+
+      var mesh = new THREE.Mesh( geometry, material );
+      this.scene.add(mesh)
+    });
+    this.animate();
+  }
+
+  animate() {
+    this.camera.lookAt( this.scene.position );
+    this.renderer.render(this.scene, this.camera);
+    window.requestAnimationFrame(_ => this.animate());
+
+  }
+
+  private onWindowResize(){
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
   }
 }

@@ -1,0 +1,135 @@
+@font-face{
+  font-family: 'Brightons';
+  src: url('../../assets/fonts/Brightons.ttf');
+}
+
+.top__panel_elements{
+  display: grid;
+  grid-template-columns: 15em 1fr;
+}
+.hexagon__position{
+  position: absolute;
+  left: 110px;
+  .hexagon {
+    position: relative;
+    width: 20px;
+    height: 11.55px;
+    background-color: #ffffff;
+    margin: 5.77px 0;
+    border-left: solid 2px #dbb21f;
+    border-right: solid 2px #dbb21f;
+    user-select: none;
+    cursor: pointer;
+
+    >span{
+      width: 21px;
+      top: -5px;
+      font-size: 19px;
+      font-weight: 900;
+      right: -1px;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      position: absolute;
+    }
+
+    &:before, &:after{
+      content: "";
+      position: absolute;
+      z-index: 1;
+      width: 14.14px;
+      height: 14.14px;
+      -webkit-transform: scaleY(0.5774) rotate(-45deg);
+      -ms-transform: scaleY(0.5774) rotate(-45deg);
+      transform: scaleY(0.5774) rotate(-45deg);
+      background-color: inherit;
+      left: 0.9289px;
+    }
+    &:before{
+      top: -9.0711px;
+      border-top: solid 2.8284px #dbb21f;
+      border-right: solid 2.8284px #dbb21f;
+      left: 1px;
+    }
+    &:after{
+      bottom: -8.0711px;
+      border-bottom: solid 2.8284px #dbb21f;
+      border-left: solid 2.8284px #dbb21f;
+      left: 1px;
+    }
+  }
+}
+
+.game__currencies{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  >div{
+    display: flex;
+    margin-right: 4em;
+    align-items: center;
+    position: relative;
+    h4{
+      display: flex;
+      margin-right: 5px;
+      width: 125px;
+      font-size: 12px;
+      justify-content: center;
+      height: 20px;
+      align-items: center;
+      position: relative;
+      background: black;
+      color: #fff;
+      font-family: Brightons;
+    }
+    .block__with_triangle::after{
+      content: '';
+      position: absolute;
+      right: -20px;
+      border: 10px solid transparent;
+      border-left: 10px solid black;
+    }
+    img{
+      width: 27px;
+      margin-right: 5px;
+      position: absolute;
+      left: -11px;
+      z-index: 11;
+    }
+  }
+}
+
+
+
+
+.current__hero{
+
+  .hero__avatar_name{
+    display: flex;
+    .hero__avatar_frame{
+      position: relative;
+      >img{
+        width: 120px;
+        z-index: 100;
+        position: relative;
+      }
+
+      .hero__avatar{
+        background-size: cover;
+        width: 100%;
+        z-index: 0;
+        top: 19px;
+        position: absolute;
+        background-position: center;
+        height: 80px;
+       }
+    }
+      .hero__name_level{
+        margin-left: 1em;
+        align-self: center;
+      }
+
+  }
+}

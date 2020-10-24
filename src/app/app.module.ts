@@ -16,6 +16,8 @@ import { CreateSubComponent } from './create-sub/create-sub.component';
 import { AuthInterceptor, authInterceptorProviders } from './helpers/auth.interceptor';
 import { GameComponent } from './game/game.component';
 import { GameGuard } from './guards/game-guard.service';
+import { GameTopPanelComponent } from './game-top-panel/game-top-panel.component';
+import { GameBottomPanelComponent } from './game-bottom-panel/game-bottom-panel.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +27,8 @@ import { GameGuard } from './guards/game-guard.service';
     NotFoundComponent,
     CreateSubComponent,
     GameComponent,
+    GameTopPanelComponent,
+    GameBottomPanelComponent,
   ],
   imports: [
     BrowserModule,
