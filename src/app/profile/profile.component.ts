@@ -28,6 +28,14 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getMyHeroes();
     this.currentUser = this.tokenStorage.getUser();
+    this.playMusic();
+  }
+  public playMusic(){
+
+      let audio = new Audio();
+      audio.src = "../../assets/musics/Exist Strategy - Reverence.mp3";
+      audio.play();
+
   }
 
 
@@ -41,8 +49,14 @@ export class ProfileComponent implements OnInit {
     this.profileService.getMyHeroes().subscribe(
       res=>{
         if(res != null){
-          this.currentHero = res[2];
+          if(res.length == 5){
+            this.currentHero = res[2];
+          }else{
+            this.currentHero = res[0];
+          }
           this.myHeroes = res;
+          console.log(this.currentHero);
+
           this.profileService.currentHero.next(this.currentHero);
         }
       }
@@ -60,8 +74,20 @@ export class ProfileComponent implements OnInit {
 
   }
   public play(){
-
     this.gameService.currentHero.next(this.currentHero);
+  }
+
+  public removeHero(sub: SubHero){
+    this.profileService.deleteSub(sub.id).subscribe(
+      res=>{
+        if(res != null){
+          console.log(res);
+          this.myHeroes = this.myHeroes.filter(x=> x.id != sub.id);
+          this.currentHero = this.myHeroes[0];
+        }
+
+      }
+    );
   }
 
 }

@@ -2,12 +2,18 @@ import { Component, HostListener, OnDestroy, OnInit, Renderer2, ViewChild } from
 import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { send } from 'process';
 import { Subscription } from 'rxjs';
+import { PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 import { SubHero } from '../models/subHero.model';
 import { SubRequest } from '../models/subRequest.model';
 import { GameService } from '../services/game.service';
-
-//THREE
 import * as THREE from 'three';
+
+var OrbitControls = require('three-orbit-controls')(THREE)
+var STLLoader = require('three-stl-loader')(THREE)
+
+var loader = new STLLoader();
+//THREE
+/*import * as THREE from 'three';
 var OrbitControls = require('three-orbit-controls')(THREE)
 var STLLoader = require('three-stl-loader')(THREE)
 var loader = new STLLoader();
@@ -15,7 +21,7 @@ import Scene = THREE.Scene;
 import Mesh = THREE.Mesh;
 import PerspectiveCamera = THREE.PerspectiveCamera;
 import WebGLRenderer = THREE.WebGLRenderer;
-
+*/
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',

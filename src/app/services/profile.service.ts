@@ -30,4 +30,7 @@ export class ProfileService{
     params = params.append('subId', subId.toString()).append('userId', userId.toString());
     return this.httpClient.get<SubHero>(API_URL + 'profile/getInfoAboutSub', {params: params});
   }
+  public deleteSub(heroId: number){
+    return this.httpClient.delete(API_URL + 'profile/deleteSubForUser/' + heroId);
+  }
 }

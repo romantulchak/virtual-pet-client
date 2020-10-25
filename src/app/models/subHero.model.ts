@@ -13,5 +13,5 @@ export class SubHero extends Sub{
     public moneyUpPrice: number;
     public moneyMultiplier: number;
     public subAttack: SubAttack;
-
+    public health: number;
 }
