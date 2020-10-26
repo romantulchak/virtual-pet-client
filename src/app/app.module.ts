@@ -18,6 +18,7 @@ import { GameComponent } from './game/game.component';
 import { GameGuard } from './guards/game-guard.service';
 import { GameTopPanelComponent } from './game-top-panel/game-top-panel.component';
 import { GameBottomPanelComponent } from './game-bottom-panel/game-bottom-panel.component';
+import { InventoryComponent } from './inventory/inventory.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { GameBottomPanelComponent } from './game-bottom-panel/game-bottom-panel.
     GameComponent,
     GameTopPanelComponent,
     GameBottomPanelComponent,
+    InventoryComponent,
   ],
   imports: [
     BrowserModule,

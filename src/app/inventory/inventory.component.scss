@@ -1,0 +1,39 @@
+.inventory__block{
+  background-image: url('../../assets/images/game/inventory.png');
+  width: 570px;
+  height: 475px;
+  background-size: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 9999999;
+}
+.overlay{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #0000002e;
+  z-index: 999999;
+  top: 0;
+}
+.inventory__grid{
+display: grid;
+    text-align: center;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 6em 6em;
+    grid-gap: 10px;
+    margin: 47px auto;
+    width: 84%;
+  .cell{
+    width: 75px;
+    display: grid;
+    justify-self: center;
+    align-items: center;
+    align-self: center;
+    border-radius: 4px;
+    background: #f0f9ff66;
+    height: 75px;
+  }
+}

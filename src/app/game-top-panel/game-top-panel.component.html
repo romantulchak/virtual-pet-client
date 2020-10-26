@@ -20,21 +20,21 @@
     <div class="game__currencies">
         <div>
             <img src="../../assets/images/game/diamond.svg" alt="">
-            <h4>0/300</h4>
+            <h4>{{currentHero?.currency.diamond}} / {{currentHero?.currency.maxDiamond}}</h4>
             <div class="hexagon__position">
               <div class="hexagon"><span>+</span></div>
             </div>
         </div>
         <div>
           <img src="../../assets/images/game/gemstone.svg" alt="">
-          <h4>0</h4>
+          <h4>{{currentHero?.currency.emerald}}</h4>
           <div class="hexagon__position">
             <div class="hexagon"><span>+</span></div>
           </div>
         </div>
       <div>
         <img src="../../assets/images/game/coin.svg" alt="">
-        <h4 class="block__with_triangle">{{currentHero?.money}}</h4>
+        <h4 class="block__with_triangle">{{currentHero?.currency.money}}</h4>
       </div>
     </div>
 

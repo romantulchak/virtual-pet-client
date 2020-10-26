@@ -4,7 +4,14 @@
   <div class="container">
     <div class="heroes__grid">
       <div class="hero__card" *ngFor="let hero of myHeroes" [class.selected]="hero?.id == currentHero?.id" [class.not_selected]="hero.id != currentHero.id">
-        <div *ngIf="hero.id == currentHero.id && myHeroes.length != 1" (click)="removeHero(hero)" class="remove__hero">X</div>
+        <div class="hero__card_elements">
+
+          <div *ngIf="hero.id == currentHero.id && myHeroes.length != 1" (click)="removeHero(hero)" class="remove__hero">X</div>
+
+         <div class="hero__inventory" *ngIf="hero.id == currentHero.id" (click)="showInventory = true">
+          <img src="../../assets/images/game/inventory.svg" alt="">
+        </div>
+        </div>
         <div class="hero__card_image">
           <img [class.selected__image]="hero.id == currentHero.id" src="../../assets/images/login/hero2.png" alt="">
         </div>
@@ -50,7 +57,22 @@
 
   </div>
 
+  <div *ngIf="showInventory">
+    <app-inventory></app-inventory>
+  </div>
 
 <app-game-bottom-panel></app-game-bottom-panel>
+<!--
+  <div *ngIf="!isMusicAllow" class="music__dialog">
+    <h2>Dialog</h2>
+    <div>
+      <button (click)="setMusic(1)">Turn on</button>
+    </div>
+    <div>
+      <button (click)="setMusic(2)">Turn off</button>
+    </div>
+  </div>-->
 </section>
+
+
 

@@ -7,11 +7,11 @@ import { SubHero } from '../models/subHero.model';
 import { SubRequest } from '../models/subRequest.model';
 import { GameService } from '../services/game.service';
 import * as THREE from 'three';
-
+/*
 var OrbitControls = require('three-orbit-controls')(THREE)
 var STLLoader = require('three-stl-loader')(THREE)
 
-var loader = new STLLoader();
+var loader = new STLLoader();*/
 //THREE
 /*import * as THREE from 'three';
 var OrbitControls = require('three-orbit-controls')(THREE)
@@ -38,16 +38,17 @@ export class GameComponent implements OnInit, OnDestroy {
   public currentBoss: any;
   public isUpdateAttack: boolean = false;
   public level: number;
-  constructor(private gameService: GameService, private render: Renderer2) {  }
+  constructor(private gameService: GameService) {  }
+  /*constructor(private gameService: GameService, private render: Renderer2) {  }*/
 
-
+/*
   @ViewChild("myCanvas") myCanvas:any;
   private path:string = '../../assets/images/game/Squirtle.stl';
   private scene: Scene;
   private camera: PerspectiveCamera;
   private renderer: WebGLRenderer;
   private controls: any;
-
+*/
 
   @HostListener('window:beforeunload', ['$event'])
   beforeUnloadHandler(event: any) {
@@ -56,12 +57,12 @@ export class GameComponent implements OnInit, OnDestroy {
   return false;
 }
 ngAfterViewInit(): void {
-  this.init3D();
+//  this.init3D();
 }
   ngOnInit(): void {
-    let global = this.render.listen('window', 'resize', (evt) => {
+    /*let global = this.render.listen('window', 'resize', (evt) => {
       this.onWindowResize();
-    });
+    });*/
     this.gameService.currentHero.subscribe(
       res=>{
         this.currentHero = res;
@@ -83,7 +84,6 @@ ngAfterViewInit(): void {
   private getBoss(){
     this.gameService.getBoss(this.subReq()).subscribe(
       res=>{
-        console.log(res);
         this.currentBoss = res.boss;
         this.level = res.level;
       }
@@ -95,9 +95,8 @@ ngAfterViewInit(): void {
         this.money += this.currentHero.moneyMultiplier;
         this.updateBoss();
 
-        this.currentHero.money += this.currentHero.moneyMultiplier;
+        this.currentHero.currency.money += this.currentHero.moneyMultiplier;
     }, 1000);
-    console.log(this.moneyInterval);
 
   }
   public upAttackLevel(){
@@ -106,12 +105,9 @@ ngAfterViewInit(): void {
     setTimeout(() => {
       this.gameService.upAttackLevel(this.subReq()).subscribe(
         res=>{
-          if(res.httpStatus == 'OK' && this.currentHero.money >= this.currentHero.subAttack.attackMoneyUp){
+          if(res.httpStatus == 'OK' && this.currentHero.currency.money >= this.currentHero.subAttack.attackMoneyUp){
             this.currentHero = res.subDTO;
-            console.log(res);
-
-
-          }else{
+            }else{
             this.errorMessage = "You do not have enough money";
           }
           this.isUpdateAttack = false;
@@ -126,7 +122,7 @@ ngAfterViewInit(): void {
       this.gameService.upMoneyLevel(this.subReq()).subscribe(
         res=>{
 
-          if(res.httpStatus == 'OK' && this.currentHero.money >= this.currentHero.moneyUpPrice){
+          if(res.httpStatus == 'OK' && this.currentHero.currency.money >= this.currentHero.moneyUpPrice){
             this.currentHero = res.subDTO;
 
           }else{
@@ -163,7 +159,7 @@ ngAfterViewInit(): void {
 
   public moneyClikcs(){
     this.money += this.currentHero.moneyMultiplier;
-    this.currentHero.money += this.currentHero.moneyMultiplier;
+    this.currentHero.currency.money += this.currentHero.moneyMultiplier;
     this.updateBoss();
   }
   private subReq():SubRequest{
@@ -180,6 +176,7 @@ ngAfterViewInit(): void {
       clearInterval(this.sendInterval);
 
   }
+  /*
   private init3D(){
     console.log(this.myCanvas.nativeElement);
 
@@ -216,5 +213,5 @@ ngAfterViewInit(): void {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-  }
+  }*/
 }

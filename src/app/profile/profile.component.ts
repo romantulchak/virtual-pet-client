@@ -16,8 +16,8 @@ export class ProfileComponent implements OnInit {
   public myHeroes: SubHero[];
   public currentUser: User;
   public currentHero: SubHero;
-
-
+  public isMusicAllow: boolean = false;
+  public showInventory: boolean = false;
 
 
 
@@ -26,10 +26,27 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    let allowMusic = localStorage.getItem('allowMusic');
+    if(allowMusic != null && allowMusic == 'true'){
+        this.playMusic();
+    }else{
+      console.log(this.isMusicAllow);
+
+      this.isMusicAllow = false;
+    }
     this.getMyHeroes();
     this.currentUser = this.tokenStorage.getUser();
-    this.playMusic();
+
   }
+  public setMusic(option?:number){
+    switch(option){
+      case 1:
+        localStorage.setItem('allowMusic', 'true')
+        break;
+    }
+  }
+
   public playMusic(){
 
       let audio = new Audio();
@@ -84,6 +101,7 @@ export class ProfileComponent implements OnInit {
           console.log(res);
           this.myHeroes = this.myHeroes.filter(x=> x.id != sub.id);
           this.currentHero = this.myHeroes[0];
+          this.profileService.currentHero.next(this.currentHero);
         }
 
       }

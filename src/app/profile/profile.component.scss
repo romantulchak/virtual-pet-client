@@ -45,41 +45,74 @@
 
       svg{
         width: 75px;
+        transition: .5s ease-in;
+        path{
 
+          transition: 1s;
+        }
+        &:hover{
+          path:first-child{
+
+            fill:#4495cc !important;
+          }
+          path:last-child{
+            fill: #fff !important;
+          }
+        }
       }
     }
   }
 
   .hero__card{
 
-    .remove__hero{
-      position: absolute;
-      left: 39%;
-      border-radius: 50px;
-      top: 272px;
-      background: rgb(213 60 42 / 77%);
-      transition: .5s ease-in;
-      width: 25px;
-      height: 25px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 13px;
-      color: #fff;
-      font-family: HeroesName;
-      cursor: pointer;
-
-      &:hover{
-
-        background: #d53c2a;
-      }
-    }
-
     height: 262px;
     transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
     width: 185px;
     border-radius: 4px;
     justify-self: center;
+    position: relative;
+
+    .hero__card_elements{
+      position: absolute;
+      width: 100%;
+      height: 35px;
+      top: 100%;
+      font-family: HeroesName;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 1fr 1fr;
+      .remove__hero{
+        border-radius: 50px;
+        background: rgb(213 60 42 / 77%);
+        transition: .5s ease-in;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        justify-self: center;
+        justify-content: center;
+        align-items: center;
+        font-size: 13px;
+        color: #fff;
+        cursor: pointer;
+
+        &:hover{
+
+          background: #d53c2a;
+        }
+      }
+
+      .hero__inventory{
+
+        justify-self: center;
+        cursor: pointer;
+        img{
+          width: 25px;
+        }
+      }
+    }
+
+
+
 
     h4{
       background: #fff;
@@ -116,11 +149,17 @@
       width: 100%;
       height: 52px;
       border: none;
+      cursor: pointer;
       outline: none;
       border-radius: 4px;
       background: gold;
       font-family: HeroesName;
       letter-spacing: 1px;
+      transition: .5s;
+
+      &:hover{
+        background: #ffd700d6;
+      }
     }
     .hero__card_image{
       height: 180px;
@@ -151,3 +190,8 @@
   }
 }
 
+.music__dialog{
+  position: absolute;
+  top: 0;
+  border: 1px solid red;
+}
