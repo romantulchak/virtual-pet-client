@@ -1,0 +1,26 @@
+<form (submit)="createSword()">
+
+  <div>
+    <h1>Name</h1>
+    <input type="text" name="name" [(ngModel)]="sword.name">
+  </div>
+  <div>
+    <h1>Attack</h1>
+    <input type="number" name="attack" [(ngModel)]="sword.attack">
+  </div>
+  <div>
+    <h1>Allow shield</h1>
+    <input type="checkbox" name="allowShield" [(ngModel)]="sword.allowShield">
+  </div>
+  <div>
+    <select name="uniqueness" [(ngModel)]="sword.uniqueness">
+      <option *ngFor="let u of uniqueness" [value]="u.value">{{u?.name}}</option>
+    </select>
+  </div>
+
+
+
+  <button type="submit">Send</button>
+
+
+</form>

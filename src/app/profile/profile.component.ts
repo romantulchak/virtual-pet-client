@@ -1,4 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { InventoryComponent } from '../inventory/inventory.component';
 import { SubHero } from '../models/subHero.model';
 import { User } from '../models/user.model';
 import { GameService } from '../services/game.service';
@@ -17,26 +19,25 @@ export class ProfileComponent implements OnInit {
   public currentUser: User;
   public currentHero: SubHero;
   public isMusicAllow: boolean = false;
-  public showInventory: boolean = false;
 
 
 
-  constructor(private tokenStorage: TokenStorageService, private profileService: ProfileService, private gameService: GameService) { }
+  constructor(private tokenStorage: TokenStorageService,private dialog: MatDialog, private profileService: ProfileService, private gameService: GameService) { }
 
 
 
   ngOnInit(): void {
-
     let allowMusic = localStorage.getItem('allowMusic');
     if(allowMusic != null && allowMusic == 'true'){
         this.playMusic();
     }else{
-      console.log(this.isMusicAllow);
 
       this.isMusicAllow = false;
     }
     this.getMyHeroes();
     this.currentUser = this.tokenStorage.getUser();
+
+    this.updateHero();
 
   }
   public setMusic(option?:number){
@@ -50,7 +51,7 @@ export class ProfileComponent implements OnInit {
   public playMusic(){
 
       let audio = new Audio();
-      audio.src = "../../assets/musics/Exist Strategy - Reverence.mp3";
+      audio.src = "../../assets/musics/Caravan Palace Lone Digger.mp3";
       audio.play();
 
   }
@@ -72,8 +73,6 @@ export class ProfileComponent implements OnInit {
             this.currentHero = res[0];
           }
           this.myHeroes = res;
-          console.log(this.currentHero);
-
           this.profileService.currentHero.next(this.currentHero);
         }
       }
@@ -108,4 +107,15 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  public openInventory(sub: SubHero){
+    this.dialog.open(InventoryComponent, {panelClass: 'inventory__dialog', width: '500px', data: {sub: sub, userId: this.currentUser.id}});
+  }
+  private updateHero(){
+    this.profileService.currentHero.subscribe(
+      res=>{
+        if(res != null)
+          this.currentHero = res;
+      }
+    );
+  }
 }

@@ -1,16 +1,52 @@
 <section>
-  <div class="overlay"></div>
 <div class="inventory__block">
   <div class="inventory__grid">
 
-    <div class="cell">1</div>
-    <div class="cell">2</div>
-    <div class="cell">3</div>
-    <div class="cell">4</div>
-    <div class="cell">5</div>
-    <div class="cell">6</div>
-    <div class="cell">7</div>
-    <div class="cell">8</div>
+    <ng-container *ngFor="let item of items">
+      <div class="cell" (click)="setItem(item)" [class.rare]="item?.uniqueness == 'RARE'" [class.legendary]="item?.uniqueness == 'LEGENDARY'" [class.mythical]="item?.uniqueness == 'MYTHICAL'">{{item?.name}}</div>
+    </ng-container>
+
+
+  </div>
+  <div class="hero__items">
+    <div class="items">
+      <div class="armor">
+        <div class="hero__item" [class.rare]="sub?.dressedItems?.head?.uniqueness == 'RARE'" [class.legendary]="sub?.dressedItems?.head?.uniqueness == 'LEGENDARY'" [class.mythical]="sub?.dressedItems?.head?.uniqueness == 'MYTHICAL'">
+          <p (click)="withdrawArmor('HEAD', sub?.dressedItems?.head?.id)" *ngIf="sub?.dressedItems?.head != null">{{sub?.dressedItems?.head?.name}}</p>
+            <div class="head" *ngIf="sub?.dressedItems?.head == null"></div>
+        </div>
+        <div class="hero__item" [class.rare]="sub?.dressedItems?.hands?.uniqueness == 'RARE'" [class.legendary]="sub?.dressedItems?.hands?.uniqueness == 'LEGENDARY'" [class.mythical]="sub?.dressedItems?.hands?.uniqueness == 'MYTHICAL'">
+         <p (click)="withdrawArmor('HANDS', sub?.dressedItems?.hands?.id)" *ngIf="sub?.dressedItems?.hands != null">{{sub?.dressedItems?.hands?.name}}</p>
+          <div class="hands" *ngIf="sub?.dressedItems?.hands == null"></div>
+        </div>
+        <div class="hero__item" [class.rare]="sub?.dressedItems?.body?.uniqueness == 'RARE'" [class.legendary]="sub?.dressedItems?.body?.uniqueness == 'LEGENDARY'" [class.mythical]="sub?.dressedItems?.body?.uniqueness == 'MYTHICAL'">
+          <p (click)="withdrawArmor('BODY', sub?.dressedItems?.body?.id)" *ngIf="sub?.dressedItems?.body != null">{{sub?.dressedItems?.body?.name}}</p>
+          <div class="body" *ngIf="sub?.dressedItems?.body == null"></div>
+        </div>
+        <div class="hero__item" [class.rare]="sub?.dressedItems?.legs?.uniqueness == 'RARE'" [class.legendary]="sub?.dressedItems?.legs?.uniqueness == 'LEGENDARY'" [class.mythical]="sub?.dressedItems?.legs?.uniqueness == 'MYTHICAL'">
+          <p (click)="withdrawArmor('LEGS', sub?.dressedItems?.legs?.id)" *ngIf="sub?.dressedItems?.legs != null">{{sub?.dressedItems?.legs?.name}}</p>
+          <div class="legs" *ngIf="sub?.dressedItems?.legs == null"></div>
+        </div>
+        <div class="hero__item" [class.rare]="sub?.dressedItems?.shoulders?.uniqueness == 'RARE'" [class.legendary]="sub?.dressedItems?.shoulders?.uniqueness == 'LEGENDARY'" [class.mythical]="sub?.dressedItems?.shoulders?.uniqueness == 'MYTHICAL'">
+          <p (click)="withdrawArmor('SHOULDERS', sub?.dressedItems?.shoulders?.id)" *ngIf="sub?.dressedItems?.shoulders != null">{{sub?.dressedItems?.shoulders?.name}}</p>
+          <div class="shoulders" *ngIf="sub?.dressedItems?.shoulders == null"></div>
+        </div>
+      </div>
+      <div class="weapon">
+        <div class="hero__item" [class.rare]="sub?.dressedItems?.sword?.uniqueness == 'RARE'" [class.legendary]="sub?.dressedItems?.sword?.uniqueness == 'LEGENDARY'" [class.mythical]="sub?.dressedItems?.sword?.uniqueness == 'MYTHICAL'">
+          <p (click)="withdrawWeapon('SWORD', sub?.dressedItems?.sword?.id)" *ngIf="sub?.dressedItems?.sword != null">{{sub?.dressedItems?.sword?.name}}</p>
+          <div class="sword" *ngIf="sub?.dressedItems?.sword == null"></div>
+        </div>
+        <div class="hero__item" [class.rare]="sub?.dressedItems?.shield?.uniqueness == 'RARE'" [class.legendary]="sub?.dressedItems?.shield?.uniqueness == 'LEGENDARY'" [class.mythical]="sub?.dressedItems?.shield?.uniqueness == 'MYTHICAL'">
+          <p (click)="withdrawArmor('SHIELD', sub?.dressedItems?.shield?.id)" *ngIf="sub?.dressedItems?.shield != null">{{sub?.dressedItems?.shield?.name}}</p>
+          <div class="shield" *ngIf="sub?.dressedItems?.shield == null"></div>
+
+        </div>
+      </div>
+     </div>
+    <img src="../../assets/images/login/hero5.png" alt="">
+
+
   </div>
 </div>
 

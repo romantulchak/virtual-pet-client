@@ -1,0 +1,23 @@
+@mixin grid-panel($numberOfColumns) {
+  display: grid;
+  grid-template-columns: repeat($numberOfColumns, 1fr);
+  align-items: center;
+}
+.bottom__section_panel{
+  margin-top: 12%;
+  .grid_bottom_panel{
+    @include grid-panel(2);
+
+    .bottom__panel_left{
+      @include grid-panel(3);
+    }
+    .bottom__panel_right{
+      @include grid-panel(2);
+      justify-self: flex-end;
+
+      div{
+        justify-self: flex-end;
+      }
+    }
+  }
+}

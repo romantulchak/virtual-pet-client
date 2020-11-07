@@ -1,39 +1,163 @@
+$shadowArea:7px;
+
+@mixin cell-shared($width-height){
+  width: $width-height;
+  display: grid;
+  justify-self: center;
+  align-items: center;
+  align-self: center;
+  border-radius: 4px;
+  word-break: break-all;
+  background: #f0f9ff66;
+  height: $width-height;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: .5s ease;
+
+  &:hover{
+    background: rgb(123 129 162 / 30%);
+  }
+}
+@mixin uniqueness($color, $color-shadow) {
+  border: 1px solid $color;
+  box-shadow: 0px 1px 5px 1px $color-shadow;
+}
+@mixin item-image($path) {
+  background-image: url($path);
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
 .inventory__block{
   background-image: url('../../assets/images/game/inventory.png');
-  width: 570px;
-  height: 475px;
+  width: 714px;
+  height: 591px;
   background-size: cover;
   position: absolute;
+  align-items: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
   z-index: 9999999;
-}
-.overlay{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #0000002e;
-  z-index: 999999;
-  top: 0;
-}
-.inventory__grid{
-display: grid;
-    text-align: center;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 6em 6em;
-    grid-gap: 10px;
-    margin: 47px auto;
-    width: 84%;
-  .cell{
-    width: 75px;
-    display: grid;
-    justify-self: center;
-    align-items: center;
-    align-self: center;
-    border-radius: 4px;
-    background: #f0f9ff66;
-    height: 75px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+
+  .hero__items{
+    margin-top: 3em;
+    .items{
+      position: relative;
+      z-index: 99999;
+
+      .armor{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1em;
+        position: absolute;
+        text-align: center;
+        width: 220px;
+        top: -180px;
+        left: -50px;
+
+
+        .head{
+          @include item-image('../../assets/images/inventory/head.svg');
+        }
+        .hands{
+
+          @include item-image('../../assets/images/inventory/hand.svg');
+        }
+        .body{
+
+          @include item-image('../../assets/images/inventory/body.svg');
+        }
+        .legs{
+
+          @include item-image('../../assets/images/inventory/legs.svg');
+        }
+        .shoulders{
+
+          @include item-image('../../assets/images/inventory/shoulders.svg');
+        }
+      }
+      .weapon{
+        display: flex;
+        gap: 2em;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: absolute;
+        width: 100%;
+        top: 180px;
+        left: -68px;
+
+        .sword{
+          @include item-image('../../assets/images/inventory/sword.svg');
+        }
+        .shield{
+          @include item-image('../../assets/images/inventory/shield.svg');
+        }
+      }
+    }
+    img{
+      position: relative;
+      right: 60px;
+      width: 100%;
+      transform: scale(1.8);
+      z-index: 8888;
+      max-height: 120px;
+      user-select: none;
+      object-fit: contain;
+    }
   }
+
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: none !important;
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 3px !important;
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+}
+
+
+.inventory__grid{
+
+
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(4, 1fr);
+  overflow-y: scroll;
+  grid-gap: 10px;
+  width: 70%;
+  height: 84%;
+  padding: 5px;
+  justify-self: center;
+
+  .cell{
+    @include cell-shared(75px)
+  }
+}
+.rare{
+  @include uniqueness(#00006b,rgb(0 0 107 / 0.50));
+}
+.legendary{
+  @include uniqueness(#eccd21, rgb(236 205 33 / 0.50));
+}
+.mythical{
+      @include uniqueness(#a207d8, rgb(162 7 216 / 0.50));
+}
+.hero__item{
+  @include cell-shared(55px);
+  flex-basis: 55px;
+
 }

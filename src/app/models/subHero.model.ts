@@ -3,6 +3,7 @@ import { Inventory } from './inventory.model';
 import { Sub } from './sub.model';
 import { SubAttack } from './subAttack.model';
 import { Currency } from './currency.model';
+import { SubItems } from './subItems.model';
 
 export class SubHero extends Sub{
     public id: number;
@@ -16,4 +17,5 @@ export class SubHero extends Sub{
     public subAttack: SubAttack;
     public health: number;
     public currency: Currency;
+    dressedItems: SubItems;
 }

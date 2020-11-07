@@ -8,14 +8,15 @@
 
           <div *ngIf="hero.id == currentHero.id && myHeroes.length != 1" (click)="removeHero(hero)" class="remove__hero">X</div>
 
-         <div class="hero__inventory" *ngIf="hero.id == currentHero.id" (click)="showInventory = true">
+         <div class="hero__inventory" *ngIf="hero.id == currentHero.id" (click)="openInventory(hero)">
           <img src="../../assets/images/game/inventory.svg" alt="">
         </div>
         </div>
         <div class="hero__card_image">
-          <img [class.selected__image]="hero.id == currentHero.id" src="../../assets/images/login/hero2.png" alt="">
+          <img [class.selected__image]="hero.id == currentHero.id" src="../../assets/images/login/hero5.png" alt="">
         </div>
         <h4>{{hero.name}}</h4>
+
         <button *ngIf="hero.id != currentHero.id; else info" (click)="selectHero(hero.id)">Choose</button>
         <ng-template #info>
             <div class="hero__info">
@@ -49,19 +50,10 @@
        </a>
       </div>
     </div>
-  <div class="circle">
-  </div>
-  <button (click)="exit()">Exit</button>
-  <a routerLink="/create-sub">Create your hero</a>
-  <a routerLink="/game" (click)="play()">Play</a>
+    <app-game-bottom-panel></app-game-bottom-panel>
+</div>
 
-  </div>
 
-  <div *ngIf="showInventory">
-    <app-inventory></app-inventory>
-  </div>
-
-<app-game-bottom-panel></app-game-bottom-panel>
 <!--
   <div *ngIf="!isMusicAllow" class="music__dialog">
     <h2>Dialog</h2>

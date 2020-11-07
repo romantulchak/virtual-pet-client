@@ -9,6 +9,7 @@ import { RegistrationGuard } from './guards/registration-guard.service';
 import { CreateSubComponent } from './create-sub/create-sub.component';
 import { GameComponent } from './game/game.component';
 import { GameGuard } from './guards/game-guard.service';
+import { ItemsComponent } from './items/items.component';
 
 const routes: Routes = [
   {path:'', component:ProfileComponent, canActivate:[RegistrationGuard]},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'create-sub', component: CreateSubComponent},
   {path: 'game', component: GameComponent, canActivate: [GameGuard]},
+  {path: 'items', component: ItemsComponent},
   {path: '**', component: NotFoundComponent}
 ];
 

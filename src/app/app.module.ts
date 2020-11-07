@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {MatDialogModule} from "@angular/material/dialog";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -19,6 +19,9 @@ import { GameGuard } from './guards/game-guard.service';
 import { GameTopPanelComponent } from './game-top-panel/game-top-panel.component';
 import { GameBottomPanelComponent } from './game-bottom-panel/game-bottom-panel.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ItemsComponent } from './items/items.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,12 +34,16 @@ import { InventoryComponent } from './inventory/inventory.component';
     GameTopPanelComponent,
     GameBottomPanelComponent,
     InventoryComponent,
+    ItemsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    DragDropModule
   ],
   providers: [AuthGuard, RegistrationGuard, GameGuard, authInterceptorProviders],
   bootstrap: [AppComponent]
