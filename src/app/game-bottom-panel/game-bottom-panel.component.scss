@@ -3,18 +3,55 @@
   grid-template-columns: repeat($numberOfColumns, 1fr);
   align-items: center;
 }
+@mixin grid-panel-icons($path) {
+  background-image: url($path);
+  width: 60px;
+  height: 60px;
+  justify-self: center;
+  background-size: cover;
+}
+@mixin game-button($color) {
+
+  padding: 1em;
+  text-decoration: none;
+  color: $color;
+  background: rgb(255 255 255 / 83%);
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-weight: 900;
+  letter-spacing: 2px;
+  transition: 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+  &:hover{
+    box-shadow: 0px 0px 7px 3px #71cc21;
+  }
+}
 .bottom__section_panel{
-  margin-top: 12%;
+  margin-top: 10%;
   .grid_bottom_panel{
     @include grid-panel(2);
 
     .bottom__panel_left{
       @include grid-panel(3);
+      .friends{
+        @include grid-panel-icons('../../assets/images/bottom-panel/friends.svg');
+      }
+      .shop{
+        @include grid-panel-icons('../../assets/images/bottom-panel/shop.svg');
+      }
+      .missions{
+        @include grid-panel-icons('../../assets/images/bottom-panel/missions.svg');
+        transform: rotate(45deg);
+      }
     }
     .bottom__panel_right{
       @include grid-panel(2);
       justify-self: flex-end;
-
+      .game__button_bot a{
+        @include game-button(seagreen);
+      }
+      .game__button_online a{
+        @include game-button(#ff5722);
+      }
       div{
         justify-self: flex-end;
       }

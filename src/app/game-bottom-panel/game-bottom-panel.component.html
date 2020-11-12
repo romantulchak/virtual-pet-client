@@ -1,27 +1,24 @@
-<section class="bottom__section_panel">
+<footer class="bottom__section_panel">
   <div class="grid_bottom_panel">
     <div class="bottom__panel_left">
-      <div>
-        <h2>Friends</h2>
+      <div class="friends">
       </div>
-      <div>
-        <h2>Shop</h2>
+      <div class="shop">
       </div>
-      <div>
-        Missions
+      <div class="missions">
       </div>
     </div>
 
 
     <div class="bottom__panel_right">
-      <div>
-        <a routerLink="/game">Play with Bot</a>
+      <div class="game__button_bot">
+        <a routerLink="/game" (click)="play()">Play with Bot</a>
       </div>
-      <div>
-        <h2>Online</h2>
+      <div class="game__button_online">
+        <a routerLink="/online" (click)="play()">Online</a>
       </div>
     </div>
 
 
   </div>
-</section>
+</footer>

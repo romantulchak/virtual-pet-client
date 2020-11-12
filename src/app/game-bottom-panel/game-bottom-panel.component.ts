@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { SubHero } from '../models/subHero.model';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-game-bottom-panel',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameBottomPanelComponent implements OnInit {
 
-  constructor() { }
+
+  @Input() currentHero: SubHero;
+
+  constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
   }
-
+  public play(){
+    this.gameService.currentHero.next(this.currentHero);
+  }
 }

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Howl } from 'howler'
 import { InventoryComponent } from '../inventory/inventory.component';
 import { SubHero } from '../models/subHero.model';
 import { User } from '../models/user.model';
@@ -20,7 +21,12 @@ export class ProfileComponent implements OnInit {
   public currentHero: SubHero;
   public isMusicAllow: boolean = false;
 
-
+  private sound = new Howl({
+    src:['../../assets/musics/Caravan Palace Lone Digger.mp3'],
+    loop: true,
+    volume: 0.020,
+    autoplay: false
+  });
 
   constructor(private tokenStorage: TokenStorageService,private dialog: MatDialog, private profileService: ProfileService, private gameService: GameService) { }
 
@@ -29,7 +35,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     let allowMusic = localStorage.getItem('allowMusic');
     if(allowMusic != null && allowMusic == 'true'){
-        this.playMusic();
+       // this.playMusic();
     }else{
 
       this.isMusicAllow = false;
@@ -49,11 +55,7 @@ export class ProfileComponent implements OnInit {
   }
 
   public playMusic(){
-
-      let audio = new Audio();
-      audio.src = "../../assets/musics/Caravan Palace Lone Digger.mp3";
-      audio.play();
-
+      this.sound.play();
   }
 
 
@@ -89,9 +91,7 @@ export class ProfileComponent implements OnInit {
     );
 
   }
-  public play(){
-    this.gameService.currentHero.next(this.currentHero);
-  }
+
 
   public removeHero(sub: SubHero){
     this.profileService.deleteSub(sub.id).subscribe(
