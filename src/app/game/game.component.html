@@ -1,30 +1,31 @@
 <section>
 
-<div>
-  Name: {{currentHero.name}}
-  Attack:
-  {{currentHero.attack}}
-</div>
+  <div>
+    Name: {{currentHero.name}}
+    Attack:
+    {{currentHero.attack}}
+  </div>
 
-<div>
-  <h2>Money: {{currentHero.currency.money}}</h2>
-</div>
+  <div>
+    <h2>Money: {{currentHero.currency.money}}</h2>
+  </div>
 
-<h1>Level: {{level}}</h1>
+  <h1>Level: {{level}}</h1>
 
-<h2>Boss Name: {{currentBoss?.name}} Boss HP: {{currentBoss?.health}} Dropped Money: {{currentBoss?.droppedMoney}}</h2>
+  <h2>Boss Name: {{currentBoss?.name}} Boss HP: {{currentBoss?.health}} Dropped Money: {{currentBoss?.droppedMoney}}
+  </h2>
 
+  <progress class="health__indicatior" max="{{bossHealth}}" value="{{currentBoss?.health}}"></progress>
+  <div class="game__click" (click)="moneyClikcs()">
 
-<div class="game__click" (click)="moneyClikcs()">
+  </div>
+  <h2 *ngIf="errorMessage != null" class="alert__error">{{errorMessage}}</h2>
+  <canvas #myCanvas></canvas>
+  <button [disabled]="isUpdatePrice" (click)="upMoneyLevel()">
+    Up money level cost: {{currentHero.moneyUpPrice}}
+  </button>
 
-</div>
-<h2 *ngIf="errorMessage != null" class="alert__error">{{errorMessage}}</h2>
-<canvas #myCanvas></canvas>
-<button [disabled]="isUpdatePrice" (click)="upMoneyLevel()">
-  Up money level cost: {{currentHero.moneyUpPrice}}
-</button>
-
-<button [disabled]="isUpdateAttack" (click)="upAttackLevel()">Up attack</button>
+  <button [disabled]="isUpdateAttack" (click)="upAttackLevel()">Up attack</button>
 
 
 </section>

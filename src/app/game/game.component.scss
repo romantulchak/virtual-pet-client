@@ -3,3 +3,10 @@
   height: 250px;
   border: 1px solid red;
 }
+progress[value]::-webkit-progress-bar {
+  background-color: green;
+}
+
+progress[value]::-webkit-progress-value {
+  background-color: #FF0000;
+}
