@@ -22,6 +22,8 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ItemsComponent } from './items/items.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { CharacterCardComponent } from './character-card/character-card.component';
+import { EnemyCardComponent } from './enemy-card/enemy-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +37,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     GameBottomPanelComponent,
     InventoryComponent,
     ItemsComponent,
+    CharacterCardComponent,
+    EnemyCardComponent,
   ],
   imports: [
     BrowserModule,

@@ -72,7 +72,11 @@ export class GameComponent implements OnInit, OnDestroy {
     });*/
     this.gameService.currentHero.subscribe((res) => {
       this.currentHero = res;
+
+
     });
+
+
     this.getBoss();
 
     if (this.currentHero != null) {
@@ -87,7 +91,6 @@ export class GameComponent implements OnInit, OnDestroy {
     this.gameService.getBoss(this.subReq()).subscribe((res) => {
       this.currentBoss = res.boss;
       this.level = res.level;
-
       this.bossHealth = this.currentBoss.health;
     });
   }

@@ -6,31 +6,35 @@ import { SubType } from '../models/subType.model';
 import { catchError, retry } from 'rxjs/operators';
 import { SubRequest } from '../models/subRequest.model';
 import { SubHero } from '../models/subHero.model';
+import { User } from '../models/user.model';
 const API_URL = environment.API_URL;
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileService{
-  constructor(private httpClient: HttpClient){}
+export class ProfileService {
+  constructor(private httpClient: HttpClient) { }
 
   public currentHero: BehaviorSubject<SubHero> = new BehaviorSubject(null);
 
-  public getMyHeroes():Observable<SubHero[]>{
+  public getMyHeroes(): Observable<SubHero[]> {
     return this.httpClient.get<SubHero[]>(API_URL + 'profile/getSubsForUser');
   }
-  public getSubTypes(): Observable<SubType[]>{
+  public getSubTypes(): Observable<SubType[]> {
     return this.httpClient.get<SubType[]>(API_URL + 'profile/getSubTypes').pipe(retry(3));
   }
-  public createSub(subRequest: SubRequest){
+  public createSub(subRequest: SubRequest) {
     return this.httpClient.post(API_URL + 'profile/createSub', subRequest);
   }
-  public getCurrentSub(subId: number, userId: number):Observable<SubHero>{
+  public getCurrentSub(subId: number, userId: number): Observable<SubHero> {
     let params = new HttpParams();
     params = params.append('subId', subId.toString()).append('userId', userId.toString());
-    return this.httpClient.get<SubHero>(API_URL + 'profile/getInfoAboutSub', {params: params});
+    return this.httpClient.get<SubHero>(API_URL + 'profile/getInfoAboutSub', { params: params });
   }
-  public deleteSub(heroId: number){
+  public deleteSub(heroId: number) {
     return this.httpClient.delete(API_URL + 'profile/deleteSubForUser/' + heroId);
+  }
+  public getFriends(): Observable<User[]> {
+    return this.httpClient.get<User[]>(API_URL + 'profile/getFriends');
   }
 }
