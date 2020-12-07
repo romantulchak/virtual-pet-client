@@ -1,0 +1,35 @@
+@import '../character-card/character-card.component.scss';
+
+
+.progress__text{
+
+  height: 20px;
+  position: relative;
+
+  span{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 2px;
+    font-family: Brightons;
+  }
+
+  .health__indicatior{
+    height: 20px;
+    width: 100%;
+    background: transparent;
+  }
+  .health__indicatior[value]::-webkit-progress-bar {
+    background-color:#eae4e4;
+
+  }
+  .health__indicatior[value]::-webkit-progress-value {
+    background-color: rgb(255 0 0 / 71%);
+  }
+}
+.hero__card{
+  .hero__info{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
