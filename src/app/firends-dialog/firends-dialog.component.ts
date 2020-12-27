@@ -100,7 +100,6 @@ export class FirendsDialogComponent implements OnInit {
         res=>{
          this.getFriendRequests();
          this.getFriendResponse();
-          
         }
     );
   }
