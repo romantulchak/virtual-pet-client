@@ -1,0 +1,57 @@
+<div>
+  <div>
+    <form (ngSubmit)="searchFriendByUsername(name.value)">
+      <input type="text" name="name" #name>
+      <button type="submit">Search</button>
+    </form>
+  </div>
+  <div>
+    <h4>Friends</h4>
+    <div class="friends__grid">
+        <div class="friend__card" *ngFor="let friend of friends">
+          <h4>{{friend.username}}</h4>
+        </div>
+    </div>
+  </div>
+  <div>
+    <div *ngIf="user != null">
+      <h4>{{user.username}}</h4>
+      <button *ngIf="!user.isFriend" (click)="sendRequest(user.id)">Add</button>
+      <h3 *ngIf="user.isFriend">Is your friend</h3>
+    </div>
+  </div>
+
+  <ng-container *ngIf="friendRequest != null">
+    <ng-container *ngFor="let item of friendRequest">
+
+      <div *ngIf="item != null">
+        <div>
+          <h4>{{item.userRequest.username}}</h4>
+          <h5>Pendding</h5>
+          
+          <button (click)="deniedRequest(item)">Denied</button>
+        </div>
+
+
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="friendResponse != null">
+
+    <ng-container *ngFor="let item of friendResponse">
+
+      <div *ngIf="item != null">
+        <div>
+          <h4>{{item.userRequest.username}}</h4>
+          <div>
+          <button (click)="acceptFriend(item)">Accept</button>
+          <button (click)="deniedRequest(item)">Denied</button>
+          </div>
+        </div>
+
+
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

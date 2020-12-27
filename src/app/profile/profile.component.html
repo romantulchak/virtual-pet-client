@@ -1,6 +1,13 @@
 <section class="profile__bg">
-  <app-game-top-panel></app-game-top-panel>
 
+
+  <div id="stars"></div>
+  <div id="stars2"></div>
+  <div id="stars3"></div>
+
+  <ng-container *ngIf="myHeroes?.length > 0">
+    <app-game-top-panel></app-game-top-panel>
+  </ng-container>
   <div class="container">
     <div class="heroes__grid">
 
@@ -10,58 +17,6 @@
           (openInventory)="openInventory(hero)" [myHeroes]="myHeroes" [currentHero]="currentHero" [hero]="hero">
         </app-character-card>
       </ng-container>
-
-      <!--
-
-
-      <div class="hero__card" *ngFor="let hero of myHeroes" [class.selected]="hero?.id == currentHero?.id" [class.not_selected]="hero.id != currentHero.id">
-        <div class="hero__card_elements">
-
-          <div *ngIf="hero.id == currentHero.id && myHeroes.length != 1" (click)="removeHero(hero)" class="remove__hero">X</div>
-
-         <div class="hero__inventory" *ngIf="hero.id == currentHero.id" (click)="openInventory(hero)">
-          <img src="../../assets/images/game/inventory.svg" alt="">
-        </div>
-        </div>
-        <div class="hero__card_image">
-          <img [class.selected__image]="hero.id == currentHero.id" src="../../assets/images/login/hero5.png" alt="">
-        </div>
-        <h4>{{hero.name}}</h4>
-
-        <button *ngIf="hero.id != currentHero.id; else info" (click)="selectHero(hero.id)">Choose</button>
-        <ng-template #info>
-            <div class="hero__info">
-              <div>
-                <img src="../../assets/images/game/health.svg" alt="">
-                <h5>{{currentHero.health}}</h5>
-              </div>
-              <div>
-                <img src="../../assets/images/game/attack.svg" alt="">
-                <h5>{{currentHero.attack}}</h5>
-              </div>
-              <div>
-                <img src="../../assets/images/game/shield.svg" alt="">
-                <h5>{{currentHero.defence}}</h5>
-              </div>
-
-            </div>
-        </ng-template>
-
-
-
-      </div>
-
--->
-
-
-
-
-
-
-
-
-
-
       <div class="add__hero" *ngIf="myHeroes?.length != 5">
         <a routerLink="/create-sub"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 480 480"

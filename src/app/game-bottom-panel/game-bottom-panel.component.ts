@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { FirendsDialogComponent } from '../firends-dialog/firends-dialog.component';
 import { SubHero } from '../models/subHero.model';
 import { GameService } from '../services/game.service';
 import { ProfileService } from '../services/profile.service';
@@ -13,21 +15,18 @@ export class GameBottomPanelComponent implements OnInit {
 
   @Input() currentHero: SubHero;
 
-  constructor(private gameService: GameService, private profileService: ProfileService) { }
+  constructor(private gameService: GameService, private profileService: ProfileService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
+   
   }
   public play() {
     this.gameService.currentHero.next(this.currentHero);
   }
-  public getFriends() {
-    this.profileService.getFriends().subscribe(
-      res => {
-        if (res != null) {
-          console.log(res);
 
-        }
-      }
-    );
+  public friendsDialog() {
+    this.dialog.open(FirendsDialogComponent, {
+      panelClass: 'friends__dialog'
+    });
   }
 }

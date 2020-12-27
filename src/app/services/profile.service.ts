@@ -7,6 +7,8 @@ import { catchError, retry } from 'rxjs/operators';
 import { SubRequest } from '../models/subRequest.model';
 import { SubHero } from '../models/subHero.model';
 import { User } from '../models/user.model';
+import { Friend } from '../models/friend.model';
+import { UserFriend } from '../models/userFriend.model';
 const API_URL = environment.API_URL;
 
 @Injectable({
@@ -36,5 +38,26 @@ export class ProfileService {
   }
   public getFriends(): Observable<User[]> {
     return this.httpClient.get<User[]>(API_URL + 'profile/getFriends');
+  }
+  public getUserByUsername(username: string): Observable<any> {
+    return this.httpClient.get<User>(API_URL + 'profile/getUserByUsername/' + username);
+  }
+  public sendRequest(user: User): Observable<any> {
+    return this.httpClient.post<any>(API_URL + 'profile/friendRequest', user);
+  }
+  public getFriendRequests(): Observable<UserFriend[]> {
+    return this.httpClient.get<UserFriend[]>(API_URL + 'profile/getFriendRequests');
+  }
+
+  public getFriendResponse(): Observable<UserFriend[]> {
+    return this.httpClient.get<UserFriend[]>(API_URL + 'profile/getFriendResponse');
+  }
+  public accpetFriend(friendRequest:UserFriend):Observable<Friend>{
+    return this.httpClient.post<Friend>(API_URL + 'profile/acceptFriend', friendRequest);
+  }
+  public deniedRequest(friendRequest:UserFriend): Observable<boolean>{
+    let params = new HttpParams();
+    params = params.append('friendRequestId', friendRequest.id.toString())
+    return this.httpClient.delete<boolean>(API_URL + 'profile/deniedFriendRequest', {params: params});
   }
 }

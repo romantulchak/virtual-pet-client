@@ -88,14 +88,18 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private getBoss() {
-    this.gameService.getBoss(this.subReq()).subscribe((res) => {
+    this.gameService.getBoss(this.subReq()).subscribe(
+      res => {
       this.currentBoss = res.boss;
       this.level = res.level;
       this.bossHealth = this.currentBoss.health;
+    },
+    error=>{
+      console.log(error);
     });
   }
 
-  private moneyEverySecond() {
+  private moneyEverySecond() {    
     this.moneyInterval = setInterval(() => {
       this.money += this.currentHero.moneyMultiplier;
       this.updateBoss();
@@ -107,41 +111,37 @@ export class GameComponent implements OnInit, OnDestroy {
     this.sendMoneyPerMinute();
     this.isUpdateAttack = true;
     setTimeout(() => {
-      this.gameService.upAttackLevel(this.subReq()).subscribe((res) => {
-        if (
-          res.httpStatus == 'OK' &&
-          this.currentHero.currency.money >=
-          this.currentHero.subAttack.attackMoneyUp
-        ) {
-          this.currentHero = res.subDTO;
-        } else {
-          this.errorMessage = 'You do not have enough money';
-        }
-        this.isUpdateAttack = false;
-      });
+      this.gameService.upAttackLevel(this.subReq()).subscribe(
+        res => {
+         this.currentHero = res.entity;
+      },
+      error=>{
+        console.log(error.error.message);
+      }
+      );
+      
+      this.isUpdateAttack = false;
     }, 1000);
   }
   public upMoneyLevel() {
     this.sendMoneyPerMinute();
     this.isUpdatePrice = true;
     setTimeout(() => {
-      this.gameService.upMoneyLevel(this.subReq()).subscribe((res) => {
-        if (
-          res.httpStatus == 'OK' &&
-          this.currentHero.currency.money >= this.currentHero.moneyUpPrice
-        ) {
-          this.currentHero = res.subDTO;
-        } else {
-          this.errorMessage = 'You do not have enough money';
-        }
+      this.gameService.upMoneyLevel(this.subReq()).subscribe(
+        res => {    
+          this.currentHero = res.entity;
+        },
+        error=>{
+          console.log(error.error.message);
+          
+        });
         this.isUpdatePrice = false;
-      });
     }, 1000);
   }
 
   private sendMoneyPerMinute() {
     this.gameService.sendMoney(this.subReq(), this.money).subscribe((res) => {
-      this.currentHero = res.subDTO;
+      this.currentHero = res.entity;
       this.money = 0;
     });
   }

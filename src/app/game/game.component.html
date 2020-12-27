@@ -13,7 +13,7 @@
 
       <div class="hero__skils">
         <button [disabled]="isUpdatePrice" (click)="upMoneyLevel()">
-          Up money level cost: {{currentHero.moneyUpPrice}}
+          Up money level cost: {{currentHero?.moneyUpPrice}}
         </button>
         <button [disabled]="isUpdateAttack" (click)="upAttackLevel()">Up attack</button>
       </div>
