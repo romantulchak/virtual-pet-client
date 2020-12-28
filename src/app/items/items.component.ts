@@ -71,7 +71,7 @@ public itemCategories = [
 
   public createSword(){
     this.sword.iconPath = "";
-    console.log(this.sword);
+    
 
     this.itemService.createSword(this.sword).subscribe(
       res=>{

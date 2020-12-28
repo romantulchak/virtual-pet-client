@@ -15,7 +15,7 @@ export class GameTopPanelComponent implements OnInit {
   ngOnInit(): void {
     this.profileService.currentHero.subscribe(
       res=>{
-        if(res != null)
+        if(res != null)        
           this.currentHero = res;
       }
     );

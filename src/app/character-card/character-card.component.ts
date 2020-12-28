@@ -1,3 +1,4 @@
+import { OnChanges } from '@angular/core';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BossSub } from '../models/bossSub.model';
 import { Sub } from '../models/sub.model';
@@ -8,7 +9,7 @@ import { SubHero } from '../models/subHero.model';
   templateUrl: './character-card.component.html',
   styleUrls: ['./character-card.component.scss']
 })
-export class CharacterCardComponent implements OnInit {
+export class CharacterCardComponent implements OnChanges {
 
 
   @Input() currentHero: any;
@@ -22,7 +23,8 @@ export class CharacterCardComponent implements OnInit {
   public bossHealth: number;
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    
   }
 
   public removeHero(hero: SubHero) {

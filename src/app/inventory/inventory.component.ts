@@ -55,7 +55,7 @@ export class InventoryComponent implements OnInit {
     let setItemRequest = new SetItemRequest(this.sub.id, item.eItemCategory, item.id, item.eItemType);
     this.inventorySerivce.setItem(setItemRequest).subscribe(
       res=>{
-        this.sub = res.subDTO;
+        this.sub = res;
         this.profileSerivce.currentHero.next(this.sub);
         this.getItems();
 
@@ -68,7 +68,7 @@ export class InventoryComponent implements OnInit {
     this.inventorySerivce.withdrawWeapon(setItemRequest).subscribe(
       res=>{
         if(res != null){
-          this.sub = res.subDTO;
+          this.sub = res;
           this.getItems();
           this.profileService.currentHero.next(this.sub);
         }
@@ -81,7 +81,7 @@ export class InventoryComponent implements OnInit {
     this.inventorySerivce.withdrawArmor(setItemRequest).subscribe(
       res=>{
         if(res != null){
-          this.sub = res.subDTO;
+          this.sub = res;
           this.getItems();
           this.profileService.currentHero.next(this.sub);
         }

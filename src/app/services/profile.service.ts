@@ -55,9 +55,14 @@ export class ProfileService {
   public accpetFriend(friendRequest:UserFriend):Observable<Friend>{
     return this.httpClient.post<Friend>(API_URL + 'profile/acceptFriend', friendRequest);
   }
-  public deniedRequest(friendRequest:UserFriend): Observable<boolean>{
+  public deniedRequest(friendRequest:UserFriend): Observable<any>{
     let params = new HttpParams();
     params = params.append('friendRequestId', friendRequest.id.toString())
-    return this.httpClient.delete<boolean>(API_URL + 'profile/deniedFriendRequest', {params: params});
+    return this.httpClient.delete<any>(API_URL + 'profile/deniedFriendRequest', {params: params});
+  }
+  public deleteFriend(friendId: number, userId: number): Observable<any>{  
+    let params = new HttpParams();
+    params = params.append("userId", userId.toString()).append("friendId", friendId.toString());
+    return this.httpClient.delete<any>(API_URL + 'profile/deleteFriend', {params: params});
   }
 }

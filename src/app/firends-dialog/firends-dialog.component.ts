@@ -103,4 +103,11 @@ export class FirendsDialogComponent implements OnInit {
         }
     );
   }
+  public deleteFriend(friend: Friend){
+    this.profileService.deleteFriend(friend.id, this.currentUser.id).subscribe(
+      res=>{
+          this.friends = this.friends.filter(x=>x.id != friend.id);
+      }
+    );
+  }
 }

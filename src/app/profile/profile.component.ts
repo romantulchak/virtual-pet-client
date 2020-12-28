@@ -96,7 +96,6 @@ export class ProfileComponent implements OnInit {
     this.profileService.deleteSub(sub.id).subscribe(
       res => {
         if (res != null) {
-          console.log(res);
           this.myHeroes = this.myHeroes.filter(x => x.id != sub.id);
           this.currentHero = this.myHeroes[0];
           this.profileService.currentHero.next(this.currentHero);

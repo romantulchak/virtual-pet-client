@@ -15,7 +15,7 @@
         <button [disabled]="isUpdatePrice" (click)="upMoneyLevel()">
           Up money level cost: {{currentHero?.moneyUpPrice}}
         </button>
-        <button [disabled]="isUpdateAttack" (click)="upAttackLevel()">Up attack</button>
+        <button [disabled]="isUpdateAttack" (click)="upAttackLevel()">Up attack {{currentHero.subAttack.attackMoneyUp}}</button>
       </div>
     </div>
 

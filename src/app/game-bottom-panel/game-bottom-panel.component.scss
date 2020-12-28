@@ -9,6 +9,7 @@
   height: 60px;
   justify-self: center;
   cursor: pointer;
+  z-index: 1000;
   background-size: cover;
 }
 @mixin game-button($color) {

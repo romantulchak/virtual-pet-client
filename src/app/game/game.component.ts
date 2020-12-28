@@ -103,7 +103,6 @@ export class GameComponent implements OnInit, OnDestroy {
     this.moneyInterval = setInterval(() => {
       this.money += this.currentHero.moneyMultiplier;
       this.updateBoss();
-
       this.currentHero.currency.money += this.currentHero.moneyMultiplier;
     }, 1000);
   }
@@ -113,7 +112,7 @@ export class GameComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.gameService.upAttackLevel(this.subReq()).subscribe(
         res => {
-         this.currentHero = res.entity;
+         this.currentHero = res;
       },
       error=>{
         console.log(error.error.message);
@@ -129,11 +128,10 @@ export class GameComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.gameService.upMoneyLevel(this.subReq()).subscribe(
         res => {    
-          this.currentHero = res.entity;
+          this.currentHero = res;
         },
         error=>{
           console.log(error.error.message);
-          
         });
         this.isUpdatePrice = false;
     }, 1000);
@@ -141,7 +139,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   private sendMoneyPerMinute() {
     this.gameService.sendMoney(this.subReq(), this.money).subscribe((res) => {
-      this.currentHero = res.entity;
+      this.currentHero = res;
       this.money = 0;
     });
   }
@@ -149,7 +147,6 @@ export class GameComponent implements OnInit, OnDestroy {
 
   private updateBoss() {
     this.currentBoss.health -= this.currentHero.attack;
-
     if (this.currentBoss.health <= 0) {
       this.money += this.currentBoss.droppedMoney;
       this.sendMoneyPerMinute();

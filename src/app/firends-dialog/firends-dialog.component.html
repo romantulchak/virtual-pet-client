@@ -10,6 +10,7 @@
     <div class="friends__grid">
         <div class="friend__card" *ngFor="let friend of friends">
           <h4>{{friend.username}}</h4>
+          <button (click)="deleteFriend(friend)">Delete friend</button>
         </div>
     </div>
   </div>
