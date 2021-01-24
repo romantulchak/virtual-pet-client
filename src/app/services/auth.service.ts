@@ -21,5 +21,8 @@ export class AuthService {
     public registration(user: User):Observable<any>{
         return this.http.post(API_URL + 'auth/signup', user, httpOptions);
     }
+    public refreshToken():Observable<any>{
+        return this.http.get(API_URL + 'auth/refreshToken');
+    }
 
 }
