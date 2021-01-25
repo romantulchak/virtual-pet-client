@@ -25,6 +25,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { CharacterCardComponent } from './character-card/character-card.component';
 import { EnemyCardComponent } from './enemy-card/enemy-card.component';
 import { FirendsDialogComponent } from './firends-dialog/firends-dialog.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { SubTypeComponent } from './sub-type/sub-type.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +43,8 @@ import { FirendsDialogComponent } from './firends-dialog/firends-dialog.componen
     CharacterCardComponent,
     EnemyCardComponent,
     FirendsDialogComponent,
+    AdminPanelComponent,
+    SubTypeComponent,
   ],
   imports: [
     BrowserModule,

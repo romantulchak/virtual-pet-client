@@ -24,6 +24,7 @@ export class CharacterCardComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges(): void {
+    console.log(this.hero);
     
   }
 

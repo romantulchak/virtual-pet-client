@@ -10,14 +10,19 @@ import { CreateSubComponent } from './create-sub/create-sub.component';
 import { GameComponent } from './game/game.component';
 import { GameGuard } from './guards/game-guard.service';
 import { ItemsComponent } from './items/items.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { SubTypeComponent } from './sub-type/sub-type.component';
 
 const routes: Routes = [
   {path:'', component:ProfileComponent, canActivate:[RegistrationGuard]},
   {path:'registration', component: RegistrationComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'create-sub', component: CreateSubComponent, canActivate:[GameGuard]},
+  {path: 'create-sub', component: CreateSubComponent},
   {path: 'game', component: GameComponent, canActivate: [GameGuard]},
   {path: 'items', component: ItemsComponent},
+  {path: 'admin', component: AdminPanelComponent,children:[
+    {path: 'create-sub-type', component:SubTypeComponent}
+  ]},  
   {path: '**', component: NotFoundComponent}
 ];
 

@@ -1,0 +1,28 @@
+<section>
+    <div>
+        <form enctype="multipart/form-data">
+            <div>
+                <label for="subTypeName">Sub Type Name</label>
+                <input type="text" name="subTypeName" id="subTypeName" [(ngModel)]="subType.subName">
+            </div>
+            <div>
+                <label for="subTypeHealth">Sub Type Health</label>
+                <input type="number" name="subTypeHealth" id="subTypeHealth" min="1" [(ngModel)]="subType.health">
+            </div>
+            <div>
+                <label for="subTypeAttack">Sub Type Attack</label>
+                <input type="number" name="subTypeAttack" id="subTypeAttack" min="1" [(ngModel)]="subType.attack">
+            </div>
+            <div>
+                <label for="subTypeDefence">Sub Type Defence</label>
+                <input type="number" name="subTypeDefence" id="subTypeDefence" [(ngModel)]="subType.defence">
+            </div>
+            <div>
+                <label for="subTypeImage">Sub Type Image</label>
+                <input type="file" id="subTypeIamge" (change)="changeFile($event)">
+            </div>
+            
+            <button (click)="uploadImage()" type="submit">Create</button>
+        </form>
+    </div>
+</section>
