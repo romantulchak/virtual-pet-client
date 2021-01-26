@@ -1,18 +1,17 @@
 <div class="hero__card" [class.selected]="currentHero != null && hero?.id == currentHero?.id"
   [class.not_selected]="currentHero != null && hero?.id != currentHero.id">
-  <div class="hero__card_elements">
+  <div class="hero__card_elements" *ngIf="currentHero != null && hero?.id == currentHero.id">
 
-    <div *ngIf="currentHero != null && hero?.id == currentHero.id && myHeroes?.length != 1" (click)="removeHero(hero)"
-      class="remove__hero">X
+    <div (click)="removeHero(hero)" *ngIf="myHeroes.length != 1" class="remove__hero">X
     </div>
 
-    <div class="hero__inventory" *ngIf="currentHero != null && hero?.id == currentHero?.id" (click)="inventory(hero)">
+    <div class="hero__inventory" (click)="inventory(hero)">
       <img src="../../assets/images/game/inventory.svg" alt="">
     </div>
   </div>
   <div class="hero__card_image">
     <img [class.selected__image]="currentHero != null && hero?.id == currentHero?.id"
-      src="../../assets/images/login/hero5.png" alt="">
+      src="{{hero.iconPath}}" alt="">
   </div>
   <h4>{{hero?.name}}</h4>
 

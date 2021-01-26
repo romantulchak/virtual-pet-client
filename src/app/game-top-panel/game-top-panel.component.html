@@ -6,7 +6,7 @@
         <div class="hero__avatar_name">
           <div class="hero__avatar_frame">
             <img src="../../assets/images/game/frame.svg" alt="">
-            <div class="hero__avatar" style="background-image: url('../../assets/images/login/hero1.png');"></div>
+            <div class="hero__avatar" [ngStyle]="{'background-image': 'url('+ currentHero.iconPath +')' }"></div>
           </div>
           <div class="hero__name_level">
               <h3>{{currentHero?.name}}</h3>

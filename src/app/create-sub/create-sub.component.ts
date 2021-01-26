@@ -23,7 +23,7 @@ export class CreateSubComponent implements OnInit {
     this.sub.subId = this.subTypeId;
     this.profileService.createSub(this.sub).subscribe(
       res=>{
-        console.log(res);
+        console.log("Sub successfully created");
 
       }
     );
