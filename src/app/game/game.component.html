@@ -16,6 +16,12 @@
           Up money level cost: {{currentHero?.moneyUpPrice}}
         </button>
         <button [disabled]="isUpdateAttack" (click)="upAttackLevel()">Up attack {{currentHero.subAttack.attackMoneyUp}}</button>
+        <div>
+          <h4>Damage skills</h4>
+          <div *ngFor="let damageSkill of currentHero.damageSkills">
+              <h4>{{damageSkill.name}}</h4>
+          </div>
+        </div>
       </div>
     </div>
 

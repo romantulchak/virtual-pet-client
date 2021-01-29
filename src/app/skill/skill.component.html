@@ -1,0 +1,39 @@
+<section>
+<div>
+    <h3>Skills</h3>
+</div>
+
+<div>
+    <h3>Create damage skill</h3>
+    <form action="">
+        <div>
+            <label for="skillName">Skill name</label>
+            <input type="text" id="name" name="name" [(ngModel)]="damageSkill.name">
+        </div>
+        <div>
+            <label for="skillPrice">Skill price</label>
+            <input type="number" id="skillPrice" name="price" [(ngModel)]="damageSkill.price">
+        </div>
+        <div>
+            <label for="skillDescription">Skill description</label>
+            <input type="text" id="skillDescription" name="skillDescription" [(ngModel)]="damageSkill.skillDescription">
+        </div>
+        <div>
+            <label for="maxCooldown">Skill maxcooldown</label>
+            <input type="number" id="maxCooldown" name="maxCooldown" [(ngModel)]="damageSkill.maxCooldown">
+        </div>
+        <div>
+            <label for="skillDamage">Skill damage</label>
+            <input type="number" id="skillDamage" name="skillDamage" [(ngModel)]="damageSkill.damage">
+        </div>
+        <div>
+            <label for="skillCriticalChance">Skill critical chance</label>
+            <input type="number" id="skillCriticalChance" name="skillCriticalChance" [(ngModel)]="damageSkill.criticalChance">
+        </div>
+        <div>
+            <button (click)="createDamageSkill()">Create</button>
+        </div>
+    </form>
+</div>
+
+</section>

@@ -12,6 +12,7 @@ import { GameGuard } from './guards/game-guard.service';
 import { ItemsComponent } from './items/items.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { SubTypeComponent } from './sub-type/sub-type.component';
+import { SkillComponent } from './skill/skill.component';
 
 const routes: Routes = [
   {path:'', component:ProfileComponent, canActivate:[RegistrationGuard]},
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: 'game', component: GameComponent, canActivate: [GameGuard]},
   {path: 'items', component: ItemsComponent},
   {path: 'admin', component: AdminPanelComponent,children:[
-    {path: 'create-sub-type', component:SubTypeComponent}
+    {path: 'create-sub-type', component:SubTypeComponent},
+    {path: 'skills', component:SkillComponent}
   ]},  
   {path: '**', component: NotFoundComponent}
 ];

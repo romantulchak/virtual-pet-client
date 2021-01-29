@@ -27,6 +27,7 @@ import { EnemyCardComponent } from './enemy-card/enemy-card.component';
 import { FirendsDialogComponent } from './firends-dialog/firends-dialog.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { SubTypeComponent } from './sub-type/sub-type.component';
+import { SkillComponent } from './skill/skill.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,7 @@ import { SubTypeComponent } from './sub-type/sub-type.component';
     FirendsDialogComponent,
     AdminPanelComponent,
     SubTypeComponent,
+    SkillComponent,
   ],
   imports: [
     BrowserModule,
