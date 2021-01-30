@@ -1,6 +1,11 @@
 <section>
 <div>
     <h3>Skills</h3>
+    <div *ngFor="let skill of skills">
+        <h3>{{skill.name}}</h3>
+        <h3><b>{{skill.id}}</b></h3>
+        <button (click)="removeSkill(skill)">Remove skill {{skill.name}}</button>
+    </div>
 </div>
 
 <div>

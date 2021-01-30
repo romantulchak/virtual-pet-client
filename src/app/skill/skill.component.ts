@@ -11,7 +11,7 @@ import { SkillService } from '../services/skill.service';
 export class SkillComponent implements OnInit {
 
   public damageSkill: DamageSkill = new DamageSkill();
-  public skills: Skill[];
+  public skills: any[] = [];
   constructor(private skillService: SkillService) { }
 
   ngOnInit(): void {
@@ -21,7 +21,7 @@ export class SkillComponent implements OnInit {
   public createDamageSkill(){
     this.skillService.createDamageSkill(this.damageSkill).subscribe(
       res=>{
-        console.log("Damage skill was created");
+        this.skills.push(this.damageSkill);
       }
     );
   }
@@ -30,9 +30,19 @@ export class SkillComponent implements OnInit {
     this.skillService.getSkills().subscribe(
       res=>{
         if(res != null){
-          console.log(res);
+          this.skills = res;
           
         }
+      }
+    );
+  }
+  public removeSkill(skill: any){
+    console.log(skill);
+    this.skillService.deleteSkill(skill.id, skill.skillCategory).subscribe(
+      res=>{
+        this.skills = this.skills.filter(x=>x.id != skill.id && x.skillCategory == skill.skillCategory);
+        console.log(this.skills);
+        
       }
     );
   }
