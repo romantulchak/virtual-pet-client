@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DamageSkill } from '../models/damageSkill.model';
 import { Skill } from '../models/skill.model';
+import { ShopService } from '../services/shop.service';
 import { SkillService } from '../services/skill.service';
 
 @Component({
@@ -12,13 +13,14 @@ export class SkillComponent implements OnInit {
 
   public damageSkill: DamageSkill = new DamageSkill();
   public skills: any[] = [];
-  constructor(private skillService: SkillService) { }
+  constructor(private skillService: SkillService, private shopServcie: ShopService) { }
 
   ngOnInit(): void {
     this.getSkills();
   }
 
   public createDamageSkill(){
+    this.changeDamageSkill(this.damageSkill);
     this.skillService.createDamageSkill(this.damageSkill).subscribe(
       res=>{
         this.skills.push(this.damageSkill);
@@ -31,6 +33,7 @@ export class SkillComponent implements OnInit {
       res=>{
         if(res != null){
           this.skills = res;
+          console.log(res);
           
         }
       }
@@ -41,10 +44,22 @@ export class SkillComponent implements OnInit {
     this.skillService.deleteSkill(skill.id, skill.skillCategory).subscribe(
       res=>{
         this.skills = this.skills.filter(x=>x.id != skill.id && x.skillCategory == skill.skillCategory);
-        console.log(this.skills);
-        
       }
     );
+  }
+  public addSkillToShop(damageSkill: DamageSkill){
+    this.changeDamageSkill(damageSkill);
+    this.shopServcie.addSkillToShop(damageSkill).subscribe(
+      res=>{
+
+      }
+    );
+  }
+
+
+  private changeDamageSkill(damageSkill: DamageSkill):void{
+    delete damageSkill.inShop;   
+    damageSkill.type = "damageSkill";
   }
 
 }
