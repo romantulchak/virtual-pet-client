@@ -12,7 +12,10 @@ export class ShopService {
     constructor(private http: HttpClient) {}
 
     public addSkillToShop(skill: Skill): Observable<any>{
-        
         return this.http.put<any>(API_URL + "shop/addSkillToShop", skill);
+    }
+    
+    public removeSkillFromShop(skill: Skill): Observable<any>{
+        return this.http.put<any>(API_URL + "shop/removeSkillFromShop", skill);
     }
 }

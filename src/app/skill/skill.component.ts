@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DamageSkill } from '../models/damageSkill.model';
+import { SkillCategoryEnum } from '../models/enums/skillCategory.enum';
 import { Skill } from '../models/skill.model';
 import { ShopService } from '../services/shop.service';
 import { SkillService } from '../services/skill.service';
@@ -33,8 +34,6 @@ export class SkillComponent implements OnInit {
       res=>{
         if(res != null){
           this.skills = res;
-          console.log(res);
-          
         }
       }
     );
@@ -51,15 +50,32 @@ export class SkillComponent implements OnInit {
     this.changeDamageSkill(damageSkill);
     this.shopServcie.addSkillToShop(damageSkill).subscribe(
       res=>{
-
+          damageSkill.inShop = true;
       }
     );
   }
 
+  public removeSkillFromShop(skill: Skill){
+    this.changeDamageSkill(skill);
+    console.log(skill);
+    
+    this.shopServcie.removeSkillFromShop(skill).subscribe(
+      res=>{        
+      }
+    );
+    
+  }
 
-  private changeDamageSkill(damageSkill: DamageSkill):void{
-    delete damageSkill.inShop;   
-    damageSkill.type = "damageSkill";
+  private changeDamageSkill(skill):void{
+    delete skill.inShop; 
+    switch(skill.skillCategory){
+      case SkillCategoryEnum.PHYS_DAMAGE:
+        skill.type = "damageSkill";
+      break;
+      case SkillCategoryEnum.DEFENCE:
+        skill.type = "defenceSkill";
+        break;
+    }
   }
 
 }

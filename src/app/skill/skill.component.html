@@ -6,6 +6,7 @@
         <h3><b>{{skill.id}}</b></h3>
         <button (click)="removeSkill(skill)">Remove skill {{skill.name}}</button>
         <button *ngIf="!skill.inShop" (click)="addSkillToShop(skill)">Add to shop</button>
+        <button *ngIf="skill.inShop" (click)="removeSkillFromShop(skill)">Remove skill from shop</button>
     </div>
 </div>
 
