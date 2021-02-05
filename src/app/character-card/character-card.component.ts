@@ -23,9 +23,7 @@ export class CharacterCardComponent implements OnChanges {
   public bossHealth: number;
   constructor() { }
 
-  ngOnChanges(): void {
-    console.log(this.hero);
-    
+  ngOnChanges(): void {   
   }
 
   public removeHero(hero: SubHero) {

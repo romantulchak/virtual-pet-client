@@ -4,6 +4,7 @@ import { FirendsDialogComponent } from '../firends-dialog/firends-dialog.compone
 import { SubHero } from '../models/subHero.model';
 import { GameService } from '../services/game.service';
 import { ProfileService } from '../services/profile.service';
+import { ShopComponent } from '../shop/shop.component';
 
 @Component({
   selector: 'app-game-bottom-panel',
@@ -28,5 +29,10 @@ export class GameBottomPanelComponent implements OnInit {
     this.dialog.open(FirendsDialogComponent, {
       panelClass: 'friends__dialog'
     });
+  }
+  public shopDialog(){
+    this.dialog.open(ShopComponent, {
+      panelClass: 'shop__dialog'
+    })
   }
 }

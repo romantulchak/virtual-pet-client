@@ -6,4 +6,6 @@ export abstract class Skill {
     public price: number;
     public skillDescription: string;
     public maxCooldown:number;
+    public skillImage: string;
+    public inShop: boolean = false;
 }

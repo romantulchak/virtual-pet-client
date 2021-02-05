@@ -28,6 +28,7 @@ import { FirendsDialogComponent } from './firends-dialog/firends-dialog.componen
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { SubTypeComponent } from './sub-type/sub-type.component';
 import { SkillComponent } from './skill/skill.component';
+import { ShopComponent } from './shop/shop.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +48,7 @@ import { SkillComponent } from './skill/skill.component';
     AdminPanelComponent,
     SubTypeComponent,
     SkillComponent,
+    ShopComponent,
   ],
   imports: [
     BrowserModule,

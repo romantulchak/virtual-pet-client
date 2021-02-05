@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { DamageSkill } from '../models/damageSkill.model';
 import { SkillCategoryEnum } from '../models/enums/skillCategory.enum';
 import { Skill } from '../models/skill.model';
@@ -10,21 +11,27 @@ import { SkillService } from '../services/skill.service';
   templateUrl: './skill.component.html',
   styleUrls: ['./skill.component.scss']
 })
-export class SkillComponent implements OnInit {
+export class SkillComponent implements OnInit, OnDestroy{
 
   public damageSkill: DamageSkill = new DamageSkill();
   public skills: any[] = [];
-  constructor(private skillService: SkillService, private shopServcie: ShopService) { }
+  private file: File;
+  private temporaryImage: any;
+  constructor(private skillService: SkillService, private shopServcie: ShopService, private saintizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.getSkills();
   }
 
   public createDamageSkill(){
-    this.changeDamageSkill(this.damageSkill);
-    this.skillService.createDamageSkill(this.damageSkill).subscribe(
+    this.skillService.uploadImage(this.file).subscribe(
       res=>{
-        this.skills.push(this.damageSkill);
+        this.changeDamageSkill(this.damageSkill);
+        this.skillService.createDamageSkill(this.damageSkill).subscribe(
+          res=>{
+            this.skills.unshift(res);
+          }
+        );  
       }
     );
   }
@@ -33,7 +40,7 @@ export class SkillComponent implements OnInit {
     this.skillService.getSkills().subscribe(
       res=>{
         if(res != null){
-          this.skills = res;
+          this.skills = res;      
         }
       }
     );
@@ -55,6 +62,9 @@ export class SkillComponent implements OnInit {
     );
   }
 
+  public setFile(event){
+    this.file = event.target.files[0];
+  }
   public removeSkillFromShop(skill: Skill){
     this.changeDamageSkill(skill);
     console.log(skill);
@@ -77,5 +87,8 @@ export class SkillComponent implements OnInit {
         break;
     }
   }
-
+  ngOnDestroy(){
+    
+  }
+  
 }

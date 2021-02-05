@@ -1,7 +1,10 @@
 <section>
 <div>
     <h3>Skills</h3>
-    <div *ngFor="let skill of skills">
+    <div *ngFor="let skill of skills" class="skill__card">
+        <div class="card__image">
+            <img [src]="skill.skillImage" alt="">
+        </div>
         <h3>{{skill.name}}</h3>
         <h3><b>{{skill.id}}</b></h3>
         <button (click)="removeSkill(skill)">Remove skill {{skill.name}}</button>
@@ -12,7 +15,7 @@
 
 <div>
     <h3>Create damage skill</h3>
-    <form action="">
+    <form action="" enctype="multipart/form-data"> 
         <div>
             <label for="skillName">Skill name</label>
             <input type="text" id="name" name="name" [(ngModel)]="damageSkill.name">
@@ -37,6 +40,11 @@
             <label for="skillCriticalChance">Skill critical chance</label>
             <input type="number" id="skillCriticalChance" name="skillCriticalChance" [(ngModel)]="damageSkill.criticalChance">
         </div>
+        <div>
+            <label for="skillImage">Skill image</label>
+            <input type="file" id="skillImage" name="skillImage" (change)="setFile($event)">
+        </div>
+        
         <div>
             <button (click)="createDamageSkill()">Create</button>
         </div>
