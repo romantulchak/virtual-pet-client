@@ -29,6 +29,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { SubTypeComponent } from './sub-type/sub-type.component';
 import { SkillComponent } from './skill/skill.component';
 import { ShopComponent } from './shop/shop.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +58,8 @@ import { ShopComponent } from './shop/shop.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    DragDropModule
+    DragDropModule,
+    MatTooltipModule
   ],
   providers: [AuthGuard, RegistrationGuard, GameGuard, authInterceptorProviders],
   bootstrap: [AppComponent]

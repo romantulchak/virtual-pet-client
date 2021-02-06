@@ -1,0 +1,159 @@
+$shop-skill-tabs-width: 60px;
+@mixin buttons_tab($background-image) {
+    background-image: url($background-image);
+    background-size: contain;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: .7s;
+    &:hover{
+        filter: hue-rotate(30deg);
+    }
+}
+
+.shop__dragon{
+    position: absolute;
+    top: -55px;
+    left: -560px;
+    transform: rotate(-3deg);
+    width: 1700px;
+    height: 750px;
+    z-index: -2;
+}
+
+.shop__block{
+    background-image: url('../../assets/images/game-icons/shop-background.png');
+    background-size: cover;
+    width: 768px;
+    height: 550px;
+
+    .shop__container{
+        padding: 4em 2em 2em 2em;
+        height: 84%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        .items__grid{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            .shop__item_card{
+                width: 75px;
+                height: 75px;
+                justify-self: center;
+                button{
+                    width: 100%;
+                    height: 100%;
+                    background: none;
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 8px;
+                        transition: 1s ease;
+                        &:hover{
+                            filter: hue-rotate(95deg);
+                        }
+                    }
+                }
+                .tooltip{
+                    height: 100%;
+                    width: 100%;
+                    transition: 1s ease-in;
+                    .item__info{
+                        visibility: hidden;
+                        width: 250px;
+                        height: 350px;
+                        background-color: #e3c986;
+                        box-shadow: 0 0 16px 1px #b78447;
+                        color: #fff;
+                        position: absolute;
+                        top: 0%;
+                        border-radius: 8px;
+                        z-index: 26;
+                        opacity: 0;
+                        user-select: none;
+                        .item__info_container{
+                            position: relative;
+                            height: 100%;
+                            width: 100%;
+                            .item__image{
+                                width: 150px;
+                                height: 150px;
+                                margin: 1em auto;
+                                img{
+                                    width: 100%;
+                                    height: 100%;
+                                    border-radius: 50%;
+                                }
+                            }
+                            .item__details_grid{
+                                margin-top: 1em;
+                                display: grid;
+                                padding: 1em;
+                                line-height: 1.9;
+                                .item__detail{
+                                    display: grid;
+                                    grid-template-columns: 7em 1fr;
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    }
+                    &:hover{
+                        .item__info{
+                            animation: scale-card-up .5s ease-in forwards;
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+    
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: none !important;
+        background-color: transparent;
+    }
+    ::-webkit-scrollbar {
+        width: 3px !important;
+        background-color: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: transparent;
+    }
+}
+.shop__tabs{
+    position: absolute;
+    top: -44px;
+    left: 25px;
+    z-index: -1;
+    button{
+        width:$shop-skill-tabs-width;
+        height: $shop-skill-tabs-width;
+        
+        &:first-child{
+            filter: hue-rotate(100deg);
+            margin-right: 2em;
+            @include buttons_tab('../../assets/images/game-icons/shop-swords.png');
+        }
+        &:nth-child(2){
+            filter: hue-rotate(65deg);
+            @include buttons_tab('../../assets/images/game-icons/shop-skills.png')
+        }
+    }
+}
+
+@keyframes scale-card-up{
+    from{
+        transform: scale(0);
+    }
+    to{
+        transform: scale(1);
+        opacity: 1;
+        visibility: visible;
+    }
+}

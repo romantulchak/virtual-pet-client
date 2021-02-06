@@ -48,8 +48,22 @@ $virtual-pet-client-theme: mat-light-theme((
   max-width: 1100px;
   margin: 0 auto;
 }
+.shop__dialog{
+  position: relative !important;
+
+}
 .cdk-overlay-container{
   z-index: 9999999;
+}
+.shop__dialog{
+  .mat-dialog-container{
+    transform: none;
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+    overflow: hidden;
+  }
 }
 .inventory__dialog{
   .mat-dialog-container{
