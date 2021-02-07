@@ -30,6 +30,8 @@ import { SubTypeComponent } from './sub-type/sub-type.component';
 import { SkillComponent } from './skill/skill.component';
 import { ShopComponent } from './shop/shop.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { SkillShopComponent } from './skill-shop/skill-shop.component';
+import { ItemShopComponent } from './item-shop/item-shop.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +52,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     SubTypeComponent,
     SkillComponent,
     ShopComponent,
+    SkillShopComponent,
+    ItemShopComponent,
   ],
   imports: [
     BrowserModule,

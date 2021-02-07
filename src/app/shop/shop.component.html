@@ -1,47 +1,23 @@
 <section class="shop__section">
-  <div class="shop__tabs">
-        <button></button>
-        <button></button>
+    <div class="shop__tabs">
+        <button (click)="showAllItems()"></button>
+        <button (click)="showAllSkills()"></button>
     </div>
     <div class="shop__block">
-        <ng-container *ngIf="isWeapon">
-            <div class="shop__container">
-                <div class="items__grid">
+        <div class="shop__container">
+            <div class="items__grid">
+                <ng-container *ngIf="isSkills">
                     <div class="shop__item_card" *ngFor="let skill of shop?.allSkills">
-                        <div class="tooltip">
-                            <button ><img [src]="skill.skillImage" alt=""></button>
-                            <div class="item__info">
-                                <div class="item__info_container">
-                                    <div class="item__image">
-                                        <img [src]="skill.skillImage" alt="">
-                                    </div>
-                                    <div class="item__details_grid">
-                                        <div class="item__detail">
-                                            <div>Name: </div>
-                                            <div>{{skill.name}}</div>
-                                        </div>
-                                        <div class="item__detail">
-                                            <div>Price: </div>
-                                            <div>{{skill.price}}</div>
-                                        </div>
-                                        <div class="item__detail">
-                                            <div>Cooldown</div>
-                                            <div>{{skill.maxCooldown}}</div>
-                                        </div>
-                                        <div class="item__detail">
-                                            <div>Name</div>
-                                            <div>{{skill.name}}</div>
-                                        </div>
-                                    </div>
-                                
-                                </div>
-
-                            </div>
-                        </div>
+                        <app-skill-shop [skill]="skill"></app-skill-shop>
                     </div>
-                </div>
+                </ng-container>
+                <ng-container *ngIf="isItems">
+                    <div class="shop__item_card" *ngFor="let item of shop?.allItems">
+                        <app-item-shop [item]="item"></app-item-shop>
+                    </div>
+                </ng-container>
             </div>
-        </ng-container>
+        </div>
     </div>
     <img class="shop__dragon" src="../../assets/images/game-icons/shop-dragon.png" alt="">
 </section>

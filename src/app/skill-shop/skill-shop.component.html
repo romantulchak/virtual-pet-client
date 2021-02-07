@@ -1,0 +1,44 @@
+<div class="tooltip">
+    <button><img [src]="skill.skillImage" alt=""></button>
+    <div class="item__info">
+        <div class="item__info_container">
+            <div class="item__image">
+                <img [src]="skill.skillImage" alt="">
+            </div>
+            <div class="item__details_grid">
+                <div class="item__detail">
+                    <div>Name: </div>
+                    <div>{{skill.name}}</div>
+                </div>
+                <div class="item__detail">
+                    <div>Price: </div>
+                    <div>{{skill.price}}</div>
+                </div>
+                <div class="item__detail">
+                    <div>Cooldown: </div>
+                    <div>{{skill.maxCooldown}}</div>
+                </div>
+                <ng-container *ngIf="skill.skillCategory == 'PHYS_DAMAGE'">
+                    <div class="item__detail">
+                        <div>Damage: </div>
+                        <div>{{skill.damage}}</div>
+                    </div>
+                    <div class="item__detail">
+                        <div>Critical Chance: </div>
+                        <div>{{skill.criticalChance}}</div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="skill.skillCategory == 'DEFENCE'">
+                    <div class="item__detail">
+                        <div>Defence: </div>
+                        <div>{{skill.defence}}</div>
+                    </div>
+                    <div class="item__detail">
+                        <div>Health: </div>
+                        <div>{{skill.health}}</div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

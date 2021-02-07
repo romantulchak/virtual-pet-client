@@ -14,7 +14,8 @@ import { ShopService } from '../services/shop.service';
 export class ShopComponent implements OnInit {
 
   public shop: Shop;
-  public isWeapon: boolean = true;
+  public isItems: boolean = true;
+  public isSkills: boolean = false;
   constructor(private shopService: ShopService) { }
 
   ngOnInit(): void {
@@ -40,4 +41,12 @@ export class ShopComponent implements OnInit {
     return damageSkills.concat(defenceSkill);
   }
 
+  public showAllSkills(){
+    this.isItems = false;
+    this.isSkills = true;
+  }
+  public showAllItems(){
+    this.isItems = true;
+    this.isSkills = false;
+  }
 }

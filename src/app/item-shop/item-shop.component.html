@@ -1,0 +1,52 @@
+<div class="tooltip">
+    <button><img [src]="item.iconPath" alt=""></button>
+    <div class="item__info">
+        <div class="item__info_container">
+            <div class="item__image">
+                <img [src]="item.iconPath" alt="">
+            </div>
+            <div class="item__details_grid">
+                <div class="item__detail">
+                    <div>Name: </div>
+                    <div>{{item.name}}</div>
+                </div>
+                <div class="item__detail">
+                    <div>Price: </div>
+                    <div>{{item.price}}</div>
+                </div>
+                <div class="item__detail">
+                    <div>Item Category: </div>
+                    <div>{{item.eItemCategory}}</div>
+                </div>
+                <div class="item__detail">
+                    <div>Item Type: </div>
+                    <div>{{item.eItemType}}</div>
+                </div>
+                <div class="item__detail">
+                    <div>Uniqueness: </div>
+                    <div>{{item.uniqueness}}</div>
+                </div>
+                <ng-container *ngIf="item.eItemType == 'WEAPON'">
+                    <div class="item__detail">
+                        <div>Attack: </div>
+                        <div>{{item.attack}}</div>
+                    </div>
+                    <div class="item__detail">
+                        <div>Allow Shield: </div>
+                        <div>{{item.allowShield}}</div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="item.eItemType == 'ARMOR'">
+                    <div class="item__detail">
+                        <div>Armor: </div>
+                        <div>{{item.armor}}</div>
+                    </div>
+                    <div class="item__detail">
+                        <div>Health: </div>
+                        <div>{{item.health}}</div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

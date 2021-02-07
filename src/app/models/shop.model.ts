@@ -11,6 +11,6 @@ export class Shop{
     public defenceSkills: DefenceSkill[];
     public itemSwords: Sword[];
     public itemArmors: Armor[];
-    public allSkills: Skill[];
-    public allItems: Item[];
+    public allSkills: any[];
+    public allItems: any[];
 }
