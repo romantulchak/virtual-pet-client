@@ -8,4 +8,5 @@ export abstract class Skill {
     public maxCooldown:number;
     public skillImage: string;
     public inShop: boolean = false;
+    public isBought: boolean;
 }

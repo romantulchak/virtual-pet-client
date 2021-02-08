@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BossSub } from '../models/bossSub.model';
 import { Sub } from '../models/sub.model';
 import { SubHero } from '../models/subHero.model';
+import { ProfileService } from '../services/profile.service';
 
 @Component({
   selector: 'app-character-card',
@@ -23,7 +24,8 @@ export class CharacterCardComponent implements OnChanges {
   public bossHealth: number;
   constructor() { }
 
-  ngOnChanges(): void {   
+  ngOnChanges(): void {  
+
   }
 
   public removeHero(hero: SubHero) {

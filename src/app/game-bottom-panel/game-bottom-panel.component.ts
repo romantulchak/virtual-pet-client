@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FirendsDialogComponent } from '../firends-dialog/firends-dialog.component';
 import { SubHero } from '../models/subHero.model';
@@ -11,7 +11,7 @@ import { ShopComponent } from '../shop/shop.component';
   templateUrl: './game-bottom-panel.component.html',
   styleUrls: ['./game-bottom-panel.component.scss']
 })
-export class GameBottomPanelComponent implements OnInit {
+export class GameBottomPanelComponent implements OnInit, OnChanges {
 
 
   @Input() currentHero: SubHero;
@@ -19,10 +19,14 @@ export class GameBottomPanelComponent implements OnInit {
   constructor(private gameService: GameService, private profileService: ProfileService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-   
+  }
+  ngOnChanges(){
+  
+    
   }
   public play() {
     this.gameService.currentHero.next(this.currentHero);
+    
   }
 
   public friendsDialog() {
@@ -32,7 +36,8 @@ export class GameBottomPanelComponent implements OnInit {
   }
   public shopDialog(){
     this.dialog.open(ShopComponent, {
-      panelClass: 'shop__dialog'
+      panelClass: 'shop__dialog',
+      data: this.currentHero
     })
   }
 }

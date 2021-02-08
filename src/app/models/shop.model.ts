@@ -13,4 +13,5 @@ export class Shop{
     public itemArmors: Armor[];
     public allSkills: any[];
     public allItems: any[];
+    public isBought: boolean;
 }

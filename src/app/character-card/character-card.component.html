@@ -11,7 +11,7 @@
   </div>
   <div class="hero__card_image">
     <img [class.selected__image]="currentHero != null && hero?.id == currentHero?.id"
-      src="{{hero.iconPath}}" alt="">
+      src="{{hero?.iconPath}}" alt="">
   </div>
   <h4>{{hero?.name}}</h4>
 
@@ -22,15 +22,15 @@
     <div class="hero__info">
       <div>
         <img src="../../assets/images/game/health.svg" alt="">
-        <h5>{{hero?.health}}</h5>
+        <h5>{{currentHero?.health}}</h5>
       </div>
       <div>
         <img src="../../assets/images/game/attack.svg" alt="">
-        <h5>{{hero?.attack}}</h5>
+        <h5>{{currentHero?.attack}}</h5>
       </div>
       <div>
         <img src="../../assets/images/game/shield.svg" alt="">
-        <h5>{{hero?.defence}}</h5>
+        <h5>{{currentHero?.defence}}</h5>
       </div>
 
     </div>

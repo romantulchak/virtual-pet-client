@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, Injectable, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Armor } from '../models/armor.model';
 import { Item } from '../models/item.model';
 import { Shop } from '../models/shop.model';
 import { Skill } from '../models/skill.model';
+import { SubHero } from '../models/subHero.model';
 import { Sword } from '../models/sword.model';
+import { ProfileService } from '../services/profile.service';
 import { ShopService } from '../services/shop.service';
 
 @Component({
@@ -16,14 +19,14 @@ export class ShopComponent implements OnInit {
   public shop: Shop;
   public isItems: boolean = true;
   public isSkills: boolean = false;
-  constructor(private shopService: ShopService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public currentHero: SubHero, private shopService: ShopService, private profileService: ProfileService) { }
 
   ngOnInit(): void {
-    this.getShop();
+    this.getShop(); 
   }
 
   private getShop(){
-    this.shopService.getShop().subscribe(
+    this.shopService.getShop(this.currentHero.id).subscribe(
       res=>{
         
         res.allItems = this.allItems(res.itemArmors, res.itemSwords);
@@ -48,5 +51,20 @@ export class ShopComponent implements OnInit {
   public showAllItems(){
     this.isItems = true;
     this.isSkills = false;
+  }
+
+  public buyItem(item){
+    delete item.isBought;
+    
+    this.shopService.buyItem(item, this.currentHero.id).subscribe(
+      res=>{
+        item.isBought = true;
+        this.currentHero.currency.money -= item.price;
+        this.profileService.currentHero.next(this.currentHero);
+      }
+    );
+  }
+  public buySkill(skill){
+    
   }
 }

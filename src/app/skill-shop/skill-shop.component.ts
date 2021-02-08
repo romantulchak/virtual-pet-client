@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-skill-shop',
@@ -8,9 +8,14 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SkillShopComponent implements OnInit {
 
   @Input() skill: any;
+  @Output() buySkillEvent = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public buySkill(skill){
+    this.buySkillEvent.emit(skill);
   }
 
 }

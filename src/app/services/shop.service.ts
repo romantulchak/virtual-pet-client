@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
@@ -12,8 +12,10 @@ const API_URL = environment.API_URL;
 export class ShopService {
     constructor(private http: HttpClient) {}
 
-    public getShop():Observable<Shop>{
-        return this.http.get<Shop>(API_URL + 'shop');
+    public getShop(subId: number):Observable<Shop>{
+        let params = new HttpParams();
+        params = params.append("subId", subId.toString());
+        return this.http.get<Shop>(API_URL + 'shop', {params: params});
     }
     public addSkillToShop(skill: Skill): Observable<any>{
         return this.http.put<any>(API_URL + "shop/addSkillToShop", skill);
@@ -21,5 +23,11 @@ export class ShopService {
     
     public removeSkillFromShop(skill: Skill): Observable<any>{
         return this.http.put<any>(API_URL + "shop/removeSkillFromShop", skill);
+    }
+    public buyItem(item: any, subId: number): Observable<any>{
+      
+        console.log(item);
+        
+        return this.http.post<any>(API_URL + "shop/buyItem/" + subId, item);
     }
 }

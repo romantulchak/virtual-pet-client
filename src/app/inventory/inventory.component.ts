@@ -29,7 +29,6 @@ export class InventoryComponent implements OnInit {
       res=>{
         if(res != null){
           this.sub = res;
-          console.log(res);
         }
       }
     );
@@ -50,11 +49,11 @@ export class InventoryComponent implements OnInit {
   }
 
   public setItem(item: any){
-    console.log(item);
-
     let setItemRequest = new SetItemRequest(this.sub.id, item.eItemCategory, item.id, item.eItemType);
     this.inventorySerivce.setItem(setItemRequest).subscribe(
       res=>{
+        console.log(res);
+        
         this.sub = res;
         this.profileSerivce.currentHero.next(this.sub);
         this.getItems();

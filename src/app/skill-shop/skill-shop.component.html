@@ -1,5 +1,5 @@
 <div class="tooltip">
-    <button><img [src]="skill.skillImage" alt=""></button>
+    <button class="image__button"><img  [src]="skill.skillImage" alt=""></button>
     <div class="item__info">
         <div class="item__info_container">
             <div class="item__image">
@@ -38,6 +38,10 @@
                         <div>{{skill.health}}</div>
                     </div>
                 </ng-container>
+                <button [disabled]="skill.isBought" (click)="buySkill(skill)">
+                    <span *ngIf="!skill.isBought">Buy item</span>
+                    <span *ngIf="skill.isBought">Already bought</span>
+                </button>
             </div>
         </div>
     </div>
