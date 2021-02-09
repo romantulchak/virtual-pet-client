@@ -1,6 +1,7 @@
 import { OnChanges } from '@angular/core';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BossSub } from '../models/bossSub.model';
+import { Skill } from '../models/skill.model';
 import { Sub } from '../models/sub.model';
 import { SubHero } from '../models/subHero.model';
 import { ProfileService } from '../services/profile.service';
@@ -21,6 +22,8 @@ export class CharacterCardComponent implements OnChanges {
   @Output() openInventory = new EventEmitter<SubHero>();
   @Output() selectHero = new EventEmitter<SubHero>();
 
+  @Output() openSkills = new EventEmitter<SubHero>();
+
   public bossHealth: number;
   constructor() { }
 
@@ -38,5 +41,7 @@ export class CharacterCardComponent implements OnChanges {
   public select(hero: SubHero) {
     this.selectHero.emit(hero);
   }
-
+  public skills(hero: SubHero){
+    this.openSkills.emit(hero);
+  }
 }

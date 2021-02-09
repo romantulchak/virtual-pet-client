@@ -2,9 +2,10 @@
   [class.not_selected]="currentHero != null && hero?.id != currentHero.id">
   <div class="hero__card_elements" *ngIf="currentHero != null && hero?.id == currentHero.id">
 
-    <div (click)="removeHero(hero)" *ngIf="myHeroes.length != 1" class="remove__hero">X
+    <div (click)="removeHero(hero)" *ngIf="myHeroes.length != 1" class="remove__hero">X</div>
+    <div class="hero__skills" (click)="skills(hero)">
+      <img src="../../assets/images/game/smoke.svg" alt="">
     </div>
-
     <div class="hero__inventory" (click)="inventory(hero)">
       <img src="../../assets/images/game/inventory.svg" alt="">
     </div>

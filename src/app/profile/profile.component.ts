@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnInit, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Howl } from 'howler'
+import { HeroSkillsComponent } from '../hero-skills/hero-skills.component';
 import { InventoryComponent } from '../inventory/inventory.component';
 import { SubHero } from '../models/subHero.model';
 import { User } from '../models/user.model';
@@ -59,8 +60,6 @@ export class ProfileComponent implements OnInit {
   }
 
 
-
-
   public exit() {
     this.tokenStorage.signOut();
   }
@@ -96,8 +95,6 @@ export class ProfileComponent implements OnInit {
     this.profileService.deleteSub(sub.id).subscribe(
       res => {
           this.myHeroes = this.myHeroes.filter(x => x.id != sub.id);
-          console.log(this.myHeroes);
-          
           this.currentHero = this.myHeroes[0];
           this.profileService.currentHero.next(this.currentHero);
       }
@@ -106,6 +103,12 @@ export class ProfileComponent implements OnInit {
 
   public openInventory(sub: SubHero) {
     this.dialog.open(InventoryComponent, { panelClass: 'inventory__dialog', width: '500px', data: { sub: sub, userId: this.currentUser.id } });
+  }
+  public openSkills(sub: SubHero){
+    this.dialog.open(HeroSkillsComponent, {
+      panelClass: 'hero__skils_dialog',
+      data: sub
+    })
   }
   private updateHero() {
     this.profileService.currentHero.subscribe(

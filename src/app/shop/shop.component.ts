@@ -65,6 +65,11 @@ export class ShopComponent implements OnInit {
     );
   }
   public buySkill(skill){
-    
+    this.shopService.buySkill(skill, this.currentHero.id).subscribe(
+      res=>{
+        skill.isBought = true;
+        this.profileService.currentHero.next(this.currentHero);
+      }
+    );
   }
 }

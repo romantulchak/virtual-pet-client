@@ -32,6 +32,7 @@ import { ShopComponent } from './shop/shop.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { SkillShopComponent } from './skill-shop/skill-shop.component';
 import { ItemShopComponent } from './item-shop/item-shop.component';
+import { HeroSkillsComponent } from './hero-skills/hero-skills.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +55,7 @@ import { ItemShopComponent } from './item-shop/item-shop.component';
     ShopComponent,
     SkillShopComponent,
     ItemShopComponent,
+    HeroSkillsComponent,
   ],
   imports: [
     BrowserModule,

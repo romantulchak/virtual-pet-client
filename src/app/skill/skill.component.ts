@@ -26,7 +26,6 @@ export class SkillComponent implements OnInit, OnDestroy{
   public createDamageSkill(){
     this.skillService.uploadImage(this.file).subscribe(
       res=>{
-        this.changeDamageSkill(this.damageSkill);
         this.skillService.createDamageSkill(this.damageSkill).subscribe(
           res=>{
             this.skills.unshift(res);
@@ -54,7 +53,6 @@ export class SkillComponent implements OnInit, OnDestroy{
     );
   }
   public addSkillToShop(damageSkill: DamageSkill){
-    this.changeDamageSkill(damageSkill);
     this.shopServcie.addSkillToShop(damageSkill).subscribe(
       res=>{
           damageSkill.inShop = true;
@@ -66,7 +64,6 @@ export class SkillComponent implements OnInit, OnDestroy{
     this.file = event.target.files[0];
   }
   public removeSkillFromShop(skill: Skill){
-    this.changeDamageSkill(skill);
     console.log(skill);
     
     this.shopServcie.removeSkillFromShop(skill).subscribe(
@@ -74,18 +71,6 @@ export class SkillComponent implements OnInit, OnDestroy{
       }
     );
     
-  }
-
-  private changeDamageSkill(skill):void{
-    delete skill.inShop; 
-    switch(skill.skillCategory){
-      case SkillCategoryEnum.PHYS_DAMAGE:
-        skill.type = "damageSkill";
-      break;
-      case SkillCategoryEnum.DEFENCE:
-        skill.type = "defenceSkill";
-        break;
-    }
   }
   ngOnDestroy(){
     

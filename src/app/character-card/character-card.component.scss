@@ -6,6 +6,14 @@
   font-family: 'Brightons';
   src: url('../../assets/fonts/Brightons.ttf');
 }
+%extend__crad_elements{
+  justify-self: center;
+  cursor: pointer;
+  transition: 1s ease-in-out;
+  &:hover{
+    filter: hue-rotate(90deg);
+  }
+}
 
 
   .add__hero{
@@ -59,7 +67,12 @@
       font-family: HeroesName;
       display: grid;
       align-items: center;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 5px;
+
+      img{
+        width: 25px;
+      }
       .remove__hero{
         border-radius: 50px;
         background: rgb(213 60 42 / 77%);
@@ -81,12 +94,11 @@
       }
 
       .hero__inventory{
-
-        justify-self: center;
-        cursor: pointer;
-        img{
-          width: 25px;
-        }
+        @extend %extend__crad_elements;
+      }
+      .hero__skills{
+        @extend %extend__crad_elements;
+         
       }
     }
 

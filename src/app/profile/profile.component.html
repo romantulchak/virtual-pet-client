@@ -11,7 +11,7 @@
       <ng-container *ngFor="let hero of myHeroes">
 
         <app-character-card (selectHero)="selectHero(hero)" (remove)="removeHero(hero)"
-          (openInventory)="openInventory(hero)" [myHeroes]="myHeroes" [currentHero]="currentHero" [hero]="hero">
+          (openInventory)="openInventory(hero)" (openSkills)="openSkills(hero)" [myHeroes]="myHeroes" [currentHero]="currentHero" [hero]="hero">
         </app-character-card>
       </ng-container>
       <div class="add__hero" *ngIf="myHeroes?.length != 5">

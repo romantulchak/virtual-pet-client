@@ -25,9 +25,9 @@ export class ShopService {
         return this.http.put<any>(API_URL + "shop/removeSkillFromShop", skill);
     }
     public buyItem(item: any, subId: number): Observable<any>{
-      
-        console.log(item);
-        
         return this.http.post<any>(API_URL + "shop/buyItem/" + subId, item);
+    }
+    public buySkill(skill: any, subId: number):Observable<any>{
+        return this.http.post<any>(API_URL + "shop/buySkill/" + subId, skill);
     }
 }
