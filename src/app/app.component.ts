@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 
 @Component({
@@ -8,7 +8,10 @@ import { NavigationStart, Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'virtual-pet-client';
-
+  @HostListener('contextmenu', ['$event'])
+  onRightClick(event) {
+    event.preventDefault();
+  }
   constructor(private router: Router){
 
   }

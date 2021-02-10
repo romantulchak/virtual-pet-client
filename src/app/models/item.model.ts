@@ -4,7 +4,7 @@ import { Uniqueness } from "./enums/uniqueness.enum";
 
 export abstract class Item {
     public id: number;
-    public uniqueness: Uniqueness;
+    public uniqueness: string;
     public iconPath: string;
     public name: string;
     public eItemType: ItemType;

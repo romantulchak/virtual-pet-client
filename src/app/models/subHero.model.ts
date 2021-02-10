@@ -9,7 +9,6 @@ import { DamageSkill } from './damageSkill.model';
 export class SubHero extends Sub {
   public id: number;
   public name: string;
-  public money: number;
   public inventory: Inventory;
   public user: User;
   public moneyUpLevel: number;

@@ -28,4 +28,7 @@ export class InventoryService{
   public withdrawWeapon(setItemRequest: SetItemRequest):Observable<SubHero>{
     return this.http.put<SubHero>(API_URL + 'inventory/withdrawWeapon', setItemRequest);
   }
+  public sellItem(item, subId: number):Observable<SubHero>{
+    return this.http.post<SubHero>(API_URL + 'inventory/sellItem/'+ subId, item);
+  }
 }

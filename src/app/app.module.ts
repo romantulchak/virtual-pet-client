@@ -33,6 +33,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { SkillShopComponent } from './skill-shop/skill-shop.component';
 import { ItemShopComponent } from './item-shop/item-shop.component';
 import { HeroSkillsComponent } from './hero-skills/hero-skills.component';
+import {MatMenuModule} from '@angular/material/menu';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +66,8 @@ import { HeroSkillsComponent } from './hero-skills/hero-skills.component';
     BrowserAnimationsModule,
     MatDialogModule,
     DragDropModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatMenuModule
   ],
   providers: [AuthGuard, RegistrationGuard, GameGuard, authInterceptorProviders],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatMenuTrigger } from '@angular/material/menu';
 import { SubHero } from '../models/subHero.model';
 import { SetItemRequest } from '../request/setItemRequest.model';
 import { InventoryService } from '../services/inventory.service';
@@ -12,11 +13,14 @@ import { ProfileService } from '../services/profile.service';
 })
 export class InventoryComponent implements OnInit {
 
-  constructor(private inventorySerivce: InventoryService,private profileService: ProfileService,  @Inject(MAT_DIALOG_DATA) public data: any, private profileSerivce: ProfileService) { }
+  constructor(private inventorySerivce: InventoryService,private profileService: ProfileService,  @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   public items: any = new Array(30);
 
   public sub: SubHero;
+
+  public menuTopLeftPosition = {x: "0", y:"0"};
+  @ViewChild(MatMenuTrigger, {static: true}) matMenuTrigger: MatMenuTrigger;
 
   ngOnInit(): void {
 
@@ -32,6 +36,16 @@ export class InventoryComponent implements OnInit {
         }
       }
     );
+  }
+
+  public onRightClick(event: MouseEvent, item){
+    event.preventDefault();
+    this.menuTopLeftPosition.x = event.clientX + 'px'; 
+    this.menuTopLeftPosition.y = event.clientY + 'px'; 
+    console.log(item);
+    
+    this.matMenuTrigger.menuData = {item: item};
+    this.matMenuTrigger.openMenu();
   }
 
   private getItems(){
@@ -51,11 +65,9 @@ export class InventoryComponent implements OnInit {
   public setItem(item: any){
     let setItemRequest = new SetItemRequest(this.sub.id, item.eItemCategory, item.id, item.eItemType);
     this.inventorySerivce.setItem(setItemRequest).subscribe(
-      res=>{
-        console.log(res);
-        
+      res=>{      
         this.sub = res;
-        this.profileSerivce.currentHero.next(this.sub);
+        this.profileService.currentHero.next(this.sub);
         this.getItems();
 
       }
@@ -85,6 +97,17 @@ export class InventoryComponent implements OnInit {
           this.profileService.currentHero.next(this.sub);
         }
 
+      }
+    );
+  }
+
+  public sellItem(item){
+    this.inventorySerivce.sellItem(item, this.sub.id).subscribe(
+      res=>{
+        this.getSub();
+        this.getItems();
+   
+        this.profileService.currentHero.next(res);
       }
     );
   }

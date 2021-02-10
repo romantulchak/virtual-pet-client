@@ -7,7 +7,6 @@ export class Sword extends Item{
   public allowShield: boolean;
   public inventory: Inventory;
   public iconPath: string;
-  public uniqueness: number;
   public name: string;
 
 }

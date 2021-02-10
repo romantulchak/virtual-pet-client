@@ -3,7 +3,7 @@
   <div class="inventory__grid">
 
     <ng-container *ngFor="let item of items">
-      <div class="cell" (click)="setItem(item)" [class.rare]="item?.uniqueness == 'RARE'" [class.legendary]="item?.uniqueness == 'LEGENDARY'" [class.mythical]="item?.uniqueness == 'MYTHICAL'">{{item?.name}}</div>
+      <div class="cell" (contextmenu)="onRightClick($event, {content:item})" (click)="setItem(item)" [class.rare]="item?.uniqueness == 'RARE'" [class.legendary]="item?.uniqueness == 'LEGENDARY'" [class.mythical]="item?.uniqueness == 'MYTHICAL'">{{item?.name}}</div>
     </ng-container>
 
 
@@ -12,33 +12,33 @@
     <div class="items">
       <div class="armor">
         <div class="hero__item" [class.rare]="sub?.dressedItems?.head?.uniqueness == 'RARE'" [class.legendary]="sub?.dressedItems?.head?.uniqueness == 'LEGENDARY'" [class.mythical]="sub?.dressedItems?.head?.uniqueness == 'MYTHICAL'">
-          <p (click)="withdrawArmor('HEAD', sub?.dressedItems?.head?.id)" *ngIf="sub?.dressedItems?.head != null">{{sub?.dressedItems?.head?.name}}</p>
+          <p (contextmenu)="onRightClick($event, {content:sub.dressedItems.head})" (click)="withdrawArmor('HEAD', sub?.dressedItems?.head?.id)" *ngIf="sub?.dressedItems?.head != null">{{sub?.dressedItems?.head?.name}}</p>
             <div class="head" *ngIf="sub?.dressedItems?.head == null"></div>
         </div>
         <div class="hero__item" [class.rare]="sub?.dressedItems?.hands?.uniqueness == 'RARE'" [class.legendary]="sub?.dressedItems?.hands?.uniqueness == 'LEGENDARY'" [class.mythical]="sub?.dressedItems?.hands?.uniqueness == 'MYTHICAL'">
-         <p (click)="withdrawArmor('HANDS', sub?.dressedItems?.hands?.id)" *ngIf="sub?.dressedItems?.hands != null">{{sub?.dressedItems?.hands?.name}}</p>
+         <p (contextmenu)="onRightClick($event, {content:sub.dressedItems.hands})"  (click)="withdrawArmor('HANDS', sub?.dressedItems?.hands?.id)" *ngIf="sub?.dressedItems?.hands != null">{{sub?.dressedItems?.hands?.name}}</p>
           <div class="hands" *ngIf="sub?.dressedItems?.hands == null"></div>
         </div>
         <div class="hero__item" [class.rare]="sub?.dressedItems?.body?.uniqueness == 'RARE'" [class.legendary]="sub?.dressedItems?.body?.uniqueness == 'LEGENDARY'" [class.mythical]="sub?.dressedItems?.body?.uniqueness == 'MYTHICAL'">
-          <p (click)="withdrawArmor('BODY', sub?.dressedItems?.body?.id)" *ngIf="sub?.dressedItems?.body != null">{{sub?.dressedItems?.body?.name}}</p>
+          <p (contextmenu)="onRightClick($event, {content:sub.dressedItems.body})"  (click)="withdrawArmor('BODY', sub?.dressedItems?.body?.id)" *ngIf="sub?.dressedItems?.body != null">{{sub?.dressedItems?.body?.name}}</p>
           <div class="body" *ngIf="sub?.dressedItems?.body == null"></div>
         </div>
         <div class="hero__item" [class.rare]="sub?.dressedItems?.legs?.uniqueness == 'RARE'" [class.legendary]="sub?.dressedItems?.legs?.uniqueness == 'LEGENDARY'" [class.mythical]="sub?.dressedItems?.legs?.uniqueness == 'MYTHICAL'">
-          <p (click)="withdrawArmor('LEGS', sub?.dressedItems?.legs?.id)" *ngIf="sub?.dressedItems?.legs != null">{{sub?.dressedItems?.legs?.name}}</p>
+          <p (contextmenu)="onRightClick($event, {content:sub.dressedItems.legs})"  (click)="withdrawArmor('LEGS', sub?.dressedItems?.legs?.id)" *ngIf="sub?.dressedItems?.legs != null">{{sub?.dressedItems?.legs?.name}}</p>
           <div class="legs" *ngIf="sub?.dressedItems?.legs == null"></div>
         </div>
         <div class="hero__item" [class.rare]="sub?.dressedItems?.shoulders?.uniqueness == 'RARE'" [class.legendary]="sub?.dressedItems?.shoulders?.uniqueness == 'LEGENDARY'" [class.mythical]="sub?.dressedItems?.shoulders?.uniqueness == 'MYTHICAL'">
-          <p (click)="withdrawArmor('SHOULDERS', sub?.dressedItems?.shoulders?.id)" *ngIf="sub?.dressedItems?.shoulders != null">{{sub?.dressedItems?.shoulders?.name}}</p>
+          <p (contextmenu)="onRightClick($event, {content:sub.dressedItems.shoulders})"  (click)="withdrawArmor('SHOULDERS', sub?.dressedItems?.shoulders?.id)" *ngIf="sub?.dressedItems?.shoulders != null">{{sub?.dressedItems?.shoulders?.name}}</p>
           <div class="shoulders" *ngIf="sub?.dressedItems?.shoulders == null"></div>
         </div>
       </div>
       <div class="weapon">
         <div class="hero__item" [class.rare]="sub?.dressedItems?.sword?.uniqueness == 'RARE'" [class.legendary]="sub?.dressedItems?.sword?.uniqueness == 'LEGENDARY'" [class.mythical]="sub?.dressedItems?.sword?.uniqueness == 'MYTHICAL'">
-          <p (click)="withdrawWeapon('SWORD', sub?.dressedItems?.sword?.id)" *ngIf="sub?.dressedItems?.sword != null">{{sub?.dressedItems?.sword?.name}}</p>
+          <p (contextmenu)="onRightClick($event, {content:sub.dressedItems.sword})" (click)="withdrawWeapon('SWORD', sub?.dressedItems?.sword?.id)" *ngIf="sub?.dressedItems?.sword != null">{{sub?.dressedItems?.sword?.name}}</p>
           <div class="sword" *ngIf="sub?.dressedItems?.sword == null"></div>
         </div>
         <div class="hero__item" [class.rare]="sub?.dressedItems?.shield?.uniqueness == 'RARE'" [class.legendary]="sub?.dressedItems?.shield?.uniqueness == 'LEGENDARY'" [class.mythical]="sub?.dressedItems?.shield?.uniqueness == 'MYTHICAL'">
-          <p (click)="withdrawArmor('SHIELD', sub?.dressedItems?.shield?.id)" *ngIf="sub?.dressedItems?.shield != null">{{sub?.dressedItems?.shield?.name}}</p>
+          <p (contextmenu)="onRightClick($event, {content:sub.dressedItems.shield})" (click)="withdrawArmor('SHIELD', sub?.dressedItems?.shield?.id)" *ngIf="sub?.dressedItems?.shield != null">{{sub?.dressedItems?.shield?.name}}</p>
           <div class="shield" *ngIf="sub?.dressedItems?.shield == null"></div>
 
         </div>
@@ -50,4 +50,17 @@
   </div>
 </div>
 
-</section>
+</section> 
+
+<div style="visibility: hidden; position: fixed;"
+[style.left]="menuTopLeftPosition.x" 
+[style.top]="menuTopLeftPosition.y" 
+[matMenuTriggerFor]="rightMenu"></div> 
+
+<mat-menu #rightMenu="matMenu"> 
+  <ng-template matMenuContent let-item="item"> 
+    <button mat-menu-item (click)="sellItem(item?.content)">Sell {{item?.content.name}} for {{item?.content.price * 0.85}} coins</button> 
+    <button mat-menu-item>Dress {{item.content.name}}</button> 
+    <button mat-menu-item>Close</button> 
+  </ng-template> 
+</mat-menu> 
