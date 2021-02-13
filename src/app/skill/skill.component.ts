@@ -39,7 +39,9 @@ export class SkillComponent implements OnInit, OnDestroy{
     this.skillService.getSkills().subscribe(
       res=>{
         if(res != null){
-          this.skills = res;      
+          this.skills = res; 
+          console.log(res);
+               
         }
       }
     );

@@ -68,6 +68,7 @@ export class ShopComponent implements OnInit {
     this.shopService.buySkill(skill, this.currentHero.id).subscribe(
       res=>{
         skill.isBought = true;
+        this.currentHero = res;
         this.profileService.currentHero.next(this.currentHero);
       }
     );

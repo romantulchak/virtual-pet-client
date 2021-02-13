@@ -106,9 +106,13 @@ export class InventoryComponent implements OnInit {
       res=>{
         this.getSub();
         this.getItems();
-   
         this.profileService.currentHero.next(res);
       }
     );
+  }
+
+  public putOnTakeOff(item){
+    console.log(item);
+    
   }
 }

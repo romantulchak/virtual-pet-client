@@ -8,7 +8,7 @@
   <div class="battle__grid">
 
     <div class="hero__card">
-      <app-character-card [hero]="currentHero" [currentHero]="null">
+      <app-character-card [hero]="currentHero" [currentHero]="null" [heroCharacteristics]="currentHero">
       </app-character-card>
 
       <div class="hero__skils">
@@ -19,7 +19,7 @@
         <div>
           <h4>Damage skills</h4>
           <div *ngFor="let damageSkill of currentHero.damageSkills">
-              <h4>{{damageSkill.name}}</h4>
+              <app-skill-shop [skill]="damageSkill"></app-skill-shop>
           </div>
         </div>
       </div>

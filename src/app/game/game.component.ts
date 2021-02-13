@@ -72,8 +72,8 @@ export class GameComponent implements OnInit, OnDestroy {
     });*/
     this.gameService.currentHero.subscribe((res) => {
       this.currentHero = res;
-
-
+      console.log(res);
+      
     });
 
 

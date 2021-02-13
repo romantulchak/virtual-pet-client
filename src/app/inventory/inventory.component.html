@@ -60,7 +60,7 @@
 <mat-menu #rightMenu="matMenu"> 
   <ng-template matMenuContent let-item="item"> 
     <button mat-menu-item (click)="sellItem(item?.content)">Sell {{item?.content.name}} for {{item?.content.price * 0.85}} coins</button> 
-    <button mat-menu-item>Dress {{item.content.name}}</button> 
+    <button mat-menu-item> Put on / take off {{item.content.name}}</button> 
     <button mat-menu-item>Close</button> 
   </ng-template> 
 </mat-menu> 

@@ -17,7 +17,7 @@ export class CharacterCardComponent implements OnChanges {
   @Input() currentHero: any;
   @Input() hero: any;
   @Input() myHeroes: SubHero[];
-
+  @Input() heroCharacteristics;
   @Output() remove = new EventEmitter<SubHero>();
   @Output() openInventory = new EventEmitter<SubHero>();
   @Output() selectHero = new EventEmitter<SubHero>();
