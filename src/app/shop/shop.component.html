@@ -1,15 +1,15 @@
 <section class="shop__section">
     <div class="shop__tabs">
-        <button (click)="showAllItems()"></button>
         <button (click)="showAllSkills()"></button>
+        <button (click)="showAllItems()"></button>
     </div>
     <div class="shop__block">
         <h4>{{currentHero.name}}</h4>
         <div class="shop__container">
             <div class="items__grid">
                 <ng-container *ngIf="isSkills">
-                    <div class="shop__item_card" *ngFor="let skill of shop?.allSkills">
-                        <app-skill-shop (buySkillEvent)="buySkill(skill)" [skill]="skill"></app-skill-shop>
+                    <div class="shop__item_card" *ngFor="let skill of skills">
+                        <app-skill-shop #test (buySkillEvent)="buySkill(skill)" [skill]="skill" [currentHeroMoney]="currentHero.currency.money"></app-skill-shop>
                     </div>
                 </ng-container>
                 <ng-container *ngIf="isItems">

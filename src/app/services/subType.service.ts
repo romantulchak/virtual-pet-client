@@ -9,9 +9,9 @@ const API_URL = environment.API_URL;
     providedIn:'root'
 })
 export class SubTypeService{
+
     constructor(private http:HttpClient){}
 
-    
     public uploadFile(file: File):Observable<any>{
         let f = new FormData();
          f.append("file", file);

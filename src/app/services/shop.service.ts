@@ -10,6 +10,7 @@ const API_URL = environment.API_URL;
     providedIn:'root'
 })
 export class ShopService {
+    
     constructor(private http: HttpClient) {}
 
     public getShop(subId: number):Observable<Shop>{
@@ -24,10 +25,12 @@ export class ShopService {
     public removeSkillFromShop(skill: Skill): Observable<any>{
         return this.http.put<any>(API_URL + "shop/removeSkillFromShop", skill);
     }
+
     public buyItem(item: any, subId: number): Observable<any>{
         return this.http.post<any>(API_URL + "shop/buyItem/" + subId, item);
     }
-    public buySkill(skill: any, subId: number):Observable<any>{
-        return this.http.post<any>(API_URL + "shop/buySkill/" + subId, skill);
+
+    public buySkill(id: number, subId: number):Observable<void>{
+        return this.http.post<void>(`${API_URL}shop/buySkill/${subId}`, id);
     }
 }

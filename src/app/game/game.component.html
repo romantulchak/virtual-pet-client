@@ -1,63 +1,37 @@
 <section class="game__bg">
   <div class="overlay" (click)="moneyClikcs()">
-
   </div>
-
-
-
   <div class="battle__grid">
-
     <div class="hero__card">
       <app-character-card [hero]="currentHero" [currentHero]="null" [heroCharacteristics]="currentHero">
       </app-character-card>
-
       <div class="hero__skils">
         <button [disabled]="isUpdatePrice" (click)="upMoneyLevel()">
-          Up money level cost: {{currentHero?.moneyUpPrice}}
+          Up money level cost: {{currentHero?.money?.moneyUpPrice}}
         </button>
-        <button [disabled]="isUpdateAttack" (click)="upAttackLevel()">Up attack {{currentHero.subAttack.attackMoneyUp}}</button>
+        <button [disabled]="isUpdateAttack" (click)="upAttackLevel()">Up attack
+          {{currentHero.subAttack.attackMoneyUp}}</button>
         <div>
           <h4>Damage skills</h4>
           <div *ngFor="let damageSkill of currentHero.damageSkills">
-              <app-skill-shop [skill]="damageSkill"></app-skill-shop>
+            <app-skill-shop [skill]="damageSkill"></app-skill-shop>
           </div>
         </div>
       </div>
     </div>
-
     <div class="battle__image">
       <span>{{level}}</span>
       <img src="../../assets/images/game/battle_sword.svg" alt="">
-
     </div>
-
     <div class="enemy__card">
       <app-enemy-card [currentBoss]="currentBoss" [bossHealth]="bossHealth">
       </app-enemy-card>
-
       <div class="hero__skils">
         <button [disabled]="isUpdatePrice" (click)="upMoneyLevel()">
-          Up money level cost: {{currentHero.moneyUpPrice}}
+          Up money level cost: {{currentHero?.money?.moneyUpPrice}}
         </button>
         <button [disabled]="isUpdateAttack" (click)="upAttackLevel()">Up attack</button>
       </div>
     </div>
-
   </div>
-
-
-
-
-
-
-
-  <div>
-    <h2>Money: {{currentHero.currency.money}}</h2>
-  </div>
-
-
-  <h2 *ngIf="errorMessage != null" class="alert__error">{{errorMessage}}</h2>
-
-
-
 </section>

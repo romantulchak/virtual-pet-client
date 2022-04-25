@@ -8,17 +8,17 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-
   public user: User = new User();
   public isSuccessful:boolean = false;
   public isSignUpFailed:boolean = false;
   public errorMessage:string = '';
+  
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
-  public registration(){
+  public registration(): void{
     this.authService.registration(this.user).subscribe(
       res=>{
         this.isSuccessful = true;

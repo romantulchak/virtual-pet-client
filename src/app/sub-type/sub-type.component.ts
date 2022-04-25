@@ -8,18 +8,19 @@ import { SubTypeService } from '../services/subType.service';
   styleUrls: ['./sub-type.component.scss']
 })
 export class SubTypeComponent implements OnInit {
-  
   public subType: SubType = new SubType();
   private file: File = null;
+
   constructor(private subTypeService: SubTypeService) { }
 
   ngOnInit(): void {
-    
   }
-  public changeFile(event){
+  
+  public changeFile(event): void{
     this.file = event.target.files[0];
   }
-  public uploadImage(){
+
+  public uploadImage(): void{
     this.subTypeService.uploadFile(this.file).subscribe(
       res=>{
         this.createSubType();
@@ -27,8 +28,7 @@ export class SubTypeComponent implements OnInit {
     );
   }
 
-
-  private createSubType(){
+  private createSubType(): void{
     this.subTypeService.createSubType(this.subType).subscribe(
       res=>{
         console.log("Sub Type was created");

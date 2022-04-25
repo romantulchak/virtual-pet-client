@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { SkillDTO } from '../dto/skill/skill.dto';
 import { DamageSkill } from '../models/damageSkill.model';
-import { SkillCategoryEnum } from '../models/enums/skillCategory.enum';
 import { Skill } from '../models/skill.model';
 import { ShopService } from '../services/shop.service';
 import { SkillService } from '../services/skill.service';
@@ -11,42 +10,33 @@ import { SkillService } from '../services/skill.service';
   templateUrl: './skill.component.html',
   styleUrls: ['./skill.component.scss']
 })
-export class SkillComponent implements OnInit, OnDestroy{
-
+export class SkillComponent implements OnInit{
   public damageSkill: DamageSkill = new DamageSkill();
   public skills: any[] = [];
+  public currentPage: number = 0;
   private file: File;
   private temporaryImage: any;
-  constructor(private skillService: SkillService, private shopServcie: ShopService, private saintizer: DomSanitizer) { }
+
+  constructor(private skillService: SkillService,
+              private shopServcie: ShopService) { }
 
   ngOnInit(): void {
     this.getSkills();
   }
 
-  public createDamageSkill(){
+  public createDamageSkill(): void{
     this.skillService.uploadImage(this.file).subscribe(
       res=>{
         this.skillService.createDamageSkill(this.damageSkill).subscribe(
           res=>{
             this.skills.unshift(res);
           }
-        );  
+        );
       }
     );
   }
 
-  private getSkills(){
-    this.skillService.getSkills().subscribe(
-      res=>{
-        if(res != null){
-          this.skills = res; 
-          console.log(res);
-               
-        }
-      }
-    );
-  }
-  public removeSkill(skill: any){
+  public removeSkill(skill: SkillDTO): void{
     console.log(skill);
     this.skillService.deleteSkill(skill.id, skill.skillCategory).subscribe(
       res=>{
@@ -54,7 +44,8 @@ export class SkillComponent implements OnInit, OnDestroy{
       }
     );
   }
-  public addSkillToShop(damageSkill: DamageSkill){
+
+  public addSkillToShop(damageSkill: DamageSkill): void{
     this.shopServcie.addSkillToShop(damageSkill).subscribe(
       res=>{
           damageSkill.inShop = true;
@@ -62,20 +53,25 @@ export class SkillComponent implements OnInit, OnDestroy{
     );
   }
 
-  public setFile(event){
+  public setFile(event): void{
     this.file = event.target.files[0];
   }
-  public removeSkillFromShop(skill: Skill){
-    console.log(skill);
-    
+
+  public removeSkillFromShop(skill: Skill): void{
     this.shopServcie.removeSkillFromShop(skill).subscribe(
-      res=>{        
+      res=>{
       }
     );
-    
   }
-  ngOnDestroy(){
-    
+
+  private getSkills(): void{
+    this.skillService.getSkills(this.currentPage).subscribe(
+      res=>{
+        if(res != null){
+          this.skills = res;
+        }
+      }
+    );
   }
-  
+
 }

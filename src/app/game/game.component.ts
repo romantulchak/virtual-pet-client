@@ -3,32 +3,12 @@ import {
   HostListener,
   OnDestroy,
   OnInit,
-  Renderer2,
-  ViewChild,
 } from '@angular/core';
-import { NavigationStart, Router, RouterOutlet } from '@angular/router';
-import { send } from 'process';
-import { Subscription } from 'rxjs';
-import { PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 import { SubHero } from '../models/subHero.model';
 import { SubRequest } from '../models/subRequest.model';
 import { GameService } from '../services/game.service';
-import * as THREE from 'three';
-/*
-var OrbitControls = require('three-orbit-controls')(THREE)
-var STLLoader = require('three-stl-loader')(THREE)
+import { ProfileService } from '../services/profile.service';
 
-var loader = new STLLoader();*/
-//THREE
-/*import * as THREE from 'three';
-var OrbitControls = require('three-orbit-controls')(THREE)
-var STLLoader = require('three-stl-loader')(THREE)
-var loader = new STLLoader();
-import Scene = THREE.Scene;
-import Mesh = THREE.Mesh;
-import PerspectiveCamera = THREE.PerspectiveCamera;
-import WebGLRenderer = THREE.WebGLRenderer;
-*/
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -36,26 +16,18 @@ import WebGLRenderer = THREE.WebGLRenderer;
 })
 export class GameComponent implements OnInit, OnDestroy {
   public currentHero: SubHero;
-  private money: number = 0;
-  private moneyInterval: any;
-  private sendInterval: any;
   public isUpdatePrice: boolean = false;
   public errorMessage: string;
   public currentBoss: any;
   public isUpdateAttack: boolean = false;
   public level: number;
   public bossHealth: number;
-  constructor(private gameService: GameService) { }
-  /*constructor(private gameService: GameService, private render: Renderer2) {  }*/
+  private money: number = 0;
+  private moneyInterval: any;
+  private sendInterval: any;
 
-  /*
-  @ViewChild("myCanvas") myCanvas:any;
-  private path:string = '../../assets/images/game/Squirtle.stl';
-  private scene: Scene;
-  private camera: PerspectiveCamera;
-  private renderer: WebGLRenderer;
-  private controls: any;
-*/
+  constructor(private gameService: GameService,
+              private profileService: ProfileService) { }
 
   @HostListener('window:beforeunload', ['$event'])
   beforeUnloadHandler(event: any) {
@@ -63,22 +35,51 @@ export class GameComponent implements OnInit, OnDestroy {
     this.sendMoneyPerMinute();
     return false;
   }
-  ngAfterViewInit(): void {
-    //  this.init3D();
-  }
+
   ngOnInit(): void {
-    /*let global = this.render.listen('window', 'resize', (evt) => {
-      this.onWindowResize();
-    });*/
-    this.gameService.currentHero.subscribe((res) => {
-      this.currentHero = res;
-      console.log(res);
-      
-    });
-
-
+    this.getSelectedHero();
     this.getBoss();
+    this.increaseMoney();
+  }
 
+  public upMoneyLevel(): void{
+    this.sendMoneyPerMinute();
+    this.isUpdatePrice = true;
+    setTimeout(() => {
+      this.gameService.upMoneyLevel(this.subReq()).subscribe(
+        res => {
+          this.currentHero.money = res.money;
+          this.currentHero.currency = res.currency;
+        },
+        error=>{
+          console.log(error.error.message);
+        });
+        this.isUpdatePrice = false;
+    }, 1000);
+  }
+
+  public moneyClikcs(): void{
+    this.money += this.currentHero.money.moneyMultiplier;
+    this.currentHero.currency.money += this.currentHero.money.moneyMultiplier;
+    this.updateBoss();
+  }
+
+  private getSelectedHero(): void{
+    this.gameService.currentHero.subscribe(
+      res => {
+        if(res !== null){
+            this.currentHero = res;
+            this.profileService.getSubMoneyCurrency(res.id, res.name).subscribe(
+              res=>{
+                this.currentHero.money = res.money;
+                this.currentHero.currency = res.currency;
+              }
+            );
+        }
+    });
+  }
+
+  private increaseMoney(): void{
     if (this.currentHero != null) {
       this.moneyEverySecond();
       this.sendInterval = setInterval(() => {
@@ -87,7 +88,8 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getBoss() {
+
+  private getBoss(): void{
     this.gameService.getBoss(this.subReq()).subscribe(
       res => {
       this.currentBoss = res.boss;
@@ -99,14 +101,15 @@ export class GameComponent implements OnInit, OnDestroy {
     });
   }
 
-  private moneyEverySecond() {    
+  private moneyEverySecond(): void{
     this.moneyInterval = setInterval(() => {
-      this.money += this.currentHero.moneyMultiplier;
+      this.money += this.currentHero.money.moneyMultiplier;
       this.updateBoss();
-      this.currentHero.currency.money += this.currentHero.moneyMultiplier;
+      this.currentHero.currency.money += this.currentHero.money.moneyMultiplier;
     }, 1000);
   }
-  public upAttackLevel() {
+
+  public upAttackLevel(): void{
     this.sendMoneyPerMinute();
     this.isUpdateAttack = true;
     setTimeout(() => {
@@ -118,34 +121,20 @@ export class GameComponent implements OnInit, OnDestroy {
         console.log(error.error.message);
       }
       );
-      
+
       this.isUpdateAttack = false;
     }, 1000);
   }
-  public upMoneyLevel() {
-    this.sendMoneyPerMinute();
-    this.isUpdatePrice = true;
-    setTimeout(() => {
-      this.gameService.upMoneyLevel(this.subReq()).subscribe(
-        res => {    
-          this.currentHero = res;
-        },
-        error=>{
-          console.log(error.error.message);
-        });
-        this.isUpdatePrice = false;
-    }, 1000);
-  }
 
-  private sendMoneyPerMinute() {
-    this.gameService.sendMoney(this.subReq(), this.money).subscribe((res) => {
-      this.currentHero = res;
-      this.money = 0;
+  private sendMoneyPerMinute(): void{
+    this.gameService.sendMoney(this.subReq(), this.money).subscribe(
+      () => {
+        this.currentHero.currency.money += this.money;
+        this.money = 0;
     });
   }
 
-
-  private updateBoss() {
+  private updateBoss(): void{
     this.currentBoss.health -= this.currentHero.attack;
     if (this.currentBoss.health <= 0) {
       this.money += this.currentBoss.droppedMoney;
@@ -154,61 +143,13 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
-  public moneyClikcs() {
-    this.money += this.currentHero.moneyMultiplier;
-    this.currentHero.currency.money += this.currentHero.moneyMultiplier;
-    this.updateBoss();
-  }
-  private subReq(): SubRequest {
-    let subRequest = new SubRequest();
-    subRequest.name = this.currentHero.name;
-    subRequest.subId = this.currentHero.id;
-    subRequest.user = this.currentHero.user;
-    return subRequest;
+  private subReq(): SubRequest{
+    return new SubRequest(this.currentHero.id, this.currentHero.name, this.currentHero.user);
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy(): void{
     clearInterval(this.moneyInterval);
     this.sendMoneyPerMinute();
     clearInterval(this.sendInterval);
   }
-
-  /*
-  private init3D(){
-    console.log(this.myCanvas.nativeElement);
-
-    this.renderer = new THREE.WebGLRenderer({alpha: true, canvas:  this.myCanvas.nativeElement});
-    this.renderer.setSize( window.innerWidth, window.innerHeight );
-    this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color( 0xFFFFFF );
-    this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 0.01, 10000 );
-    this.camera.position.set( 113, 111, 113 );
-    this.camera.aspect = window.innerWidth / window.innerHeight;
-    this.scene.add( new THREE.AmbientLight( 0x222222 ) );
-    this.scene.add( this.camera ); // required, because we are adding a light as a child of the camera
-    this.controls = new OrbitControls(this.camera,this.renderer.domElement);
-    var light = new THREE.PointLight( 0xffffff, 0.8 );
-    this.camera.add( light );
-
-    loader.load(this.path, geometry => {
-      var material = new THREE.MeshPhongMaterial( { color: 0xBEBEBE } );
-
-      var mesh = new THREE.Mesh( geometry, material );
-      this.scene.add(mesh)
-    });
-    this.animate();
-  }
-
-  animate() {
-    this.camera.lookAt( this.scene.position );
-    this.renderer.render(this.scene, this.camera);
-    window.requestAnimationFrame(_ => this.animate());
-
-  }
-
-  private onWindowResize(){
-    this.camera.aspect = window.innerWidth / window.innerHeight;
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-  }*/
 }

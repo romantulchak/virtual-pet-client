@@ -3,7 +3,7 @@
     <h3>Skills</h3>
     <div *ngFor="let skill of skills" class="skill__card">
         <div class="card__image">
-            <img [src]="skill.skillImage" alt="">
+            <img [src]="skill.icon" alt="">
         </div>
         <h3>{{skill.name}}</h3>
         <h3><b>{{skill.id}}</b></h3>
@@ -26,7 +26,7 @@
         </div>
         <div>
             <label for="skillDescription">Skill description</label>
-            <input type="text" id="skillDescription" name="skillDescription" [(ngModel)]="damageSkill.skillDescription">
+            <input type="text" id="skillDescription" name="skillDescription" [(ngModel)]="damageSkill.description">
         </div>
         <div>
             <label for="maxCooldown">Skill maxcooldown</label>

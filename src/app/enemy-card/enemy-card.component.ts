@@ -7,15 +7,11 @@ import { BossSub } from '../models/bossSub.model';
   styleUrls: ['./enemy-card.component.scss']
 })
 export class EnemyCardComponent implements OnInit {
-
-
   @Input() currentBoss: BossSub;
   @Input() bossHealth: number;
 
   constructor() { }
 
-
   ngOnInit(): void {
   }
-
 }

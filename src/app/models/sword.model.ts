@@ -8,5 +8,4 @@ export class Sword extends Item{
   public inventory: Inventory;
   public iconPath: string;
   public name: string;
-
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Uniqueness } from '../models/enums/uniqueness.enum';
 import { Sword } from '../models/sword.model';
 import { ItemService } from '../services/item.service';
 
@@ -11,8 +10,6 @@ import { ItemService } from '../services/item.service';
 export class ItemsComponent implements OnInit {
 
   public sword: Sword = new Sword();
-
-
 
   public uniqueness = [
     {
@@ -36,6 +33,7 @@ export class ItemsComponent implements OnInit {
     value: 4,
     }
 ];
+
 public itemCategories = [
   {
     name:"sword",
@@ -61,22 +59,17 @@ public itemCategories = [
     name: "shield",
     value: 5
   }
-]
-
+];
 
   constructor(private itemService: ItemService) { }
 
   ngOnInit(): void {
   }
 
-  public createSword(){
+  public createSword(): void{
     this.sword.iconPath = "";
-    
-
     this.itemService.createSword(this.sword).subscribe(
       res=>{
-        console.log(res);
-
       }
     );
   }

@@ -6,9 +6,7 @@
       <img class="second__model" src="../../../assets/images/login/hero2.png" alt="">
       <img class="third__model" src="../../../assets/images/login/hero3.png" alt="">
       <div class="login__card">
-
         <form
-          *ngIf="!isLoggedIn"
           name="form"
           (ngSubmit)="f.form.valid && login()"
           #f="ngForm"
@@ -94,10 +92,6 @@
             </div>
           </div>
         </form>
-
-        <div class="alert alert-success" *ngIf="isLoggedIn">
-          Logged in as {{ roles }}.
-        </div>
       </div>
     </div>
   </div>

@@ -5,15 +5,14 @@ import { SubAttack } from './subAttack.model';
 import { Currency } from './currency.model';
 import { SubItems } from './subItems.model';
 import { DamageSkill } from './damageSkill.model';
+import { Money } from './sub/money.model';
 
 export class SubHero extends Sub {
   public id: number;
   public name: string;
   public inventory: Inventory;
   public user: User;
-  public moneyUpLevel: number;
-  public moneyUpPrice: number;
-  public moneyMultiplier: number;
+  public money: Money;
   public subAttack: SubAttack;
   public currency: Currency;
   public dressedItems: SubItems;

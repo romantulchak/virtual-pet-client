@@ -10,13 +10,13 @@ export class ItemShopComponent implements OnInit {
 
   @Input() item: any;
   @Output() buyItemEnvet = new EventEmitter<Item>(null);
+
   constructor() { }
 
   ngOnInit(): void {
-    
   }
 
-  public buyItem(item){
+  public buyItem(item): void{
     this.buyItemEnvet.emit(item);
   }
 }

@@ -12,8 +12,6 @@ export class HeroSkillsComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public sub: SubHero) { }
 
   ngOnInit(): void {
-    console.log(this.sub);
-    
   }
 
 }

@@ -1,12 +1,9 @@
 <section>
 <div class="inventory__block">
   <div class="inventory__grid">
-
     <ng-container *ngFor="let item of items">
       <div class="cell" (contextmenu)="onRightClick($event, {content:item})" (click)="setItem(item)" [class.rare]="item?.uniqueness == 'RARE'" [class.legendary]="item?.uniqueness == 'LEGENDARY'" [class.mythical]="item?.uniqueness == 'MYTHICAL'">{{item?.name}}</div>
     </ng-container>
-
-
   </div>
   <div class="hero__items">
     <div class="items">
@@ -40,27 +37,21 @@
         <div class="hero__item" [class.rare]="sub?.dressedItems?.shield?.uniqueness == 'RARE'" [class.legendary]="sub?.dressedItems?.shield?.uniqueness == 'LEGENDARY'" [class.mythical]="sub?.dressedItems?.shield?.uniqueness == 'MYTHICAL'">
           <p (contextmenu)="onRightClick($event, {content:sub.dressedItems.shield})" (click)="withdrawArmor('SHIELD', sub?.dressedItems?.shield?.id)" *ngIf="sub?.dressedItems?.shield != null">{{sub?.dressedItems?.shield?.name}}</p>
           <div class="shield" *ngIf="sub?.dressedItems?.shield == null"></div>
-
         </div>
       </div>
      </div>
     <img [src]="sub?.iconPath" alt="">
-
-
   </div>
 </div>
-
-</section> 
-
+</section>
 <div style="visibility: hidden; position: fixed;"
-[style.left]="menuTopLeftPosition.x" 
-[style.top]="menuTopLeftPosition.y" 
-[matMenuTriggerFor]="rightMenu"></div> 
-
-<mat-menu #rightMenu="matMenu"> 
-  <ng-template matMenuContent let-item="item"> 
-    <button mat-menu-item (click)="sellItem(item?.content)">Sell {{item?.content.name}} for {{item?.content.price * 0.85}} coins</button> 
-    <button mat-menu-item> Put on / take off {{item.content.name}}</button> 
-    <button mat-menu-item>Close</button> 
-  </ng-template> 
-</mat-menu> 
+[style.left]="menuTopLeftPosition.x"
+[style.top]="menuTopLeftPosition.y"
+[matMenuTriggerFor]="rightMenu"></div>
+<mat-menu #rightMenu="matMenu">
+  <ng-template matMenuContent let-item="item">
+    <button mat-menu-item (click)="sellItem(item?.content)">Sell {{item?.content?.name}} for {{item?.content?.price * 0.85}} coins</button>
+    <button mat-menu-item (click)="withdrawItem(item)"> Put on / take off {{item?.content?.name}}</button>
+    <button mat-menu-item>Close</button>
+  </ng-template>
+</mat-menu>

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SubHero } from '../models/subHero.model';
 import { SubRequest } from '../models/subRequest.model';
 import { SubType } from '../models/subType.model';
-import { User } from '../models/user.model';
 import { ProfileService } from '../services/profile.service';
 
 @Component({
@@ -12,15 +10,18 @@ import { ProfileService } from '../services/profile.service';
 })
 export class CreateSubComponent implements OnInit {
 
-  constructor(private profileService: ProfileService) { }
   public subTypes: SubType[];
   public sub: SubRequest = new SubRequest();
   public subTypeId: number;
+
+  constructor(private profileService: ProfileService) { }
+
   ngOnInit(): void {
     this.getSubTypes();
   }
-  public createSub(){
-    this.sub.subId = this.subTypeId;
+
+  public createSub(): void{
+    this.sub.id = this.subTypeId;
     this.profileService.createSub(this.sub).subscribe(
       res=>{
         console.log("Sub successfully created");
@@ -28,11 +29,10 @@ export class CreateSubComponent implements OnInit {
       }
     );
   }
-  private getSubTypes(){
+
+  private getSubTypes(): void{
     this.profileService.getSubTypes().subscribe(
       res=>{
-        console.log(res);
-
         if(res != null)
           this.subTypes = res;
       }

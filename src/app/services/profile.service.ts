@@ -3,18 +3,20 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SubType } from '../models/subType.model';
-import { catchError, retry } from 'rxjs/operators';
+import { retry } from 'rxjs/operators';
 import { SubRequest } from '../models/subRequest.model';
 import { SubHero } from '../models/subHero.model';
 import { User } from '../models/user.model';
 import { Friend } from '../models/friend.model';
 import { UserFriend } from '../models/userFriend.model';
+import { MoneyCurrencyDTO } from '../dto/money-currency.dto';
 const API_URL = environment.API_URL;
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
+
   constructor(private httpClient: HttpClient) { }
 
   public currentHero: BehaviorSubject<SubHero> = new BehaviorSubject(null);
@@ -60,9 +62,17 @@ export class ProfileService {
     params = params.append('friendRequestId', friendRequest.id.toString())
     return this.httpClient.delete<any>(API_URL + 'profile/deniedFriendRequest', {params: params});
   }
-  public deleteFriend(friendId: number, userId: number): Observable<any>{  
+  public deleteFriend(friendId: number, userId: number): Observable<any>{
     let params = new HttpParams();
-    params = params.append("userId", userId.toString()).append("friendId", friendId.toString());
+    params = params.append("userId", userId.toString())
+                   .append("friendId", friendId.toString());
     return this.httpClient.delete<any>(API_URL + 'profile/deleteFriend', {params: params});
+  }
+
+  public getSubMoneyCurrency(id: number, name: string): Observable<MoneyCurrencyDTO>{
+    let params = new HttpParams();
+    params = params.append("id", id.toString())
+                    .append("name", name);
+    return this.httpClient.get<MoneyCurrencyDTO>(`${API_URL}profile/sub-money-currency`, {params: params});
   }
 }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Howl } from 'howler'
 import { HeroSkillsComponent } from '../hero-skills/hero-skills.component';
@@ -31,8 +31,6 @@ export class ProfileComponent implements OnInit {
 
   constructor(private tokenStorage: TokenStorageService, private dialog: MatDialog, private profileService: ProfileService, private gameService: GameService) { }
 
-
-
   ngOnInit(): void {
     let allowMusic = localStorage.getItem('allowMusic');
     if (allowMusic != null && allowMusic == 'true') {
@@ -43,11 +41,10 @@ export class ProfileComponent implements OnInit {
     }
     this.getMyHeroes();
     this.currentUser = this.tokenStorage.getUser();
-
     this.updateHero();
-
   }
-  public setMusic(option?: number) {
+
+  public setMusic(option?: number): void{
     switch (option) {
       case 1:
         localStorage.setItem('allowMusic', 'true')
@@ -55,31 +52,15 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  public playMusic() {
+  public playMusic(): void{
     this.sound.play();
   }
 
-
-  public exit() {
+  public exit(): void{
     this.tokenStorage.signOut();
   }
 
-  private getMyHeroes() {
-    this.profileService.getMyHeroes().subscribe(
-      res => {
-        if (res != null) {
-          if (res.length == 5) {
-            this.currentHero = res[2];
-          } else {
-            this.currentHero = res[0];
-          }
-          this.myHeroes = res;
-          this.profileService.currentHero.next(this.currentHero);
-        }
-      }
-    );
-  }
-  public selectHero(hero: SubHero) {
+  public selectHero(hero: SubHero): void{
     this.profileService.getCurrentSub(hero.id, this.currentUser.id).subscribe(
       res => {
         if (res != null) {
@@ -91,7 +72,7 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  public removeHero(sub: SubHero) {
+  public removeHero(sub: SubHero): void{
     this.profileService.deleteSub(sub.id).subscribe(
       res => {
           this.myHeroes = this.myHeroes.filter(x => x.id != sub.id);
@@ -101,20 +82,38 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  public openInventory(sub: SubHero) {
+  public openInventory(sub: SubHero): void{
     this.dialog.open(InventoryComponent, { panelClass: 'inventory__dialog', width: '500px', data: { sub: sub, userId: this.currentUser.id } });
   }
-  public openSkills(sub: SubHero){
+
+  public openSkills(sub: SubHero): void{
     this.dialog.open(HeroSkillsComponent, {
       panelClass: 'hero__skils_dialog',
       data: sub
     })
   }
-  private updateHero() {
+
+  private updateHero(): void{
     this.profileService.currentHero.subscribe(
       res => {
         if (res != null)
           this.currentHero = res;
+      }
+    );
+  }
+
+  private getMyHeroes(): void{
+    this.profileService.getMyHeroes().subscribe(
+      res => {
+        if (res != null) {
+          if (res.length == 5) {
+            this.currentHero = res[2];
+          } else {
+            this.currentHero = res[0];
+          }
+          this.myHeroes = res;
+          this.profileService.currentHero.next(this.currentHero);
+        }
       }
     );
   }

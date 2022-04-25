@@ -1,10 +1,6 @@
 import { OnChanges } from '@angular/core';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BossSub } from '../models/bossSub.model';
-import { Skill } from '../models/skill.model';
-import { Sub } from '../models/sub.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SubHero } from '../models/subHero.model';
-import { ProfileService } from '../services/profile.service';
 
 @Component({
   selector: 'app-character-card',
@@ -12,8 +8,7 @@ import { ProfileService } from '../services/profile.service';
   styleUrls: ['./character-card.component.scss']
 })
 export class CharacterCardComponent implements OnChanges {
-
-
+  public bossHealth: number;
   @Input() currentHero: any;
   @Input() hero: any;
   @Input() myHeroes: SubHero[];
@@ -21,27 +16,26 @@ export class CharacterCardComponent implements OnChanges {
   @Output() remove = new EventEmitter<SubHero>();
   @Output() openInventory = new EventEmitter<SubHero>();
   @Output() selectHero = new EventEmitter<SubHero>();
-
   @Output() openSkills = new EventEmitter<SubHero>();
 
-  public bossHealth: number;
   constructor() { }
 
-  ngOnChanges(): void {  
-
+  ngOnChanges(): void {
   }
 
-  public removeHero(hero: SubHero) {
+  public removeHero(hero: SubHero): void{
     this.remove.emit(hero);
   }
 
-  public inventory(hero: SubHero) {
+  public inventory(hero: SubHero): void{
     this.openInventory.emit(hero);
   }
-  public select(hero: SubHero) {
+
+  public select(hero: SubHero): void{
     this.selectHero.emit(hero);
   }
-  public skills(hero: SubHero){
+
+  public skills(hero: SubHero): void{
     this.openSkills.emit(hero);
   }
 }

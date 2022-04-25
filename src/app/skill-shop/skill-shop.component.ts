@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DamageSkillDTO } from '../dto/skill/damage-skill.dto';
+import { DefenceSkillDTO } from '../dto/skill/defence-skill.dto';
 
 @Component({
   selector: 'app-skill-shop',
@@ -6,16 +8,17 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./skill-shop.component.scss']
 })
 export class SkillShopComponent implements OnInit {
+  @Input() skill: DamageSkillDTO | DefenceSkillDTO;
+  @Input() currentHeroMoney: number;
+  @Output() buySkillEvent = new EventEmitter<number>();
 
-  @Input() skill: any;
-  @Output() buySkillEvent = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
-  public buySkill(skill){
+  public buySkill(skill): void{
     this.buySkillEvent.emit(skill);
   }
-
 }

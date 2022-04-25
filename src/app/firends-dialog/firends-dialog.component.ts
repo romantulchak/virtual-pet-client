@@ -11,13 +11,16 @@ import { TokenStorageService } from '../services/token-storage.service';
   styleUrls: ['./firends-dialog.component.scss']
 })
 export class FirendsDialogComponent implements OnInit {
-
-  constructor(private profileService: ProfileService, private tokenStorageService: TokenStorageService) { }
   public user: any;
   public friendRequest: UserFriend[] = [];
   public friendResponse: UserFriend[] = [];
   public currentUser: User;
   public friends: Friend[] = [];
+
+  constructor(private profileService: ProfileService, 
+              private tokenStorageService: TokenStorageService) { }
+
+
   ngOnInit(): void {
     this.currentUser = this.tokenStorageService.getUser();
     this.getFriends();
@@ -25,12 +28,10 @@ export class FirendsDialogComponent implements OnInit {
     this.getFriendResponse();
   }
 
-  public searchFriendByUsername(name: string) {
+  public searchFriendByUsername(name: string): void{
     this.profileService.getUserByUsername(name).subscribe(
       res => {
         if (res != null) {
-          console.log(res);
-
           this.user = res;
         }
       },
@@ -41,7 +42,7 @@ export class FirendsDialogComponent implements OnInit {
     );
   }
 
-  public sendRequest(userId: number) {
+  public sendRequest(userId: number): void{
     let searchedUser = new User();
     searchedUser.id = userId;
     this.profileService.sendRequest(searchedUser).subscribe(
@@ -52,40 +53,28 @@ export class FirendsDialogComponent implements OnInit {
     );
   }
 
-  public getFriendRequests() {
+  public getFriendRequests(): void{
     this.profileService.getFriendRequests().subscribe(
       res => {
         if (res != null) {
-          console.log(res);
-
           this.friendRequest = res;
         }
-
       }
     );
   }
-  public getFriendResponse() {
+
+  public getFriendResponse(): void{
     this.profileService.getFriendResponse().subscribe(
       res => {
         if (res != null) {
-          console.log(res);
-
           this.friendResponse = res;
         }
 
       }
     );
   }
-  private getFriends() {
-    this.profileService.getFriends().subscribe(
-      res => {
-        if (res != null) {
-          this.friends = res;
-        }
-      }
-    );
-  }
-  public acceptFriend(friendRequest){
+
+  public acceptFriend(friendRequest): void{
     this.profileService.accpetFriend(friendRequest).subscribe(
       res=>{
         if(res != null){
@@ -95,15 +84,27 @@ export class FirendsDialogComponent implements OnInit {
       }
     );
   }
-  public deniedRequest(friendRequset:UserFriend){
+
+  public deniedRequest(friendRequset:UserFriend): void{
     this.profileService.deniedRequest(friendRequset).subscribe(
-        res=>{
+        ()=>{
          this.getFriendRequests();
          this.getFriendResponse();
         }
     );
   }
-  public deleteFriend(friend: Friend){
+
+  private getFriends(): void{
+    this.profileService.getFriends().subscribe(
+      res => {
+        if (res != null) {
+          this.friends = res;
+        }
+      }
+    );
+  }
+
+  public deleteFriend(friend: Friend): void{
     this.profileService.deleteFriend(friend.id, this.currentUser.id).subscribe(
       res=>{
           this.friends = this.friends.filter(x=>x.id != friend.id);

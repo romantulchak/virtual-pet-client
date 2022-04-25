@@ -8,14 +8,14 @@ import { ProfileService } from '../services/profile.service';
   styleUrls: ['./game-top-panel.component.scss']
 })
 export class GameTopPanelComponent implements OnInit {
-
   public currentHero: SubHero;
+
   constructor(private profileService: ProfileService) { }
 
   ngOnInit(): void {
     this.profileService.currentHero.subscribe(
       res=>{
-        if(res != null)        
+        if(res != null)
           this.currentHero = res;
       }
     );
