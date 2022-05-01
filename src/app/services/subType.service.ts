@@ -4,7 +4,8 @@ import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { SubType } from "../models/subType.model";
 
-const API_URL = environment.API_URL;
+const API_URL = `${environment.API_URL}/sub`;
+
 @Injectable({
     providedIn:'root'
 })
@@ -13,11 +14,11 @@ export class SubTypeService{
     constructor(private http:HttpClient){}
 
     public uploadFile(file: File):Observable<any>{
-        let f = new FormData();
-         f.append("file", file);
-        return this.http.post(API_URL + 'sub/uploadSubTypeImage', f)
+        let formData = new FormData();
+        formData.append("file", file);
+        return this.http.post(`${API_URL}/upload-sub-image`, formData);
     }
     public createSubType(subType: SubType):Observable<any>{
-        return this.http.post(API_URL + 'sub/createSubType', subType);
+        return this.http.post(`${API_URL}/create-sub-type`, subType);
     }
 }

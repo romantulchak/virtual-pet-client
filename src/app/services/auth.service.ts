@@ -3,8 +3,9 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
+import { Jwt } from "../models/jwt.model";
 
-const API_URL = environment.API_URL;
+const API_URL = `${environment.API_URL}/auth`;
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,14 +16,14 @@ const httpOptions = {
 export class AuthService {
     constructor(private http: HttpClient){}
 
-    public login(data: any):Observable<any>{
-        return this.http.post(API_URL + 'auth/signin', {username: data.username, password: data.password}, httpOptions);
+    public login(data: any):Observable<Jwt>{
+        return this.http.post<Jwt>(`${API_URL}/sign-in`, {username: data.username, password: data.password});
     }
-    public registration(user: User):Observable<any>{
-        return this.http.post(API_URL + 'auth/signup', user, httpOptions);
+    public registration(user: User):Observable<void>{
+        return this.http.post<void>(`${API_URL}/sign-up`, user);
     }
     public refreshToken():Observable<any>{
-        return this.http.get(API_URL + 'auth/refreshToken');
+        return this.http.get(`${API_URL}/refresh-token`);
     }
 
 }

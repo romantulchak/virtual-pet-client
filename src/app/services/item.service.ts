@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Sword } from '../models/sword.model';
 
-const API_URL = environment.API_URL;
+const API_URL = `${environment.API_URL}/create-sword`;
 
 @Injectable({
   providedIn:'root'
@@ -13,6 +13,6 @@ export class ItemService{
   constructor(private http: HttpClient){  }
 
   public createSword(sword: Sword){
-    return this.http.post(API_URL + 'items/createSword', sword);
+    return this.http.post(`${API_URL}/createSword`, sword);
   }
 }

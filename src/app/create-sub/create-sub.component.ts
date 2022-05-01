@@ -33,6 +33,8 @@ export class CreateSubComponent implements OnInit {
   private getSubTypes(): void{
     this.profileService.getSubTypes().subscribe(
       res=>{
+        console.log(res);
+        
         if(res != null)
           this.subTypes = res;
       }

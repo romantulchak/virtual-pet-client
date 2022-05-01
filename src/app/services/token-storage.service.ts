@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { User } from '../models/user.model';
+import { Jwt } from "../models/jwt.model";
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -22,7 +22,7 @@ export class TokenStorageService{
     public getToken(){
         return localStorage.getItem(TOKEN_KEY);
     }
-    public saveUser(user:User){
+    public saveUser(user:Jwt){
         window.localStorage.removeItem(USER_KEY);
         window.localStorage.setItem(USER_KEY, JSON.stringify(user));
     }
