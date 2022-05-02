@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { ProfileService } from 'src/app/services/profile.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
@@ -16,7 +17,9 @@ export class LoginComponent implements OnInit {
   public errorMessage = '';
   private roles: string[] = [];
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(private authService: AuthService, 
+              private tokenStorage: TokenStorageService,
+              private profileService: ProfileService) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
@@ -30,6 +33,7 @@ export class LoginComponent implements OnInit {
       res=>{
         this.tokenStorage.saveToken(res.token);
         this.tokenStorage.saveUser(res);
+        this.profileService.setSelectedSub(0);
         this.isLoginFailed = false;
         this.roles = this.tokenStorage.getUser().roles;
         window.location.href = "/";

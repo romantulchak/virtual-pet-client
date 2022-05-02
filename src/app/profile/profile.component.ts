@@ -29,7 +29,10 @@ export class ProfileComponent implements OnInit {
     autoplay: false
   });
 
-  constructor(private tokenStorage: TokenStorageService, private dialog: MatDialog, private profileService: ProfileService, private gameService: GameService) { }
+  constructor(private tokenStorage: TokenStorageService, 
+              private dialog: MatDialog, 
+              private profileService: ProfileService, 
+              private gameService: GameService) { }
 
   ngOnInit(): void {
     let allowMusic = localStorage.getItem('allowMusic');
@@ -61,6 +64,8 @@ export class ProfileComponent implements OnInit {
   }
 
   public selectHero(hero: SubHero): void{
+    let currentSubIndex = this.myHeroes.indexOf(hero);
+    this.profileService.setSelectedSub(currentSubIndex);
     this.profileService.getCurrentSub(hero.id, this.currentUser.id).subscribe(
       res => {
         if (res != null) {
@@ -103,14 +108,11 @@ export class ProfileComponent implements OnInit {
   }
 
   private getMyHeroes(): void{
+    const index =  this.profileService.getSelectedSubIndex();
     this.profileService.getMyHeroes().subscribe(
       res => {
-        if (res != null) {
-          if (res.length == 5) {
-            this.currentHero = res[2];
-          } else {
-            this.currentHero = res[0];
-          }
+        if (res && res.length > 0) {
+          this.currentHero = res[index];
           this.myHeroes = res;
           this.profileService.currentHero.next(this.currentHero);
         }

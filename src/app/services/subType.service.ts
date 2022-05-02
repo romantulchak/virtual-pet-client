@@ -18,7 +18,10 @@ export class SubTypeService{
         formData.append("file", file);
         return this.http.post(`${API_URL}/upload-sub-image`, formData);
     }
-    public createSubType(subType: SubType):Observable<any>{
-        return this.http.post(`${API_URL}/create-sub-type`, subType);
+    public createSubType(subType: SubType, image: File):Observable<void>{
+        let formData = new FormData();
+        formData.append('subType', JSON.stringify(subType));
+        formData.append('image', image);
+        return this.http.post<void>(`${API_URL}/create-sub-type`, formData);
     }
 }

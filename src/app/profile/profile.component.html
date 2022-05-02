@@ -1,19 +1,30 @@
 <section class="profile__bg">
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
   <ng-container *ngIf="myHeroes?.length > 0">
     <app-game-top-panel></app-game-top-panel>
   </ng-container>
-  <div id="stars"></div>
-  <div id="stars2"></div>
-  <div id="stars3"></div>
   <div class="container">
     <div class="heroes__grid">
-
       <ng-container *ngFor="let hero of myHeroes">
-
         <app-character-card (selectHero)="selectHero(hero)" (remove)="removeHero(hero)"
-          (openInventory)="openInventory(hero)" (openSkills)="openSkills(hero)" [myHeroes]="myHeroes" [heroCharacteristics]="currentHero" [currentHero]="currentHero" [hero]="hero">
+          (openInventory)="openInventory(hero)" (openSkills)="openSkills(hero)" [myHeroes]="myHeroes"
+          [heroCharacteristics]="currentHero" [currentHero]="currentHero" [hero]="hero">
         </app-character-card>
-       </ng-container>
+      </ng-container>
       <div class="add__hero" *ngIf="myHeroes?.length != 5">
         <a routerLink="/create-sub"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 480 480"
@@ -32,16 +43,4 @@
     </div>
     <app-game-bottom-panel [currentHero]="currentHero"></app-game-bottom-panel>
   </div>
-
-
-  <!--
-  <div *ngIf="!isMusicAllow" class="music__dialog">
-    <h2>Dialog</h2>
-    <div>
-      <button (click)="setMusic(1)">Turn on</button>
-    </div>
-    <div>
-      <button (click)="setMusic(2)">Turn off</button>
-    </div>
-  </div>-->
 </section>

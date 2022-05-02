@@ -20,16 +20,8 @@ export class SubTypeComponent implements OnInit {
     this.file = event.target.files[0];
   }
 
-  public uploadImage(): void{
-    this.subTypeService.uploadFile(this.file).subscribe(
-      res=>{
-        this.createSubType();
-      }
-    );
-  }
-
-  private createSubType(): void{
-    this.subTypeService.createSubType(this.subType).subscribe(
+  public createSubType(): void{
+    this.subTypeService.createSubType(this.subType, this.file).subscribe(
       res=>{
         console.log("Sub Type was created");
       }
