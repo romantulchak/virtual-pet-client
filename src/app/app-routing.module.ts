@@ -13,6 +13,7 @@ import { ItemsComponent } from './items/items.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { SubTypeComponent } from './sub-type/sub-type.component';
 import { SkillComponent } from './skill/skill.component';
+import { SubtypeListComponent } from './subtype-list/subtype-list.component';
 
 const routes: Routes = [
   {path:'', component:ProfileComponent, canActivate:[RegistrationGuard]},
@@ -21,8 +22,9 @@ const routes: Routes = [
   {path: 'create-sub', component: CreateSubComponent},
   {path: 'game', component: GameComponent, canActivate: [GameGuard]},
   {path: 'items', component: ItemsComponent},
-  {path: 'admin', component: AdminPanelComponent,children:[
+  {path: 'admin', component: AdminPanelComponent, children:[
     {path: 'create-sub-type', component:SubTypeComponent},
+    {path: 'sub-types', component: SubtypeListComponent},
     {path: 'skills', component:SkillComponent}
   ]},  
   {path: '**', component: NotFoundComponent}

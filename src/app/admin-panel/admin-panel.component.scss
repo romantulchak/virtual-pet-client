@@ -1,5 +1,82 @@
-.admin__panel_section{
-    background-image: url("../../assets/images/login/login.png");
-    height: 100vh;
-    background-size: cover;
+.admin__panel_section {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+}
+
+.links {
+  max-width: 230px;
+  background: #fbfaff;
+  padding: 1em;
+  border: 1px solid #e9e9ef;
+  color: #545a6d;
+
+  .title {
+    text-align: center;
+  }
+
+  .accordion {
+    width: 100%;
+    padding: 1em;
+
+    .accordion-item-header {
+      font-weight: 600;
+      letter-spacing: 1px;
+      display: flex;
+      grid-template-columns: 24px 1fr;
+      align-items: center;
+      width: 100%;
+      cursor: pointer;
+      height: 50px;
+      justify-content: space-between;
+      transition: .3s ease-in-out;
+
+      .link__icon_name {
+        display: flex;
+        align-items: center;
+
+        span {
+          font-size: .9rem;
+          margin-left: 10px;
+        }
+      }
+
+      &:hover {
+        color: #5156be;
+      }
+    }
+  }
+
+  .sublinks {
+    list-style-type: none;
+    font-size: .9rem;
+    margin-left: 2em;
+
+    li {
+        
+      a {
+        color: #545a6d;
+        text-decoration: none;
+        display: block;
+
+        &:hover {
+          color: #5156be;
+        }
+
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+
+      .active {
+        color: #5156be;
+      }
+    }
+  }
+}
+
+.content {
+  padding: 1em;
+  overflow-y: auto;
 }

@@ -13,7 +13,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuard } from './guards/auth-guard.service';
 import { RegistrationGuard } from './guards/registration-guard.service';
 import { CreateSubComponent } from './create-sub/create-sub.component';
-import { AuthInterceptor, authInterceptorProviders } from './helpers/auth.interceptor';
+import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { GameComponent } from './game/game.component';
 import { GameGuard } from './guards/game-guard.service';
 import { GameTopPanelComponent } from './game-top-panel/game-top-panel.component';
@@ -34,6 +34,10 @@ import { SkillShopComponent } from './skill-shop/skill-shop.component';
 import { ItemShopComponent } from './item-shop/item-shop.component';
 import { HeroSkillsComponent } from './hero-skills/hero-skills.component';
 import {MatMenuModule} from '@angular/material/menu';
+import {CdkAccordionModule} from '@angular/cdk/accordion';
+import {MatIconModule} from '@angular/material/icon';
+import { SubtypeListComponent } from './subtype-list/subtype-list.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +61,7 @@ import {MatMenuModule} from '@angular/material/menu';
     SkillShopComponent,
     ItemShopComponent,
     HeroSkillsComponent,
+    SubtypeListComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +72,9 @@ import {MatMenuModule} from '@angular/material/menu';
     MatDialogModule,
     DragDropModule,
     MatTooltipModule,
-    MatMenuModule
+    MatMenuModule,
+    CdkAccordionModule,
+    MatIconModule
   ],
   providers: [AuthGuard, RegistrationGuard, GameGuard, authInterceptorProviders],
   bootstrap: [AppComponent]

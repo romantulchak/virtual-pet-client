@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SkillDTO } from '../dto/skill/skill.dto';
 import { DamageSkill } from '../models/damageSkill.model';
 import { Skill } from '../models/skill.model';
+import { DamageSkillRequest } from '../request/damage-skill.request';
 import { ShopService } from '../services/shop.service';
 import { SkillService } from '../services/skill.service';
 
@@ -11,7 +12,7 @@ import { SkillService } from '../services/skill.service';
   styleUrls: ['./skill.component.scss']
 })
 export class SkillComponent implements OnInit{
-  public damageSkill: DamageSkill = new DamageSkill();
+  public damageSkill: DamageSkillRequest = new DamageSkillRequest();
   public skills: any[] = [];
   public currentPage: number = 0;
   private file: File;
@@ -25,13 +26,9 @@ export class SkillComponent implements OnInit{
   }
 
   public createDamageSkill(): void{
-    this.skillService.uploadImage(this.file).subscribe(
+    this.skillService.createDamageSkill(this.damageSkill, this.file).subscribe(
       res=>{
-        this.skillService.createDamageSkill(this.damageSkill).subscribe(
-          res=>{
-            this.skills.unshift(res);
-          }
-        );
+        this.skills.unshift(res);
       }
     );
   }

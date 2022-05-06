@@ -5,6 +5,7 @@ import { environment } from "src/environments/environment";
 import { DamageSkillDTO } from "../dto/skill/damage-skill.dto";
 import { DefenceSkillDTO } from "../dto/skill/defence-skill.dto";
 import { DamageSkill } from "../models/damageSkill.model";
+import { DamageSkillRequest } from "../request/damage-skill.request";
 
 const API_URL = `${environment.API_URL}/skills`;
 
@@ -15,8 +16,11 @@ export class SkillService{
 
     constructor(private http: HttpClient){}
 
-    public createDamageSkill(damageSkill: DamageSkill):Observable<DamageSkill>{
-        return this.http.post<DamageSkill>(`${API_URL}/create-damage-skill`, damageSkill);
+    public createDamageSkill(damageSkill: DamageSkillRequest, image: File):Observable<DamageSkill>{
+        let formData = new FormData();
+        formData.append('damageSkill', JSON.stringify(damageSkill));
+        formData.append('image', image);
+        return this.http.post<DamageSkill>(`${API_URL}/create-damage-skill`, formData);
     }
     public getSkills(page: number):Observable<any>{
         let params = new HttpParams();
