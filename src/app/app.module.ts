@@ -37,6 +37,10 @@ import {MatMenuModule} from '@angular/material/menu';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import {MatIconModule} from '@angular/material/icon';
 import { SubtypeListComponent } from './subtype-list/subtype-list.component';
+import {MatTableModule} from '@angular/material/table';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -74,7 +78,11 @@ import { SubtypeListComponent } from './subtype-list/subtype-list.component';
     MatTooltipModule,
     MatMenuModule,
     CdkAccordionModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [AuthGuard, RegistrationGuard, GameGuard, authInterceptorProviders],
   bootstrap: [AppComponent]

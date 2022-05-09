@@ -1,0 +1,52 @@
+.subtypes__table {
+  width: 100%;
+  text-align: center;
+
+  .column__header {
+    text-align: center;
+  }
+
+  .column__name{
+    width: 30%;
+  }
+
+  .column {
+    width: 96px;
+    text-align: center;
+  }
+
+  .icon {
+    width: 90px;
+
+    img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+    }
+  }
+
+  .actions {
+    width: 230px;
+
+    .actions__btn_block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .action__btn {
+        border: none;
+        background: none;
+        cursor: pointer;
+        flex: 0 1 35px;
+      }
+
+      .edit{
+          color: #6495ed;
+      }
+
+      .remove{
+        color: #ff7f50;
+      }
+    }
+  }
+}

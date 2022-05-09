@@ -1,1 +1,72 @@
-<p>subtype-list works!</p>
+<section>
+  <form *ngIf="dataSource" [formGroup]="subtypeEditGroup">
+    <ng-container formArrayName="rows">
+      <table mat-table [dataSource]="dataSource" class="subtypes__table">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef class="column__header"> No. </th>
+          <td mat-cell *matCellDef="let element; let i = index" class="column" [formGroup]="element">
+            {{element.get('id').value}} </td>
+        </ng-container>
+        <ng-container matColumnDef="icon">
+          <th mat-header-cell *matHeaderCellDef class="column__header"> Icon </th>
+          <td mat-cell *matCellDef="let element; let i = index" class="icon" [formGroup]="element"> <img
+              src="{{element.get('iconPath').value}}" alt=""> </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef class="column__header"> Name </th>
+          <td mat-cell class="column__name" *matCellDef="let element; let i = index" [formGroup]="element">
+            <span *ngIf="element.get('isEditable').value">
+              {{element.get('name').value}}
+            </span>
+            <mat-form-field appearance="legacy" *ngIf="!element.get('isEditable').value">
+              <input matInput type="text" formControlName="name">
+            </mat-form-field>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="attack">
+          <th mat-header-cell *matHeaderCellDef class="column__header"> Attack </th>
+          <td mat-cell *matCellDef="let element; let i = index" [formGroup]="element">
+            <span *ngIf="element.get('isEditable').value">
+              {{element.get('attack').value}}
+            </span>
+            <mat-form-field appearance="legacy" *ngIf="!element.get('isEditable').value">
+              <input matInput type="number" formControlName="attack">
+            </mat-form-field>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="defence">
+          <th mat-header-cell *matHeaderCellDef class="column__header"> Defence </th>
+          <td mat-cell *matCellDef="let element; let i = index" [formGroup]="element">
+            <span *ngIf="element.get('isEditable').value">
+              {{element.get('defence').value}}
+            </span>
+            <mat-form-field appearance="legacy" *ngIf="!element.get('isEditable').value">
+              <input matInput type="number" formControlName="defence">
+            </mat-form-field>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="column__header"> Actions </th>
+          <td mat-cell *matCellDef="let element; let i = index" class="actions" [formGroup]="element">
+            <div class="actions__btn_block">
+              <button class="action__btn edit" (click)="saveChanges(i)" *ngIf="!element.get('isEditable').value">
+                <mat-icon>check_circle</mat-icon>
+              </button>
+              <button class="action__btn remove" (click)="cancelChanges(i)" *ngIf="!element.get('isEditable').value">
+                <mat-icon>cancel</mat-icon>
+              </button>
+              <button class="action__btn edit" (click)="edit(i)" *ngIf="element.get('isEditable').value">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button class="action__btn remove" *ngIf="element.get('isEditable').value">
+                <mat-icon>remove_circle_outline</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </ng-container>
+  </form>
+
+</section>
